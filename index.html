@@ -1144,43 +1144,6 @@
         updateCarousel();
         setInterval(nextSlide, 5000); // Auto-advance every 5 seconds
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            const $track = $('#carousel-tracks');
-            const $slides = $track.children();
-            const slideCount = $slides.length;
-            let index = 0;
-
-            function goToSlide(i) {
-                const width = $slides.outerWidth(true); // includes margin
-                $track.css('transform', 'translateX(' + (-i * width) + 'px)');
-            }
-
-            // Next button
-            $('#next').click(function () {
-                index = (index + 1) % slideCount;
-                goToSlide(index);
-            });
-
-            // Prev button
-            $('#prev').click(function () {
-                index = (index - 1 + slideCount) % slideCount;
-                goToSlide(index);
-            });
-
-            // Auto slide every 3 sec
-            setInterval(function () {
-                index = (index + 1) % slideCount;
-                goToSlide(index);
-            }, 3000);
-
-            // Optional: responsive resize
-            $(window).resize(function () {
-                goToSlide(index);
-            });
-        });
-    </script>
 
 
 </body>
