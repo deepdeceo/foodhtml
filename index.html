@@ -4,1147 +4,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Delivery Mobile UI</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Use Inter font -->
+    <title>Food Delivery App</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e5e7eb;
+        }
+
+        /* Custom scrollbar hide */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Bottom navbar round corners */
+        .bottom-nav {
+            border-top-left-radius: 1.5rem;
+            border-top-right-radius: 1.5rem;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Modal panel rounded top corners */
+        .modal-panel {
+            border-top-left-radius: 1.5rem;
+            border-top-right-radius: 1.5rem;
+        }
+
+        .category-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 1rem;
+            background-color: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .food-card img {
+            object-fit: cover;
+            height: 8rem;
+        }
+
+        .heart-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: #fff;
+            border-radius: 50%;
+            padding: 0.25rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .sticky-bottom {
+            position: sticky;
+            bottom: 0;
+            z-index: 10;
+        }
     </style>
-    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="bg-blue-50">
-    <!-- Mobile Frame Container -->
-    <div class="mobile-frame pb-24 ">
+<body>
 
-        <!-- HEADER AND LOCATION -->
-        <header class="p-5 flex justify-between items-center sticky top-0 z-10 bg-white shadow-sm">
-            <!-- Location Selector (Now Clickable) -->
-            <div class="flex-grow cursor-pointer" id="open-location-modal">
-                <p class="text-xs text-gray-400 font-medium">Deliver to</p>
-                <div class="flex items-center">
-                    <p class="font-bold text-lg text-gray-900">Select Your Location</p>
-                    <svg class="w-4 h-4 text-red-500 ml-1 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7">
-                        </path>
-                    </svg>
-                </div>
-            </div>
-            <!-- Shopping Bags and New 4-Dot Menu -->
-            <div class="flex space-x-2">
-                <!-- Shopping Bag 1 (Cart) -->
-                <div class="p-2 bg-gray-100 rounded-full cursor-pointer hover:bg-gray-200 transition">
-                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                    </svg>
-                </div>
-                <!-- Shopping Bag 2 (Cart) -->
-                <div class="p-2 bg-gray-100 rounded-full cursor-pointer hover:bg-gray-200 transition">
-                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                    </svg>
-                </div>
-                <!-- 4-Dot Menu (New Clickable Icon) -->
-                <button id="open-module-modal"
-                    class="p-2 bg-gray-100 rounded-full cursor-pointer transition duration-150 hover:bg-gray-200 focus:outline-none">
-                    <!-- Grid icon (4 dot menu interpretation) -->
-                    <svg class="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm-6 0h4v-4h-4v4z">
-                        </path>
-                    </svg>
-                </button>
-            </div>
-        </header>
+    <div class="container d-flex justify-content-center py-5">
+        <div class="bg-white rounded-3 shadow-lg w-100" style="max-width: 380px; height:850px; overflow-y:auto;">
+            <div class="p-4 pb-5">
 
-        <!-- CAROUSEL SECTION -->
-        <section class="px-5 mt-2 overflow-hidden relative">
-            <div id="carousel-track" class="flex transition-transform duration-500 ease-in-out w-full">
-                <!-- Slide 1 (The main slide from the image) -->
-                <div class="flex-shrink-0 w-full ">
-                    <div class="p-[3px]">
-                        <!-- Placeholder Image (Ice Cream Cone) -->
-                        <img src="assets/img/banner1.png" class="w-auto h-[200px] object-cover rounded-xl "
-                            onerror="this.onerror=null;this.src='https://placehold.co/120x160/f8a531/ffffff?text=Image+Error';">
+                <!-- Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <p class="text-secondary mb-0 small">Deliver to</p>
+                        <div class="d-flex align-items-center">
+                            <h1 class="h5 mb-0">Select Your Location</h1>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ms-1" width="20" height="20" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
                     </div>
-                </div>
-                <div class="flex-shrink-0 w-full ">
-                    <div class="p-2.5">
-
-                        <!-- Placeholder Image (Ice Cream Cone) -->
-                        <img src="assets/img/banner2.png" class="w-auto  h-[200px] object-cover rounded-xl "
-                            onerror="this.onerror=null;this.src='https://placehold.co/120x160/f8a531/ffffff?text=Image+Error';">
-                    </div>
-                </div>
-                <div class="flex-shrink-0 w-full ">
-                    <div class="p-2.5">
-
-                        <!-- Placeholder Image (Ice Cream Cone) -->
-                        <img src="assets/img/banner3.png" class="w-auto  h-[200px] object-cover rounded-xl "
-                            onerror="this.onerror=null;this.src='https://placehold.co/120x160/f8a531/ffffff?text=Image+Error';">
+                    <div>
+                        <button class="btn btn-light rounded-circle p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20"
+                                    cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path></svg>
+                        </button>
                     </div>
                 </div>
 
-            </div>
-
-            <!-- Carousel Dots -->
-            <div id="carousel-dots" class="flex justify-center space-x-1 mt-3">
-                <span class="dot w-2 h-2 rounded-full bg-red-500 transition-all duration-300"></span>
-                <span class="dot w-2 h-2 rounded-full bg-gray-300 transition-all duration-300"></span>
-                <span class="dot w-2 h-2 rounded-full bg-gray-300 transition-all duration-300"></span>
-            </div>
-        </section>
-
-        <!-- SEARCH BAR -->
-        <section class="p-5">
-            <div class="flex items-center space-x-3">
-                <!-- Search Input -->
-                <div class="relative flex-grow" id="searchTrigger">
-                    <input type="text" placeholder="Search"
-                        class="w-full pl-10 pr-4 py-3 bg-gray-100 rounded-2xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300" />
-                    <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                </div>
-                <!-- Filter Button (Styled to look like the image) -->
-                <button class="p-3 bg-white rounded-2xl card-shadow border border-gray-100">
-                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8h12a2 2 0 002-2v-4a2 2 0 00-2-2H6a2 2 0 00-2 2v4a2 2 0 002 2z">
-                        </path>
-                    </svg>
-                </button>
-            </div>
-        </section>
-
-        <!-- CATEGORIES (Homepage Subset) -->
-        <section class="px-5">
-            <div class="grid grid-cols-4 gap-y-4 gap-x-2">
-                <!-- Category Item Component: Burger -->
-                <a href="" class="flex flex-col items-center">
-                    <div class="w-14 h-14 rounded-xl bg-red-100 flex items-center justify-center mb-1">
-                        <img src="assets/img/burgar.png" class="w-8 h-8" alt="Burger">
+                <!-- Carousel -->
+                <div id="bannerCarousel" class="carousel slide rounded-3 overflow-hidden mb-4" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://placehold.co/600x300/FFF2D4/F97316?text=Ice+Cream" class="d-block w-100"
+                                alt="Ice Cream">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://placehold.co/600x300/1F2937/FFFFFF?text=Burger" class="d-block w-100"
+                                alt="Burger">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://placehold.co/600x300/FEE2E2/EF4444?text=Pizza" class="d-block w-100"
+                                alt="Pizza">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://placehold.co/600x300/D1FAE5/10B981?text=Sushi" class="d-block w-100"
+                                alt="Sushi">
+                        </div>
                     </div>
-                    <span class="text-xs font-medium text-gray-700">Burger</span>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="0" class="active"
+                            aria-current="true"></button>
+                        <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="3"></button>
+                    </div>
+                </div>
+
+                <!-- Search -->
+                <div class="mb-4 position-relative">
+                    <input type="text" class="form-control rounded-pill ps-5 pe-5" placeholder="Search">
+                    <span class="position-absolute top-50 start-0 translate-middle-y ps-3">
+                        🔍
+                    </span>
+                </div>
+
+                <!-- Categories -->
+                <div class="row row-cols-4 g-3 text-center mb-4">
+                    <div class="col">
+                        <a href="#" class="text-decoration-none text-dark">
+                            <div class="category-icon">🍔</div>
+                            <p class="mt-2 mb-0 small">Burger</p>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="#" class="text-decoration-none text-dark">
+                            <div class="category-icon">🌮</div>
+                            <p class="mt-2 mb-0 small">Taco</p>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="#" class="text-decoration-none text-dark">
+                            <div class="category-icon">🌯</div>
+                            <p class="mt-2 mb-0 small">Burrito</p>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="#" id="more-btn" class="text-decoration-none text-dark">
+                            <div class="category-icon">•••</div>
+                            <p class="mt-2 mb-0 small">More</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Food Items -->
+                <div class="row row-cols-2 g-3">
+                    <div class="col">
+                        <div class="card food-card shadow-sm position-relative">
+                            <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=2072&auto=format&fit=crop"
+                                class="card-img-top" alt="Chicken Burger">
+                            <button class="heart-btn">❤️</button>
+                            <div class="card-body p-2">
+                                <h6 class="card-title mb-1">Chicken Burger</h6>
+                                <small class="text-warning">★ 4.9</small>
+                                <p class="mb-0 mt-1">
+                                    <span class="text-decoration-line-through text-muted">£10.00</span>
+                                    <span class="text-danger fw-bold ms-2">£6.00</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card food-card shadow-sm position-relative">
+                            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1998&auto=format&fit=crop"
+                                class="card-img-top" alt="Beef Burger">
+                            <button class="heart-btn">❤️</button>
+                            <div class="card-body p-2">
+                                <h6 class="card-title mb-1">Beef Burger</h6>
+                                <small class="text-warning">★ 4.9</small>
+                                <p class="mb-0 mt-1">
+                                    <span class="text-decoration-line-through text-muted">£12.00</span>
+                                    <span class="text-danger fw-bold ms-2">£10.00</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Navigation -->
+            <nav class="sticky-bottom bg-white bottom-nav d-flex justify-content-around py-2">
+                <a href="#" class="text-danger text-center">
+                    <div>🍔</div>
+                    <small>Food</small>
                 </a>
-
-                <!-- Category Item Component: Taco -->
-                <div class="flex flex-col items-center">
-                    <div class="w-14 h-14 rounded-xl bg-yellow-100 flex items-center justify-center mb-1">
-                        <img src="https://placehold.co/32x32/fef3c7/d97706?text=🌮" class="w-8 h-8" alt="Taco">
-                    </div>
-                    <span class="text-xs font-medium text-gray-700">Fresh Food</span>
-                </div>
-
-                <!-- Category Item Component: Burrito -->
-                <div class="flex flex-col items-center">
-                    <div class="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center mb-1">
-                        <img src="https://placehold.co/32x32/d1fae5/059669?text=🌯" class="w-8 h-8" alt="Burrito">
-                    </div>
-                    <span class="text-xs font-medium text-gray-700">Burrito</span>
-                </div>
-
-                <!-- Category Item Component: Drink -->
-                <div class="flex flex-col items-center">
-                    <div class="w-14 h-14 rounded-xl bg-blue-100 flex items-center justify-center mb-1">
-                        <img src="https://placehold.co/32x32/dbeafe/2563eb?text=🍹" class="w-8 h-8" alt="Drink">
-                    </div>
-                    <span class="text-xs font-medium text-gray-700">Drink</span>
-                </div>
-
-                <!-- Category Item Component: Sandwich -->
-                <div class="flex flex-col items-center mt-3">
-                    <div class="w-14 h-14 rounded-xl bg-indigo-100 flex items-center justify-center mb-1">
-                        <img src="https://placehold.co/32x32/e0e7ff/4f46e5?text=🥪" class="w-8 h-8" alt="Sandwich">
-                    </div>
-                    <span class="text-xs font-medium text-gray-700">Sandwich</span>
-                </div>
-
-                <!-- Category Item Component: Pasta -->
-                <div class="flex flex-col items-center mt-3">
-                    <div class="w-14 h-14 rounded-xl bg-pink-100 flex items-center justify-center mb-1">
-                        <img src="https://placehold.co/32x32/fbcfe8/ec4899?text=🍝" class="w-8 h-8" alt="Pasta">
-                    </div>
-                    <span class="text-xs font-medium text-gray-700">Pasta</span>
-                </div>
-
-                <!-- Category Item Component: Ice Cream -->
-                <div class="flex flex-col items-center mt-3">
-                    <div class="w-14 h-14 rounded-xl bg-amber-100 flex items-center justify-center mb-1">
-                        <img src="https://placehold.co/32x32/fef3c7/d97706?text=🍦" class="w-8 h-8" alt="Ice Cream">
-                    </div>
-                    <span class="text-xs font-medium text-gray-700">Ice Cream</span>
-                </div>
-
-                <!-- Category Item Component: More (CLICKABLE) -->
-                <button id="open-categories-modal" class="flex flex-col items-center mt-3 focus:outline-none">
-                    <div
-                        class="w-14 h-14 rounded-xl bg-gray-100 flex items-center justify-center mb-1 transition duration-150 hover:bg-gray-200">
-                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z">
-                            </path>
-                        </svg>
-                    </div>
-                    <span class="text-xs font-medium text-gray-700">More</span>
-                </button>
-            </div>
-        </section>
-         <!-- Header Section -->
-        <header class="flex justify-between items-center px-5 pt-8">
-            <h1 class="text-small font-bold">Nearby Restaurants</h1>
-            <a href="#" class="text-sm font-medium text-gray-500 hover:text-orange-500 transition">View all</a>
-        </header>
-        <!-- Carousel Wrapper -->
-        <div id="start-resrutent" class="relative overflow-hidden p-5">
-            <div class="flex transition-transform duration-500 ease-in-out" id="carousel-tracks">
-                <!-- Card 1 -->
-                <div class="min-w-[90%] mr-5">
-                    <div class="relative w-full h-70 rounded-3xl overflow-hidden card-shadow">
-                        <img src="assets/img/banneri.png" alt="Delicious Asian Cuisine"
-                            class="w-full h-full object-cover">
-
-                        <!-- Open Now Badge -->
-                        <div
-                            class="absolute top-4 right-4 bg-red-600 text-white text-sm font-semibold px-4 py-1 rounded-full shadow-lg">
-                            Open now
-                        </div>
-
-                        <!-- User Info -->
-                        <div
-                            class="absolute top-4 left-4 flex items-center space-x-2 p-2 bg-black bg-opacity-30 rounded-full pr-4">
-                            <img src="https://placehold.co/40x40/5a67d8/ffffff?text=JD" alt="Jane Doe profile"
-                                class="w-10 h-10 rounded-full border-2 border-white object-cover">
-                            <div>
-                                <p class="text-white text-sm font-semibold leading-tight">Jane Doe</p>
-                                <p class="text-white text-xs opacity-75 leading-tight">Snapped a photo</p>
-                            </div>
-                        </div>
-
-                        <!-- Glassmorphism Overlay -->
-                        <div class="absolute inset-x-0 bottom-0 px-4 pb-3  pt-8 glass-overlay text-white">
-                            <div class="flex justify-between items-end">
-                                <div>
-                                    <h2 class="text-3xl font-extrabold mb-1">Asian Kitchen</h2>
-                                    <div class="flex flex-wrap items-center text-sm font-medium space-x-3 mt-1">
-                                        <span class="flex items-center">Birmingham, AL</span>
-                                        <span class="flex items-center text-yellow-400">⭐ 4.5 (78 reviews)</span>
-                                    </div>
-                                </div>
-                                <button
-                                    class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-gray-800 shadow-xl ml-4">
-                                    🔑
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                 <!-- Card 1 -->
-                <div class="min-w-[90%] mr-5">
-                    <div class="relative w-full h-70 rounded-3xl overflow-hidden card-shadow">
-                        <img src="assets/img/banneri.png" alt="Delicious Asian Cuisine"
-                            class="w-full h-full object-cover">
-
-                        <!-- Open Now Badge -->
-                        <div
-                            class="absolute top-4 right-4 bg-red-600 text-white text-sm font-semibold px-4 py-1 rounded-full shadow-lg">
-                            Open now
-                        </div>
-
-                        <!-- User Info -->
-                        <div
-                            class="absolute top-4 left-4 flex items-center space-x-2 p-2 bg-black bg-opacity-30 rounded-full pr-4">
-                            <img src="https://placehold.co/40x40/5a67d8/ffffff?text=JD" alt="Jane Doe profile"
-                                class="w-10 h-10 rounded-full border-2 border-white object-cover">
-                            <div>
-                                <p class="text-white text-sm font-semibold leading-tight">Jane Doe</p>
-                                <p class="text-white text-xs opacity-75 leading-tight">Snapped a photo</p>
-                            </div>
-                        </div>
-
-                        <!-- Glassmorphism Overlay -->
-                        <div class="absolute inset-x-0 bottom-0 px-4 pb-3  pt-8 glass-overlay text-white">
-                            <div class="flex justify-between items-end">
-                                <div>
-                                    <h2 class="text-3xl font-extrabold mb-1">Asian Kitchen</h2>
-                                    <div class="flex flex-wrap items-center text-sm font-medium space-x-3 mt-1">
-                                        <span class="flex items-center">Birmingham, AL</span>
-                                        <span class="flex items-center text-yellow-400">⭐ 4.5 (78 reviews)</span>
-                                    </div>
-                                </div>
-                                <button
-                                    class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-gray-800 shadow-xl ml-4">
-                                    🔑
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                 <!-- Card 1 -->
-                <div class="min-w-[90%] mr-5">
-                    <div class="relative w-full h-70 rounded-3xl overflow-hidden card-shadow">
-                        <img src="assets/img/banneri.png" alt="Delicious Asian Cuisine"
-                            class="w-full h-full object-cover">
-
-                        <!-- Open Now Badge -->
-                        <div
-                            class="absolute top-4 right-4 bg-red-600 text-white text-sm font-semibold px-4 py-1 rounded-full shadow-lg">
-                            Open now
-                        </div>
-
-                        <!-- User Info -->
-                        <div
-                            class="absolute top-4 left-4 flex items-center space-x-2 p-2 bg-black bg-opacity-30 rounded-full pr-4">
-                            <img src="https://placehold.co/40x40/5a67d8/ffffff?text=JD" alt="Jane Doe profile"
-                                class="w-10 h-10 rounded-full border-2 border-white object-cover">
-                            <div>
-                                <p class="text-white text-sm font-semibold leading-tight">Jane Doe</p>
-                                <p class="text-white text-xs opacity-75 leading-tight">Snapped a photo</p>
-                            </div>
-                        </div>
-
-                        <!-- Glassmorphism Overlay -->
-                        <div class="absolute inset-x-0 bottom-0 px-4 pb-3  pt-8 glass-overlay text-white">
-                            <div class="flex justify-between items-end">
-                                <div>
-                                    <h2 class="text-3xl font-extrabold mb-1">Asian Kitchen</h2>
-                                    <div class="flex flex-wrap items-center text-sm font-medium space-x-3 mt-1">
-                                        <span class="flex items-center">Birmingham, AL</span>
-                                        <span class="flex items-center text-yellow-400">⭐ 4.5 (78 reviews)</span>
-                                    </div>
-                                </div>
-                                <button
-                                    class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-gray-800 shadow-xl ml-4">
-                                    🔑
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Navigation -->
-            <button id="prev"
-                class="absolute left-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow">◀</button>
-            <button id="next"
-                class="absolute right-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow">▶</button>
-        </div>
-
-        <!-- End of Card -->
-        <!-- FEATURED RESTAURANT CARD (Based on the uploaded image) -->
-        <section class="px-5 mt-8">
-            <!-- Restaurant Card Container -->
-            <div class="bg-white rounded-3xl shadow-sm overflow-hidden">
-                <!-- Banner Area -->
-                <div class="relative h-[8rem]">
-                    <!-- Background Banner Image Placeholder (Simulating the 'SPECIAL FOOD MENU' banner) -->
-                    <img src="assets/img/banneri.png" alt="Special Food Menu Banner" class="w-full h-full object-cover"
-                        onerror="this.onerror=null;this.src='https://placehold.co/420x160/a81e1e/ffffff?text=Image+Error';">
-
-                    <!-- 'Featured' Tag -->
-                    <div
-                        class="absolute top-0 left-0 bg-red-500 rounded-br-lg px-3 py-1 text-white font-semibold text-sm transform -translate-x-1 -translate-y-1">
-                        Featured
-                    </div>
-
-                    <!-- 'Open' Button -->
-                    <div
-                        class="absolute top-4 right-4 bg-teal-500 text-white font-bold text-sm px-3 py-1.5 rounded-full shadow-lg">
-                        Open
-                    </div>
-
-                    <!-- Restaurant Logo (Centered on the divide) -->
-                    <div
-                        class="absolute bottom-[-20px] left-1/2 transform -translate-x-1/2 w-16 h-16 rounded-full bg-white flex items-center justify-center border-4 border-white shadow-md">
-                        <!-- Logo Placeholder (Burgers logo) -->
-                        <img src="assets/img/burgar.png" alt="Kombucha Logo" class="w-10 h-10 object-contain">
-                    </div>
-                </div>
-
-                <!-- Details Area -->
-                <div class="pt-8 pb-5 text-center">
-                    <!-- Restaurant Name -->
-                    <h2 class="text-xl font-bold text-gray-900 mb-1 flex justify-center items-center">
-                        Kombucha
-                        <!-- Verified Checkmark Icon -->
-                        <svg class="w-5 h-5 text-blue-500 ml-1.5" fill="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z">
-                            </path>
-                        </svg>
-                    </h2>
-
-                    <!-- Location and Rating -->
-                    <div class="flex justify-center items-center text-sm text-gray-600 mt-2 space-x-4">
-                        <div class="flex items-center">
-                            <svg class="w-4 h-4 text-red-400 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243m1.414 1.414L12 22.343l4.243-4.243m-4.243-1.414l-4.243-4.243m4.243 4.243L12 18.343l4.243-4.243m-4.243 1.414l-4.243 4.243m4.243-4.243L12 14.343l4.243-4.243m-4.243-1.414l-4.243-4.243M12 21a9 9 0 100-18 9 9 0 000 18z">
-                                </path>
-                            </svg>
-                            <span>Comilla</span>
-                        </div>
-                        <!-- Separator Dot (Orange dot visible in the original image) -->
-                        <span class="w-1 h-1 bg-amber-500 rounded-full"></span>
-                        <div class="flex items-center">
-                            <svg class="w-4 h-4 text-yellow-500 mr-1" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                </path>
-                            </svg>
-                            <span>0 (0)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- PRODUCT CARDS -->
-        <section class="px-5 pt-8">
-            <div class="grid grid-cols-2 gap-4">
-                <!-- Card 1: Chicken Burger -->
-                <div
-                    class="bg-white rounded-3xl card-shadow overflow-hidden p-3 transform transition duration-300 hover:scale-[1.02]">
-                    <div class="relative">
-                        <!-- Product Image (Chicken Burger) -->
-                        <img src="assets/img/banneri.png" alt="Chicken Burger"
-                            class="w-full h-28 object-cover rounded-2xl"
-                            onerror="this.onerror=null;this.src='https://placehold.co/200x150/eab308/ffffff?text=Image+Error';">
-                        <!-- Heart Icon -->
-                        <div
-                            class="absolute top-2 right-2 p-1.5 bg-white/80 rounded-full backdrop-blur-sm cursor-pointer">
-                            <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
-                                </path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="pt-3">
-                        <p class="font-semibold text-gray-900 truncate">Chicken Burger</p>
-                        <div class="flex items-center text-sm mt-1">
-                            <svg class="w-3.5 h-3.5 text-yellow-500 mr-1" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                </path>
-                            </svg>
-                            <span class="text-gray-600 font-medium">4.9</span>
-                        </div>
-                        <div class="mt-2 flex items-baseline">
-                            <span class="text-sm font-light text-gray-400 line-through mr-2">£ 10.00</span>
-                            <span class="text-lg font-bold text-red-500">£ 6.00</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 2: Beef Burger -->
-                <div
-                    class="bg-white rounded-3xl card-shadow overflow-hidden p-3 transform transition duration-300 hover:scale-[1.02]">
-                    <div class="relative">
-                        <!-- Product Image (Beef Burger) -->
-                        <img src="https://placehold.co/200x150/dc2626/ffffff?text=Beef+Burger" alt="Beef Burger"
-                            class="w-full h-28 object-cover rounded-2xl"
-                            onerror="this.onerror=null;this.src='https://placehold.co/200x150/dc2626/ffffff?text=Image+Error';">
-                        <!-- Heart Icon (Filled to match image) -->
-                        <div
-                            class="absolute top-2 right-2 p-1.5 bg-white/80 rounded-full backdrop-blur-sm cursor-pointer">
-                            <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
-                                </path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="pt-3">
-                        <p class="font-semibold text-gray-900 truncate">Beef Burger</p>
-                        <div class="flex items-center text-sm mt-1">
-                            <svg class="w-3.5 h-3.5 text-yellow-500 mr-1" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                </path>
-                            </svg>
-                            <span class="text-gray-600 font-medium">4.9</span>
-                        </div>
-                        <div class="mt-2 flex items-baseline">
-                            <span class="text-sm font-light text-gray-400 line-through mr-2">£ 12.00</span>
-                            <span class="text-lg font-bold text-red-500">£ 10.00</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <div id="bottom-nav-list"
-            class="fixed bottom-0 w-full max-w-[420px] bg-white pt-3 pb-5 rounded-t-3xl shadow-2xl shadow-gray-300">
-            <nav class="flex justify-around items-center h-full">
-
-                <!-- Orders (Active) -->
-                <button class="relative -mt-8 flex flex-col items-center active:scale-95">
-                    <div class="p-3 rounded-full nav-active-bg text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                        </svg>
-                    </div>
-                    <span class="text-xs mt-1 text-gray-800 font-semibold">Orders</span>
-                </button>
-
-
-                <!-- Favorites -->
-                <button class="flex flex-col items-center text-gray-500 hover:text-gray-900 transition duration-150">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
-                    <span class="text-xs mt-1">Glocery</span>
-                </button>
-
-                <!-- Notifications -->
-                <button class="flex flex-col items-center text-gray-500 hover:text-gray-900 transition duration-150">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                    </svg>
-                    <span class="text-xs mt-1">Shop</span>
-                </button>
-
-                <!-- Profile -->
-                <button class="flex flex-col items-center text-gray-500 hover:text-gray-900 transition duration-150">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                    <span class="text-xs mt-1">Pharmecy</span>
-                </button>
-                <!-- Profile -->
-                <button class="flex flex-col items-center text-gray-500 hover:text-gray-900 transition duration-150">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                    <span class="text-xs mt-1">Fresh</span>
-                </button>
-
+                <a href="#" class="text-secondary text-center">
+                    <div>🛒</div>
+                    <small>Cart</small>
+                </a>
+                <a href="#" class="text-secondary text-center">
+                    <div>❤️</div>
+                    <small>Likes</small>
+                </a>
+                <a href="#" class="text-secondary text-center">
+                    <div>🔔</div>
+                    <small>Notifications</small>
+                </a>
+                <a href="#" class="text-secondary text-center">
+                    <div>👤</div>
+                    <small>Profile</small>
+                </a>
             </nav>
         </div>
     </div>
 
-    <!-- Location Modal (Full Screen Popup) -->
-    <div id="location-modal" class="fixed inset-0 z-50 hidden bg-white transform transition-transform duration-300">
-        <div class="w-full h-full p-5 flex flex-col max-w-[420px] mx-auto">
-            <!-- Modal Header -->
-            <div class="flex justify-between items-center mb-6">
-                <!-- Close Button -->
-                <button id="close-location-modal" class="p-2 rounded-full hover:bg-gray-100 transition">
-                    <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                            d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-                <h3 class="text-xl font-bold">Choose Location</h3>
-                <div class="w-10"></div> <!-- Placeholder for alignment -->
-            </div>
-
-            <!-- Search/Input Area -->
-            <div class="relative mb-6">
-                <input type="text" placeholder="Search for street, city, or zip"
-                    class="w-full pl-10 pr-4 py-3 bg-gray-100 rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300" />
-                <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none"
-                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-            </div>
-
-            <!-- Location List/Content -->
-            <div class="flex-grow space-y-4 overflow-y-auto pb-4">
-                <div
-                    class="flex items-center p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition card-shadow">
-                    <svg class="w-6 h-6 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243m1.414 1.414L12 22.343l4.243-4.243m-4.243-1.414l-4.243-4.243m4.243 4.243L12 18.343l4.243-4.243m-4.243 1.414l-4.243 4.243m4.243-4.243L12 14.343l4.243-4.243m-4.243-1.414l-4.243-4.243M12 21a9 9 0 100-18 9 9 0 000 18z">
-                        </path>
-                    </svg>
-                    <div>
-                        <p class="font-semibold text-gray-800">Current Location</p>
-                        <p class="text-sm text-gray-500">123 Main St, Downtown City</p>
-                    </div>
+    <!-- More Modal -->
+    <div class="modal fade" id="moreModal" tabindex="-1">
+        <div class="modal-dialog modal-bottom">
+            <div class="modal-content modal-panel p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0">More Categories</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-
-                <h4 class="font-bold text-gray-800 pt-3">Recent Locations</h4>
-
-                <!-- Repeatable location item: Work -->
-                <div
-                    class="flex items-center p-3 border-b border-gray-100 cursor-pointer hover:bg-gray-50 transition rounded-lg">
-                    <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M20 7l-8-4-8 4m16 0h-4m4 0v10m-4 0l-8 4-8-4m8 4V7m-4 0h4m-8 4v10l8 4 8-4v-10"></path>
-                    </svg>
-                    <div>
-                        <p class="font-medium text-gray-800">Work</p>
-                        <p class="text-sm text-gray-500">456 Corporate Ave, Floor 10</p>
-                    </div>
+                <div class="row row-cols-4 g-3 text-center">
+                    <div class="col"><div class="category-icon">🍕</div><p class="mt-2 mb-0 small">Pizza</p></div>
+                    <div class="col"><div class="category-icon">🍣</div><p class="mt-2 mb-0 small">Sushi</p></div>
+                    <div class="col"><div class="category-icon">🥗</div><p class="mt-2 mb-0 small">Salad</p></div>
+                    <div class="col"><div class="category-icon">🍩</div><p class="mt-2 mb-0 small">Donuts</p></div>
+                    <div class="col"><div class="category-icon">🍜</div><p class="mt-2 mb-0 small">Ramen</p></div>
+                    <div class="col"><div class="category-icon">🎂</div><p class="mt-2 mb-0 small">Cake</p></div>
+                    <div class="col"><div class="category-icon">☕</div><p class="mt-2 mb-0 small">Coffee</p></div>
+                    <div class="col"><div class="category-icon">🥐</div><p class="mt-2 mb-0 small">Bakery</p></div>
                 </div>
-                <!-- Repeatable location item: Home -->
-                <div
-                    class="flex items-center p-3 border-b border-gray-100 cursor-pointer hover:bg-gray-50 transition rounded-lg">
-                    <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 12l2-2m0 0l7-7 7 7m-2 2l-7-7-7 7m7 7v6"></path>
-                    </svg>
-                    <div>
-                        <p class="font-medium text-gray-800">Home</p>
-                        <p class="text-sm text-gray-500">789 Residential Plaza</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div id="search-modal" class="fixed inset-0 z-50 hidden bg-white transform transition-transform duration-300">
-        <div class="w-full h-full p-5 flex flex-col max-w-[420px] mx-auto">
-
-            <div class="flex items-center space-x-3 mb-6">
-
-                <button id="close-search-modal" class="p-2 rounded-full hover:bg-gray-100 transition">
-                    <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                    </svg>
-                </button>
-
-                <div class="relative flex-grow">
-                    <input id="modal-search-input" type="text" placeholder="Search for food or restaurants"
-                        class="w-full pl-10 pr-4 py-3 bg-gray-100 rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300"
-                        autofocus />
-                    <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                </div>
-            </div>
-
-            <div class="flex-grow space-y-6 overflow-y-auto">
-
-                <div>
-                    <h4 class="text-lg font-bold text-gray-900 mb-3">Recent Searches</h4>
-                    <div class="flex flex-wrap gap-2">
-                        <span
-                            class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm cursor-pointer hover:bg-gray-200 transition">Burger</span>
-                        <span
-                            class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm cursor-pointer hover:bg-gray-200 transition">Pizza
-                            Hut</span>
-                        <span
-                            class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm cursor-pointer hover:bg-gray-200 transition">Ice
-                            Cream</span>
-                        <span
-                            class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm cursor-pointer hover:bg-gray-200 transition">Shawarma</span>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="text-lg font-bold text-gray-900 mb-4">Popular Near You</h4>
-                    <div class="space-y-4">
-                        <div
-                            class="flex items-center p-3 bg-white rounded-xl shadow-sm cursor-pointer hover:bg-gray-50 transition">
-                            <img src="https://placehold.co/40x40/f87171/ffffff?text=🍕" alt="Pizza"
-                                class="w-10 h-10 object-cover rounded-lg mr-4">
-                            <div class="flex-grow">
-                                <p class="font-medium text-gray-800">Classic Pepperoni Pizza</p>
-                                <p class="text-sm text-gray-500">The Italian Kitchen</p>
-                            </div>
-                            <span class="text-sm font-semibold text-red-500">£ 8.50</span>
-                        </div>
-
-                        <div
-                            class="flex items-center p-3 bg-white rounded-xl shadow-sm cursor-pointer hover:bg-gray-50 transition">
-                            <img src="https://placehold.co/40x40/60a5fa/ffffff?text=🌮" alt="Taco"
-                                class="w-10 h-10 object-cover rounded-lg mr-4">
-                            <div class="flex-grow">
-                                <p class="font-medium text-gray-800">Spicy Beef Taco</p>
-                                <p class="text-sm text-gray-500">Mexican Fiesta Grill</p>
-                            </div>
-                            <span class="text-sm font-semibold text-red-500">£ 4.00</span>
-                        </div>
-
-                        <div
-                            class="flex items-center p-3 bg-white rounded-xl shadow-sm cursor-pointer hover:bg-gray-500 transition">
-                            <img src="https://placehold.co/40x40/34d399/ffffff?text=🥗" alt="Salad"
-                                class="w-10 h-10 object-cover rounded-lg mr-4">
-                            <div class="flex-grow">
-                                <p class="font-medium text-gray-800">Chicken Caesar Salad</p>
-                                <p class="text-sm text-gray-500">Healthy Greens</p>
-                            </div>
-                            <span class="text-sm font-semibold text-red-500">£ 7.50</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-    <!-- Full Categories Modal (New Popup) -->
-    <div id="full-categories-modal"
-        class="fixed inset-0 z-50 hidden bg-white transform transition-transform duration-300">
-        <div class="w-full h-full p-5 flex flex-col max-w-[420px] mx-auto">
-            <!-- Modal Header -->
-            <div class="flex justify-between items-center mb-8">
-                <!-- Close Button -->
-                <button id="close-categories-modal" class="p-2 rounded-full hover:bg-gray-100 transition">
-                    <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                            d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-                <h3 class="text-xl font-bold text-gray-900">All Categories</h3>
-                <div class="w-10"></div> <!-- Placeholder for alignment -->
-            </div>
-
-            <!-- Categories Grid (Content injected by JS) -->
-            <div id="categories-grid" class="grid grid-cols-4 gap-y-6 gap-x-2 flex-grow overflow-y-auto">
-                <!-- Categories will be injected here by JavaScript -->
-            </div>
-
-        </div>
-    </div>
-
-    <!-- MODULE SELECTION MODAL (BOTTOM SHEET STYLE) -->
-    <div id="module-selection-modal" class="fixed inset-0 z-50 hidden transition-opacity duration-300"
-        style="background-color: rgba(0,0,0,0.5);">
-        <!-- Modal Content Container -->
-        <div id="module-modal-content"
-            class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-[420px] bg-white rounded-t-3xl p-6 transition-transform duration-300 translate-y-full">
-
-            <!-- Handle indicator -->
-            <div class="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-6"></div>
-
-            <!-- Modal Header -->
-            <div class="flex justify-center items-center mb-8">
-                <h3 class="text-xl font-bold text-gray-900">Select a type of module for your orders</h3>
-            </div>
-
-            <!-- Modules Grid -->
-            <div id="modules-grid" class="grid grid-cols-3 gap-4">
-                <!-- Module Item: Grocery -->
-                <div
-                    class="module-item flex flex-col items-center justify-center p-4 bg-white rounded-2xl card-shadow cursor-pointer hover:bg-gray-50 transition duration-150 text-center">
-                    <!-- Icon placeholder: Broccoli -->
-                    <img src="https://placehold.co/48x48/d1fae5/059669?text=🥦" class="w-12 h-12 mb-2"
-                        alt="Grocery icon">
-                    <span class="font-medium text-sm text-gray-800">Grocery</span>
-                </div>
-                <!-- Module Item: Pharmacy -->
-                <div
-                    class="module-item flex flex-col items-center justify-center p-4 bg-white rounded-2xl card-shadow cursor-pointer hover:bg-gray-50 transition duration-150 text-center">
-                    <!-- Icon placeholder: Plus sign/Cross -->
-                    <img src="https://placehold.co/48x48/dbeafe/2563eb?text=➕" class="w-12 h-12 mb-2"
-                        alt="Pharmacy icon">
-                    <span class="font-medium text-sm text-gray-800">Pharmacy</span>
-                </div>
-                <!-- Module Item: Shop -->
-                <div
-                    class="module-item flex flex-col items-center justify-center p-4 bg-white rounded-2xl card-shadow cursor-pointer hover:bg-gray-50 transition duration-150 text-center">
-                    <!-- Icon placeholder: Shopping Bag -->
-                    <img src="https://placehold.co/48x48/fbcfe8/ec4899?text=🛍️" class="w-12 h-12 mb-2" alt="Shop icon">
-                    <span class="font-medium text-sm text-gray-800">Shop</span>
-                </div>
-                <!-- Module Item: Food (Current active module, indicated by red border) -->
-                <div
-                    class="module-item flex flex-col items-center justify-center p-4 bg-white rounded-2xl card-shadow cursor-pointer hover:bg-gray-50 transition duration-150 text-center border-2 border-red-500">
-                    <!-- Icon placeholder: Fries/Food -->
-                    <img src="https://placehold.co/48x48/fef3c7/d97706?text=🍟" class="w-12 h-12 mb-2" alt="Food icon">
-                    <span class="font-bold text-sm text-red-500">Food</span>
-                </div>
-                <!-- Module Item: Parcel -->
-                <div
-                    class="module-item flex flex-col items-center justify-center p-4 bg-white rounded-2xl card-shadow cursor-pointer hover:bg-gray-50 transition duration-150 text-center">
-                    <!-- Icon placeholder: Box -->
-                    <img src="https://placehold.co/48x48/e0e7ff/4f46e5?text=📦" class="w-12 h-12 mb-2"
-                        alt="Parcel icon">
-                    <span class="font-medium text-sm text-gray-800">Parcel</span>
-                </div>
-                <!-- Module Item: Rental -->
-                <div
-                    class="module-item flex flex-col items-center justify-center p-4 bg-white rounded-2xl card-shadow cursor-pointer hover:bg-gray-50 transition duration-150 text-center">
-                    <!-- Icon placeholder: Car -->
-                    <img src="https://placehold.co/48x48/fee2e2/dc2626?text=🚗" class="w-12 h-12 mb-2"
-                        alt="Rental icon">
-                    <span class="font-medium text-sm text-gray-800">Rental</span>
-                </div>
-            </div>
-
-            <!-- Footer Notice -->
-            <div class="mt-8 p-4 bg-blue-50 rounded-xl flex items-start space-x-3">
-                <svg class="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                        clip-rule="evenodd"></path>
-                </svg>
-                <p class="text-sm text-blue-800">A module must be selected to continue.</p>
             </div>
         </div>
     </div>
 
-
-    <!-- CAROUSEL AND MODAL JAVASCRIPT -->
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- DATA: Full List of Categories ---
-            const ALL_CATEGORIES = [
-                // Existing categories (can be repeated or re-defined for full list)
-                { name: 'Burger', icon: '🍔', color: 'red-100', text: 'dc2626' },
-                { name: 'Taco', icon: '🌮', color: 'yellow-100', text: 'd97706' },
-                { name: 'Burrito', icon: '🌯', color: 'green-100', text: '059669' },
-                { name: 'Drink', icon: '🍹', color: 'blue-100', text: '2563eb' },
-                { name: 'Sandwich', icon: '🥪', color: 'indigo-100', text: '4f46e5' },
-                { name: 'Pasta', icon: '🍝', color: 'pink-100', text: 'ec4899' },
-                { name: 'Ice Cream', icon: '🍦', color: 'amber-100', text: 'd97706' },
-                // 10 new categories for the full list
-                { name: 'Pizza', icon: '🍕', color: 'orange-100', text: 'f97316' },
-                { name: 'Sushi', icon: '🍣', color: 'teal-100', text: '0d9488' },
-                { name: 'Thai', icon: '🍜', color: 'lime-100', text: '65a30d' },
-                { name: 'Mexican', icon: '🌶️', color: 'red-100', text: 'dc2626' },
-                { name: 'Coffee', icon: '☕', color: 'stone-100', text: '57534e' },
-                { name: 'Dessert', icon: '🍰', color: 'fuchsia-100', text: 'c026d3' },
-                { name: 'Vegan', icon: '🥦', color: 'emerald-100', text: '059669' },
-                { name: 'Breakfast', icon: '🥞', color: 'yellow-200', text: 'ca8a04' },
-                { name: 'Indian', icon: '🍛', color: 'orange-200', text: 'ea580c' },
-                { name: 'Seafood', icon: '🦞', color: 'sky-100', text: '0ea5e9' },
-            ];
-
-
-            // --- DOM ELEMENTS ---
-            const body = document.body;
-
-            // Location Modal elements
-            const openLocationModalBtn = document.getElementById('open-location-modal');
-            const closeLocationModalBtn = document.getElementById('close-location-modal');
-            const locationModal = document.getElementById('location-modal');
-
-            // Categories Modal elements
-            const openCategoriesModalBtn = document.getElementById('open-categories-modal');
-            const closeCategoriesModalBtn = document.getElementById('close-categories-modal');
-            const categoriesModal = document.getElementById('full-categories-modal');
-            const categoriesGrid = document.getElementById('categories-grid');
-
-            // NEW: Module Selection Modal elements
-            const openModuleModalBtn = document.getElementById('open-module-modal');
-            const moduleModal = document.getElementById('module-selection-modal');
-            const moduleModalContent = document.getElementById('module-modal-content');
-            const moduleItems = document.querySelectorAll('.module-item');
-
-
-            // --- MODAL CONTROL FUNCTIONS ---
-
-            // Function to show a generic FULL SCREEN modal (Location/Categories)
-            function showModal(modalElement) {
-                modalElement.classList.remove('hidden');
-                body.classList.add('modal-open');
-            }
-
-            // Function to hide a generic FULL SCREEN modal (Location/Categories)
-            function hideModal(modalElement) {
-                modalElement.classList.add('hidden');
-                body.classList.remove('modal-open');
-            }
-
-            // Function to show the BOTTOM SHEET modal (Module Selection)
-            function showModuleModal() {
-                moduleModal.classList.remove('hidden');
-                // Use setTimeout to ensure the transition fires correctly
-                setTimeout(() => {
-                    moduleModalContent.classList.remove('translate-y-full');
-                    moduleModal.style.opacity = '1';
-                }, 10);
-                body.classList.add('modal-open');
-            }
-
-            // Function to hide the BOTTOM SHEET modal (Module Selection)
-            function hideModuleModal() {
-                moduleModalContent.classList.add('translate-y-full');
-                // Wait for the slide transition to complete (300ms defined in CSS)
-                setTimeout(() => {
-                    moduleModal.classList.add('hidden');
-                    body.classList.remove('modal-open');
-                }, 300);
-            }
-
-            // --- CATEGORIES RENDERING ---
-
-            // Function to dynamically render all categories into the grid
-            function renderCategories() {
-                // Clear existing content
-                categoriesGrid.innerHTML = '';
-
-                const categoriesToRender = ALL_CATEGORIES;
-
-                categoriesToRender.forEach(category => {
-                    const categoryElement = document.createElement('div');
-                    categoryElement.className = 'flex flex-col items-center cursor-pointer transition duration-150 hover:opacity-80';
-                    categoryElement.innerHTML = `
-                        <div class="w-14 h-14 rounded-xl bg-${category.color} flex items-center justify-center mb-1">
-                            <img src="https://placehold.co/32x32/${category.color.split('-')[0]}/${category.text}?text=${category.icon}" class="w-8 h-8" alt="${category.name} icon">
-                        </div>
-                        <span class="text-xs font-medium text-gray-700 text-center">${category.name}</span>
-                    `;
-                    // Add an event listener for user interaction
-                    categoryElement.addEventListener('click', () => {
-                        console.log(`Category clicked: ${category.name}`);
-                        hideModal(categoriesModal); // Close modal after selection (simulate action)
-                    });
-
-                    categoriesGrid.appendChild(categoryElement);
-                });
-            }
-
-
-            // --- EVENT LISTENERS ---
-
-            // 1. Location Modal Listeners
-            openLocationModalBtn.addEventListener('click', (e) => showModal(locationModal));
-            closeLocationModalBtn.addEventListener('click', (e) => hideModal(locationModal));
-            openLocationModalBtn.addEventListener('touchstart', (e) => showModal(locationModal));
-            closeLocationModalBtn.addEventListener('touchstart', (e) => hideModal(locationModal));
-
-            // 2. Full Categories Modal Listeners
-            openCategoriesModalBtn.addEventListener('click', (e) => {
-                renderCategories(); // Render every time it opens to ensure freshness
-                showModal(categoriesModal);
-            });
-            closeCategoriesModalBtn.addEventListener('click', (e) => hideModal(categoriesModal));
-            openCategoriesModalBtn.addEventListener('touchstart', (e) => {
-                renderCategories();
-                showModal(categoriesModal);
-            });
-            closeCategoriesModalBtn.addEventListener('touchstart', (e) => hideModal(categoriesModal));
-
-            // 3. NEW: Module Selection Modal Listeners
-            openModuleModalBtn.addEventListener('click', showModuleModal);
-            openModuleModalBtn.addEventListener('touchstart', showModuleModal);
-
-            // Close modal when backdrop is clicked (for bottom sheet)
-            moduleModal.addEventListener('click', (e) => {
-                // Only close if the click is directly on the backdrop (not the content)
-                if (e.target === moduleModal) {
-                    hideModuleModal();
-                }
-            });
-
-            // Close modal when a module item is clicked (simulating selection)
-            moduleItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    console.log(`Module selected: ${item.querySelector('span').textContent}`);
-                    hideModuleModal();
-                });
-            });
-
-
-            // --- CAROUSEL LOGIC (Retained from previous update) ---
-            const track = document.getElementById('carousel-track');
-            const slides = track.querySelectorAll(':scope > div');
-            const dotsContainer = document.getElementById('carousel-dots');
-            const dots = dotsContainer.querySelectorAll('.dot');
-            const slideCount = slides.length;
-            let currentSlide = 0;
-            // Calculate slide width dynamically to handle responsiveness
-            const slideWidth = track.parentElement.offsetWidth;
-
-            function updateCarousel() {
-                // Using a calculation that accounts for both the slide width and the 'mr-3' gap (12px in Tailwind)
-                const offset = -currentSlide * (slideWidth);
-                track.style.transform = `translateX(-${currentSlide * 100}%)`; // Use percentage for fluid width
-
-                dots.forEach((dot, index) => {
-                    dot.classList.remove('bg-red-500', 'bg-gray-300');
-                    if (index === currentSlide) {
-                        dot.classList.add('bg-red-500');
-                    } else {
-                        dot.classList.add('bg-gray-300');
-                    }
-                });
-            }
-
-            // Update carousel on initial load and resize
-            window.addEventListener('resize', updateCarousel);
-
-
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % slideCount;
-                updateCarousel();
-            }
-
-            // Initial call to set up the carousel correctly
-            updateCarousel();
-            setInterval(nextSlide, 3000);
+        // Open modal when "More" is clicked
+        const moreBtn = document.getElementById('more-btn');
+        const moreModal = new bootstrap.Modal(document.getElementById('moreModal'));
+        moreBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            moreModal.show();
         });
     </script>
-    <script>
-        // --- Existing Modals Logic (Location and Categories) ---
-        const body = document.body;
-
-        // Location Modal
-        const locationModal = document.getElementById('location-modal');
-        document.getElementById('open-location-modal').addEventListener('click', () => {
-            locationModal.classList.remove('hidden');
-            body.classList.add('modal-open');
-        });
-        document.getElementById('close-location-modal').addEventListener('click', () => {
-            locationModal.classList.add('hidden');
-            body.classList.remove('modal-open');
-        });
-
-        // Categories Modal
-        const categoriesModal = document.getElementById('full-categories-modal');
-        document.getElementById('open-categories-modal').addEventListener('click', () => {
-            // Only inject categories once
-            if (document.getElementById('categories-grid').children.length === 0) {
-                injectAllCategories();
-            }
-            categoriesModal.classList.remove('hidden');
-            body.classList.add('modal-open');
-        });
-        document.getElementById('close-categories-modal').addEventListener('click', () => {
-            categoriesModal.classList.add('hidden');
-            body.classList.remove('modal-open');
-        });
-
-        function injectAllCategories() {
-            const categoriesData = [
-                { name: "Burger", emoji: "🍔", color: "red" },
-                { name: "Taco", emoji: "🌮", color: "yellow" },
-                { name: "Burrito", emoji: "🌯", color: "green" },
-                { name: "Drink", emoji: "🍹", color: "blue" },
-                { name: "Sandwich", emoji: "🥪", color: "indigo" },
-                { name: "Pasta", emoji: "🍝", color: "pink" },
-                { name: "Ice Cream", emoji: "🍦", color: "amber" },
-                { name: "Pizza", emoji: "🍕", color: "orange" },
-                { name: "Sushi", emoji: "🍣", color: "purple" },
-                { name: "Noodles", emoji: "🍜", color: "cyan" },
-                { name: "Cake", emoji: "🍰", color: "rose" },
-                { name: "Coffee", emoji: "☕", color: "brown" },
-                // Add more categories as needed for a full list
-            ];
-
-            const grid = document.getElementById('categories-grid');
-            const colorMap = {
-                "red": { bg: "bg-red-100", text: "text-red-600" },
-                "yellow": { bg: "bg-yellow-100", text: "text-yellow-600" },
-                "green": { bg: "bg-green-100", text: "text-green-600" },
-                "blue": { bg: "bg-blue-100", text: "text-blue-600" },
-                "indigo": { bg: "bg-indigo-100", text: "text-indigo-600" },
-                "pink": { bg: "bg-pink-100", text: "text-pink-600" },
-                "amber": { bg: "bg-amber-100", text: "text-amber-600" },
-                "orange": { bg: "bg-orange-100", text: "text-orange-600" },
-                "purple": { bg: "bg-purple-100", text: "text-purple-600" },
-                "cyan": { bg: "bg-cyan-100", text: "text-cyan-600" },
-                "rose": { bg: "bg-rose-100", text: "text-rose-600" },
-                "brown": { bg: "bg-yellow-800", text: "text-yellow-900" }, // Custom for coffee
-            };
-
-            categoriesData.forEach(cat => {
-                const colors = colorMap[cat.color] || { bg: "bg-gray-100", text: "text-gray-700" };
-                const div = document.createElement('div');
-                div.className = 'flex flex-col items-center cursor-pointer hover:opacity-80 transition';
-                div.innerHTML = `
-                <div class="w-14 h-14 rounded-xl ${colors.bg} flex items-center justify-center mb-1 card-shadow">
-                    <span class="text-2xl">${cat.emoji}</span>
-                </div>
-                <span class="text-xs font-medium text-gray-700 text-center">${cat.name}</span>
-            `;
-                grid.appendChild(div);
-            });
-        }
-
-        // --- NEW: Search Modal Logic ---
-        const searchModal = document.getElementById('search-modal');
-        const searchTrigger = document.getElementById('searchTrigger'); // The div containing the search input on the home page
-        const modalSearchInput = document.getElementById('modal-search-input');
-
-        // Open Modal when the search area on the home page is clicked
-        searchTrigger.addEventListener('click', () => {
-            searchModal.classList.remove('hidden');
-            body.classList.add('modal-open');
-            // Wait a moment for the modal to be visible before focusing the input
-            setTimeout(() => {
-                modalSearchInput.focus();
-            }, 100);
-        });
-
-        // Close Modal when the back button is clicked
-        document.getElementById('close-search-modal').addEventListener('click', () => {
-            searchModal.classList.add('hidden');
-            body.classList.remove('modal-open');
-        });
-
-        // --- Carousel Logic (for completeness) ---
-        const carouselTrack = document.getElementById('carousel-track');
-        const dotsContainer = document.getElementById('carousel-dots');
-        const slides = carouselTrack.children;
-        let currentSlide = 0;
-
-        function updateCarousel() {
-            const slideWidth = slides[0].offsetWidth + (parseFloat(getComputedStyle(slides[0]).marginRight) || 0);
-            carouselTrack.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-
-            // Update dots
-            Array.from(dotsContainer.children).forEach((dot, index) => {
-                if (index === currentSlide) {
-                    dot.classList.add('bg-red-500');
-                    dot.classList.remove('bg-gray-300');
-                } else {
-                    dot.classList.remove('bg-red-500');
-                    dot.classList.add('bg-gray-300');
-                }
-            });
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            updateCarousel();
-        }
-
-        // Initial setup and auto-advance
-        updateCarousel();
-        setInterval(nextSlide, 5000); // Auto-advance every 5 seconds
-    </script>
-
 
 </body>
 
