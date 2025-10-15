@@ -1,0 +1,80 @@
+ body {
+     font-family: 'Inter', sans-serif;
+     /* Light background to match the mobile container feel */
+ }
+
+ /* Custom scrollbar for better mobile feel, though not strictly necessary */
+ .hide-scrollbar::-webkit-scrollbar {
+     display: none;
+ }
+
+ .hide-scrollbar {
+     -ms-overflow-style: none;
+     /* IE and Edge */
+     scrollbar-width: none;
+     /* Firefox */
+ }
+
+ /* Custom shadow for cards */
+ .card-shadow {
+     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+ }
+
+ /* The main container to simulate the mobile screen dimensions */
+ .mobile-frame {
+     max-width: 420px;
+     /* Standard large mobile width */
+     min-height: 100vh;
+     margin: auto;
+     background-color: white;
+     position: relative;
+     overflow-x: hidden;
+ }
+
+ /* Custom styling for the bottom navigation active button */
+ .nav-active-bg {
+     background-color: #ff5252;
+     box-shadow: 0 4px 10px rgba(255, 82, 82, 0.4);
+     transition: all 0.3s ease;
+ }
+
+
+ /* Style to prevent body scroll when modal is active (controlled by JS) */
+ .modal-open {
+     overflow: hidden;
+ }
+
+ /* Custom shadow for cards */
+ .card-shadow {
+     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+ }
+
+ /* Glassmorphism Effect for the overlay */
+ .glass-overlay {
+     background: rgba(255, 255, 255, 0.1);
+     backdrop-filter: blur(2px);
+     -webkit-backdrop-filter: blur(10px);
+     border-top: 1px solid rgba(255, 255, 255, 0.2);
+     background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.05));
+ }
+
+ /* Carousel container enables horizontal scrolling and snapping */
+ .carousel-container {
+     scroll-snap-type: x mandatory;
+     overflow-x: auto;
+     scroll-behavior: smooth;
+     /* Hide scrollbar */
+     -ms-overflow-style: none;
+     scrollbar-width: none;
+ }
+
+ .carousel-container::-webkit-scrollbar {
+     display: none;
+ }
+
+ .carousel-items {
+     /* Define the snap point for each card */
+     scroll-snap-align: start;
+     /* Card width is 90% of the container, allowing the next card to peek */
+     flex: 0 0 90%;
+ }
