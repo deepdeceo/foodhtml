@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Free Map with Current Location</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <style>
+        #map { height: 500px; width: 100%; }
+    </style>
+</head>
+<body>
+
+<h2>My Location Map</h2>
+<div id="map"></div>
+<p id="status">Detecting location…</p>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const status = document.getElementById("status");
+
+// Initialize map with default center
+const map = L.map('map').setView([0, 0], 2);
+
+// OpenStreetMap tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+}).addTo(map);
+
+// Check if Geolocation is available
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            status.textContent = `You are here: Lat ${lat}, Lng ${lng}`;
+
+            // Set map view to current location
+            map.setView([lat, lng], 13);
+
+            // Add marker
+            L.marker([lat, lng]).addTo(map)
+                .bindPopup("You are here!")
+                .openPopup();
+        },
+        (error) => {
+            status.textContent = "Error getting location: " + error.message;
+        }
+    );
+} else {
+    status.textContent = "Geolocation is not supported by your browser.";
+}
+</script>
+</body>
+</html>
