@@ -1,789 +1,688 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Food Delivery - Fast & Fresh</title>
-
-    <!-- PWA Meta Tags -->
-    <meta name="description"
-        content="Fast food delivery with the best restaurants in your area. Order burgers, tacos, pasta, and more with quick delivery.">
-    <meta name="keywords"
-        content="food delivery, restaurant, burger, taco, pasta, ice cream, fast food, online ordering">
-    <meta name="author" content="Food Delivery App">
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://fooddelivery.app/">
-    <meta property="og:title" content="Food Delivery App - Fast & Fresh">
-    <meta property="og:description" content="Order from the best restaurants in your area with fast delivery.">
-    <meta property="og:image" content="assets/images/logo/512.png">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://fooddelivery.app/">
-    <meta property="twitter:title" content="Food Delivery App - Fast & Fresh">
-    <meta property="twitter:description" content="Order from the best restaurants in your area with fast delivery.">
-    <meta property="twitter:image" content="assets/images/logo/512.png">
-
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="assets/images/logo/favicon.png" type="image/x-icon">
-    <link rel="apple-touch-icon" href="assets/images/logo/favicon.png">
-    <meta name="title-color" content="#FF9D5C">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="FoodDelivery">
-    <meta name="msapplication-TileImage" content="assets/images/logo/favicon.png">
-    <meta name="msapplication-TileColor" content="#FFFFFF">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
-        rel="stylesheet">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Bootstrap Icons CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-
-    <link rel="stylesheet" href="assets/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'food-red': '#FF4444',
+                        'food-orange': '#FF8A00',
+                        'food-yellow': '#FFD700',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-
-<body>
-
-    <!-- Mobile Container -->
-    <div class="mobile-container">
-        <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <button class="menu-btn" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
-                <i class="bi bi-list"></i>
-            </button>
-            <div class="location-section">
-                <img src="assets/images/svg/location.svg" alt="location" class="location-icon">
-                <div class="location-text">
-                    <p class="deliver-to">Deliver to</p>
-                    <p class="location-select">
-                        Select Your Location
-                        <i class="bi bi-chevron-down location-arrow"></i>
-                    </p>
+<body class="bg-white min-h-screen">
+    <!-- Header Section -->
+    <div class="px-4 py-3 bg-white">
+        <div class="flex justify-between items-center">
+            <button id="openLocationBtn" class="text-left">
+                <p class="text-gray-500 text-sm">Deliver to</p>
+                <div class="flex items-center">
+                    <p class="text-gray-700 text-sm">Select Your Location</p>
+                    <i class="fas fa-chevron-down text-red-500 text-xs ml-1"></i>
                 </div>
-            </div>
-            <div class="header-actions">
-                <a href="search.html" class="header-btn">
-                    <i class="bi bi-search"></i>
-                </a>
-                <a href="notification.html" class="header-btn">
-                    <i class="bi bi-bell"></i>
-                </a>
-                <button class="header-btn" data-bs-toggle="modal" data-bs-target="#quickActionsModal">
-                    <i class="bi bi-three-dots"></i>
+            </button>
+            <div class="flex space-x-3">
+                <button id="openCartBtn" class="text-gray-600 text-lg">
+                    <i class="fas fa-shopping-bag"></i>
+                </button>
+                <button id="openSearchBtn" class="text-gray-600 text-lg">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="openSheetBtn" class="text-gray-600 text-lg">
+                    <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
-    </header>
+    </div>
 
-    <!-- Banner Carousel -->
-    <section class="banner-section">
-        <div id="foodBannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#foodBannerCarousel" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#foodBannerCarousel" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#foodBannerCarousel" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <!-- Ice Cream Banner -->
-                <div class="carousel-item active">
-                    <div class="banner-slide">
-                        <div class="banner-badge">ICE CREAM DAY</div>
-                        <div class="banner-title">GET YOUR SWEET ICE CREAM</div>
-                        <div class="banner-offer">40% OFF</div>
-                        <a href="category-details.html" class="banner-btn">Order Now</a>
+    <!-- Promotional Banner Slider -->
+    <div class="px-4 py-2">
+        <div class="relative overflow-hidden rounded-lg">
+            <!-- Slider Container -->
+            <div id="bannerSlider" class="flex transition-transform duration-500 ease-in-out">
+                <!-- Slide 1: Ice Cream Banner -->
+                <div class="w-full flex-shrink-0 bg-gradient-to-r from-orange-400 to-yellow-400 rounded-lg p-4 relative overflow-hidden">
+                    <div class="relative z-10">
+                        <p class="text-white text-xs font-semibold mb-1">ICE CREAM DAY</p>
+                        <h2 class="text-white text-lg font-bold leading-tight mb-2">GET YOUR SWEET<br>ICE CREAM</h2>
+                        <p class="text-white text-sm font-semibold">40% OFF</p>
                     </div>
-                            </div>
-                <!-- Burger Banner -->
-                <div class="carousel-item">
-                    <div class="banner-slide" style="background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);">
-                        <div class="banner-badge">BURGER SPECIAL</div>
-                        <div class="banner-title">JUICY BURGERS</div>
-                        <div class="banner-offer">BUY 2 GET 1 FREE</div>
-                        <a href="category-details.html" class="banner-btn">Order Now</a>
+                    <div class="absolute right-0 top-0 w-20 h-20">
+                        <div class="w-full h-full bg-pink-300 rounded-full transform translate-x-8 -translate-y-4"></div>
                     </div>
-                            </div>
-                <!-- Free Delivery Banner -->
-                <div class="carousel-item">
-                    <div class="banner-slide" style="background: linear-gradient(135deg, #32CD32 0%, #228B22 100%);">
-                        <div class="banner-badge">FREE DELIVERY</div>
-                        <div class="banner-title">ON ORDERS OVER €25</div>
-                        <div class="banner-offer">FAST & FRESH</div>
-                        <a href="category-details.html" class="banner-btn">Order Now</a>
+                </div>
+                
+                <!-- Slide 2: Coupon Banner -->
+                <div class="w-full flex-shrink-0 bg-gray-800 rounded-lg p-4 relative">
+                    <div class="text-white">
+                        <p class="text-xs font-semibold">COUPON</p>
+                        <p class="text-lg font-bold">Don't</p>
+                        <p class="text-lg font-bold">Hesitate</p>
+                        <p class="text-xs">Happy Hour</p>
+                    </div>
+                    <div class="absolute right-4 top-4 w-12 h-12 bg-red-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-gift text-white text-lg"></i>
+                    </div>
+                </div>
+                
+                <!-- Slide 3: Pizza Banner -->
+                <div class="w-full flex-shrink-0 bg-gradient-to-r from-red-500 to-pink-500 rounded-lg p-4 relative overflow-hidden">
+                    <div class="relative z-10">
+                        <p class="text-white text-xs font-semibold mb-1">PIZZA TIME</p>
+                        <h2 class="text-white text-lg font-bold leading-tight mb-2">HOT & FRESH<br>PIZZA</h2>
+                        <p class="text-white text-sm font-semibold">30% OFF</p>
+                    </div>
+                    <div class="absolute right-0 top-0 w-20 h-20">
+                        <div class="w-full h-full bg-yellow-300 rounded-full transform translate-x-8 -translate-y-4"></div>
                     </div>
                 </div>
             </div>
+            
+            <!-- Carousel Indicators -->
+            <div class="flex justify-center space-x-2 py-2">
+                <button class="w-2 h-2 bg-red-500 rounded-full transition-colors duration-300 indicator active" data-slide="0"></button>
+                <button class="w-2 h-2 bg-gray-300 rounded-full transition-colors duration-300 indicator" data-slide="1"></button>
+                <button class="w-2 h-2 bg-gray-300 rounded-full transition-colors duration-300 indicator" data-slide="2"></button>
+            </div>
         </div>
-    </section>
+    </div>
 
     <!-- Search Bar -->
-    <section class="search-section">
-        <div class="search-bar">
-            <i class="bi bi-search" style="color: #999;"></i>
-            <input type="text" class="search-input" placeholder="Search" />
-            <button class="filter-btn">
-                <i class="bi bi-sliders"></i>
-            </button>
+    <div class="px-4 py-3">
+        <div class="relative">
+            <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+                <i class="fas fa-search text-gray-400"></i>
             </div>
-    </section>
-
-    <!-- Categories Grid -->
-    <section class="categories-section">
-        <div class="categories-grid">
-            <a href="category-details.html" class="category-item">
-                <div class="category-icon" style="background: #FF9D5C;">
-                    <i class="bi bi-burger"></i>
-                </div>
-                <h5 class="category-name">Burger</h5>
-            </a>
-            <a href="category-details.html" class="category-item">
-                <div class="category-icon" style="background: #FF6B35;">
-                    <i class="bi bi-egg-fried"></i>
-                </div>
-                <h5 class="category-name">Taco</h5>
-            </a>
-            <a href="category-details.html" class="category-item">
-                <div class="category-icon" style="background: #8B4513;">
-                    <i class="bi bi-egg-fried"></i>
-                </div>
-                <h5 class="category-name">Burrito</h5>
-            </a>
-            <a href="category-details.html" class="category-item">
-                <div class="category-icon" style="background: #32CD32;">
-                    <i class="bi bi-cup-straw"></i>
-                </div>
-                <h5 class="category-name">Drink</h5>
-            </a>
-            <a href="category-details.html" class="category-item">
-                <div class="category-icon" style="background: #FFD700;">
-                    <i class="bi bi-sandwich"></i>
-                </div>
-                <h5 class="category-name">Sandwich</h5>
-            </a>
-            <a href="category-details.html" class="category-item">
-                <div class="category-icon" style="background: #FF1493;">
-                    <i class="bi bi-egg-fried"></i>
-                </div>
-                <h5 class="category-name">Pasta</h5>
-            </a>
-            <a href="category-details.html" class="category-item">
-                <div class="category-icon" style="background: #FF69B4;">
-                    <i class="bi bi-ice-cream"></i>
-                </div>
-                <h5 class="category-name">Ice Cream</h5>
-            </a>
-            <a href="category-details.html" class="category-item">
-                <div class="category-icon" style="background: #808080;">
-                    <i class="bi bi-three-dots"></i>
-                </div>
-                <h5 class="category-name">More</h5>
-            </a>
+            <input type="text" placeholder="Search" class="w-full bg-gray-100 rounded-lg py-3 pl-10 pr-10 text-gray-500 focus:outline-none">
+            <div class="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <i class="fas fa-sliders-h text-gray-400"></i>
+            </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Featured Restaurants Carousel -->
-    <section class="featured-restaurants-section">
-        <div class="custom-container">
-            <div class="section-header">
-                <h2 class="section-title">Featured Restaurants</h2>
-                <p class="section-subtitle">Discover amazing food from top restaurants</p>
+    <!-- Food Categories -->
+    <div class="px-4 py-2">
+        <div class="grid grid-cols-4 gap-4">
+            <!-- Row 1 -->
+            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                <div class="w-8 h-8 mx-auto mb-2 bg-orange-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-hamburger text-orange-500 text-sm"></i>
+                </div>
+                <p class="text-gray-700 text-xs">Burger</p>
+            </div>
+            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                <div class="w-8 h-8 mx-auto mb-2 bg-yellow-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-taco text-yellow-500 text-sm"></i>
+                </div>
+                <p class="text-gray-700 text-xs">Taco</p>
+            </div>
+            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                <div class="w-8 h-8 mx-auto mb-2 bg-green-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-burrito text-green-500 text-sm"></i>
+                </div>
+                <p class="text-gray-700 text-xs">Burrito</p>
+            </div>
+            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                <div class="w-8 h-8 mx-auto mb-2 bg-blue-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-coffee text-blue-500 text-sm"></i>
+                </div>
+                <p class="text-gray-700 text-xs">Drink</p>
             </div>
             
-            <div id="restaurantsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#restaurantsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#restaurantsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#restaurantsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <!-- Row 2 -->
+            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                <div class="w-8 h-8 mx-auto mb-2 bg-purple-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-sandwich text-purple-500 text-sm"></i>
                 </div>
-                
-                <div class="carousel-inner">
-                    <!-- Restaurant Card 1 -->
-                    <div class="carousel-item active">
-                        <div class="featured-restaurant-card">
-                            <!-- Promotional Banner -->
-                            <div class="restaurant-banner">
-                                <div class="banner-tags">
-                                    <span class="featured-tag">Featured</span>
-                                    <button class="open-btn">
-                                        <i class="bi bi-arrow-up"></i>
-                                        Open
-                                    </button>
-                                </div>
-                                <div class="banner-content">
-                                    <h2 class="banner-title">SPECIAL FOOD MENU</h2>
-                                    <p class="banner-subtitle">This weekend only</p>
-                                    <div class="banner-time">24/7</div>
-                                </div>
-                                <div class="banner-image">
-                                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=200&h=150&fit=crop" alt="Special Food" loading="lazy">
-                                </div>
-                            </div>
-                            
-                            <!-- Restaurant Logo -->
-                            <div class="restaurant-logo">
-                                <div class="logo-circle">
-                                    <i class="bi bi-burger"></i>
-                                </div>
-                                <span class="logo-text">Burgers</span>
-                            </div>
-                            
-                            <!-- Restaurant Info -->
-                            <div class="restaurant-info">
-                                <div class="restaurant-header">
-                                    <h3 class="restaurant-name">Kombucha</h3>
-                                    <i class="bi bi-patch-check-fill verified-icon"></i>
-                                </div>
-                                <div class="restaurant-details">
-                                    <div class="detail-item">
-                                        <i class="bi bi-geo-alt location-icon"></i>
-                                        <span>Comilla</span>
-                                    </div>
-                                    <div class="detail-separator"></div>
-                                    <div class="detail-item">
-                                        <i class="bi bi-star-fill star-icon"></i>
-                                        <span>0 (0)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Restaurant Card 2 -->
-                    <div class="carousel-item">
-                        <div class="featured-restaurant-card">
-                            <!-- Promotional Banner -->
-                            <div class="restaurant-banner" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">
-                                <div class="banner-tags">
-                                    <span class="featured-tag" style="background: #28a745;">Hot</span>
-                                    <button class="open-btn">
-                                        <i class="bi bi-arrow-up"></i>
-                                        Open
-                                    </button>
-                                </div>
-                                <div class="banner-content">
-                                    <h2 class="banner-title">ITALIAN SPECIAL</h2>
-                                    <p class="banner-subtitle">Fresh pasta daily</p>
-                                    <div class="banner-time">11AM-10PM</div>
-                                </div>
-                                <div class="banner-image">
-                                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=200&h=150&fit=crop" alt="Italian Food" loading="lazy">
-                                </div>
-                            </div>
-                            
-                            <!-- Restaurant Logo -->
-                            <div class="restaurant-logo">
-                                <div class="logo-circle">
-                                    <i class="bi bi-cup-hot"></i>
-                                </div>
-                                <span class="logo-text">Pasta</span>
-                            </div>
-                            
-                            <!-- Restaurant Info -->
-                            <div class="restaurant-info">
-                                <div class="restaurant-header">
-                                    <h3 class="restaurant-name">Mario's Italian</h3>
-                                    <i class="bi bi-patch-check-fill verified-icon"></i>
-                                </div>
-                                <div class="restaurant-details">
-                                    <div class="detail-item">
-                                        <i class="bi bi-geo-alt location-icon"></i>
-                                        <span>Dhaka</span>
-                                    </div>
-                                    <div class="detail-separator"></div>
-                                    <div class="detail-item">
-                                        <i class="bi bi-star-fill star-icon"></i>
-                                        <span>4.8 (127)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Restaurant Card 3 -->
-                    <div class="carousel-item">
-                        <div class="featured-restaurant-card">
-                            <!-- Promotional Banner -->
-                            <div class="restaurant-banner" style="background: linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%);">
-                                <div class="banner-tags">
-                                    <span class="featured-tag" style="background: #6f42c1;">New</span>
-                                    <button class="open-btn">
-                                        <i class="bi bi-arrow-up"></i>
-                                        Open
-                                    </button>
-                                </div>
-                                <div class="banner-content">
-                                    <h2 class="banner-title">ASIAN FUSION</h2>
-                                    <p class="banner-subtitle">Exotic flavors</p>
-                                    <div class="banner-time">12PM-11PM</div>
-                                </div>
-                                <div class="banner-image">
-                                    <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=200&h=150&fit=crop" alt="Asian Food" loading="lazy">
-                                </div>
-                            </div>
-                            
-                            <!-- Restaurant Logo -->
-                            <div class="restaurant-logo">
-                                <div class="logo-circle">
-                                    <i class="bi bi-egg-fried"></i>
-                                </div>
-                                <span class="logo-text">Asian</span>
-                            </div>
-                            
-                            <!-- Restaurant Info -->
-                            <div class="restaurant-info">
-                                <div class="restaurant-header">
-                                    <h3 class="restaurant-name">Tokyo Sushi</h3>
-                                    <i class="bi bi-patch-check-fill verified-icon"></i>
-                                </div>
-                                <div class="restaurant-details">
-                                    <div class="detail-item">
-                                        <i class="bi bi-geo-alt location-icon"></i>
-                                        <span>Chittagong</span>
-                                    </div>
-                                    <div class="detail-separator"></div>
-                                    <div class="detail-item">
-                                        <i class="bi bi-star-fill star-icon"></i>
-                                        <span>4.9 (89)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <p class="text-gray-700 text-xs">Sandwich</p>
+            </div>
+            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                <div class="w-8 h-8 mx-auto mb-2 bg-red-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-utensils text-red-500 text-sm"></i>
                 </div>
-                
-                <button class="carousel-control-prev" type="button" data-bs-target="#restaurantsCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#restaurantsCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                <p class="text-gray-700 text-xs">Pasta</p>
+            </div>
+            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                <div class="w-8 h-8 mx-auto mb-2 bg-pink-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-ice-cream text-pink-500 text-sm"></i>
+                </div>
+                <p class="text-gray-700 text-xs">Ice Cream</p>
+            </div>
+            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                <div class="w-8 h-8 mx-auto mb-2 bg-gray-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-ellipsis-h text-gray-500 text-sm"></i>
+                </div>
+                <p class="text-gray-700 text-xs">More</p>
             </div>
         </div>
-    </section>
-    <!-- Featured Restaurants Carousel end -->
+    </div>
 
-    <!-- Food Items -->
-    <section class="food-items-section">
-        <div class="food-items-grid">
-            <!-- Chicken Burger -->
-            <div class="food-item">
-                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=200&fit=crop"
-                    alt="Chicken Burger" class="food-image" loading="lazy">
-                <button class="favorite-btn">
-                    <i class="bi bi-heart"></i>
-                </button>
-                <div class="food-details">
-                    <h5 class="food-name">Chicken Burger</h5>
-                    <div class="food-rating">
-                        <i class="bi bi-star-fill star-icon"></i>
-                        <span class="rating-text">4.9</span>
+    <!-- Food Listings -->
+    <div class="px-4 py-3">
+        <div class="flex space-x-4 overflow-x-auto pb-4">
+            <!-- Chicken Burger Card -->
+            <div class="flex-shrink-0 w-48 bg-white rounded-lg shadow-sm">
+                <div class="relative">
+                    <div class="w-full h-32 bg-gradient-to-br from-yellow-200 to-orange-200 rounded-t-lg flex items-center justify-center">
+                        <div class="w-20 h-20 bg-orange-300 rounded-full"></div>
                     </div>
-                    <div class="food-price">
-                        <span class="current-price">€6.00</span>
-                        <span class="original-price">€10.00</span>
+                    <div class="absolute top-2 right-2 w-6 h-6 bg-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-heart text-gray-400 text-xs"></i>
+                    </div>
+                </div>
+                <div class="p-3">
+                    <h3 class="font-bold text-gray-800 text-sm mb-1">Chicken Burger</h3>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-star text-yellow-400 text-xs mr-1"></i>
+                        <span class="text-gray-600 text-xs">4.9</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-gray-400 text-xs line-through mr-2">£ 10.00</span>
+                        <span class="text-red-500 font-bold text-sm">£ 6.00</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Beef Burger -->
-            <div class="food-item">
-                <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433a?w=400&h=200&fit=crop"
-                    alt="Beef Burger" class="food-image" loading="lazy">
-                <button class="favorite-btn">
-                    <i class="bi bi-heart"></i>
-                </button>
-                <div class="food-details">
-                    <h5 class="food-name">Beef Burger</h5>
-                    <div class="food-rating">
-                        <i class="bi bi-star-fill star-icon"></i>
-                        <span class="rating-text">4.9</span>
+            <!-- Beef Burger Card -->
+            <div class="flex-shrink-0 w-48 bg-white rounded-lg shadow-sm">
+                <div class="relative">
+                    <div class="w-full h-32 bg-gradient-to-br from-gray-300 to-gray-400 rounded-t-lg flex items-center justify-center">
+                        <div class="w-20 h-20 bg-gray-500 rounded-full"></div>
                     </div>
-                    <div class="food-price">
-                        <span class="current-price">€10.00</span>
-                        <span class="original-price">€12.00</span>
+                    <div class="absolute top-2 right-2 w-6 h-6 bg-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-heart text-gray-400 text-xs"></i>
+                    </div>
+                </div>
+                <div class="p-3">
+                    <h3 class="font-bold text-gray-800 text-sm mb-1">Beef Burger</h3>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-star text-yellow-400 text-xs mr-1"></i>
+                        <span class="text-gray-600 text-xs">4.9</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-gray-400 text-xs line-through mr-2">£ 12.00</span>
+                        <span class="text-red-500 font-bold text-sm">£ 10.00</span>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Bottom Navigation -->
-    <div class="bottom-nav">
-        <div class="nav-items">
-            <a href="home.html" class="nav-item active">
-                <div class="nav-icon">
-                    <i class="bi bi-house"></i>
-                    </div>
-                <div class="nav-label">Food</div>
-            </a>
-            <a href="orders.html" class="nav-item">
-                <div class="nav-icon">
-                    <i class="bi bi-list-ul"></i>
-                    </div>
-                <div class="nav-label">Orders</div>
-            </a>
-            <a href="cart.html" class="nav-item">
-                <div class="nav-icon">
-                    <i class="bi bi-bag"></i>
-                    </div>
-                <div class="nav-label">Cart</div>
-            </a>
-            <a href="favorites.html" class="nav-item">
-                <div class="nav-icon">
-                    <i class="bi bi-heart"></i>
-                    </div>
-                <div class="nav-label">Favorites</div>
-            </a>
-            <a href="profile.html" class="nav-item">
-                <div class="nav-icon">
-                    <i class="bi bi-person"></i>
-                    </div>
-                <div class="nav-label">Profile</div>
-                </a>
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
+        <div class="flex justify-around items-center py-2">
+            <div class="flex flex-col items-center">
+                <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center mb-1">
+                    <i class="fas fa-home text-white text-sm"></i>
+                </div>
+                <span class="text-red-500 text-xs font-medium">Food</span>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-list text-gray-400 text-lg mb-1"></i>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-heart text-gray-400 text-lg mb-1"></i>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-bell text-gray-400 text-lg mb-1"></i>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-user text-gray-400 text-lg mb-1"></i>
+            </div>
         </div>
     </div>
 
-    <!-- Offcanvas Sidebar Menu -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="sidebarMenuLabel">
-                <img src="assets/images/logo/logo.png" alt="Food Delivery" style="height: 30px;">
-                Food Delivery
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <!-- User Profile Section -->
-            <div class="user-profile mb-4">
-                <div class="d-flex align-items-center">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face" 
-                         alt="User" class="rounded-circle me-3" style="width: 50px; height: 50px;">
-                    <div>
-                        <h6 class="mb-0">John Doe</h6>
-                        <small class="text-muted">john.doe@email.com</small>
-                    </div>
-                </div>
+    <!-- Add bottom padding to prevent content from being hidden behind navigation -->
+    <div class="h-16"></div>
+
+    <!-- Bottom Sheet Modal -->
+    <div id="moduleSheet" class="fixed inset-0 z-40 hidden">
+        <!-- Backdrop -->
+        <div id="sheetBackdrop" class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300"></div>
+        <!-- Sheet -->
+        <div id="sheetPanel" class="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-full w-[92%] max-w-md bg-white rounded-t-2xl shadow-xl transition-transform duration-400">
+            <div class="pt-3 pb-1 flex justify-center">
+                <div class="w-16 h-1.5 bg-gray-300 rounded-full"></div>
             </div>
-
-            <!-- Menu Items -->
-            <div class="menu-items">
-                <div class="menu-section mb-3">
-                    <h6 class="menu-section-title text-muted mb-2">FOOD</h6>
-                    <a href="home.html" class="menu-item">
-                        <i class="bi bi-house me-3"></i>
-                        <span>Home</span>
-                    </a>
-                    <a href="categories.html" class="menu-item">
-                        <i class="bi bi-grid me-3"></i>
-                        <span>Categories</span>
-                    </a>
-                    <a href="favorites.html" class="menu-item">
-                        <i class="bi bi-heart me-3"></i>
-                        <span>Favorites</span>
-                    </a>
-                    <a href="search.html" class="menu-item">
-                        <i class="bi bi-search me-3"></i>
-                        <span>Search</span>
-                    </a>
-                </div>
-
-                <div class="menu-section mb-3">
-                    <h6 class="menu-section-title text-muted mb-2">ORDERS</h6>
-                    <a href="orders.html" class="menu-item">
-                        <i class="bi bi-list-ul me-3"></i>
-                        <span>My Orders</span>
-                    </a>
-                    <a href="track-order.html" class="menu-item">
-                        <i class="bi bi-truck me-3"></i>
-                        <span>Track Order</span>
-                    </a>
-                    <a href="order-history.html" class="menu-item">
-                        <i class="bi bi-clock-history me-3"></i>
-                        <span>Order History</span>
-                    </a>
-                </div>
-
-                <div class="menu-section mb-3">
-                    <h6 class="menu-section-title text-muted mb-2">ACCOUNT</h6>
-                    <a href="profile.html" class="menu-item">
-                        <i class="bi bi-person me-3"></i>
-                        <span>Profile</span>
-                    </a>
-                    <a href="addresses.html" class="menu-item">
-                        <i class="bi bi-geo-alt me-3"></i>
-                        <span>Addresses</span>
-                    </a>
-                    <a href="payment-methods.html" class="menu-item">
-                        <i class="bi bi-credit-card me-3"></i>
-                        <span>Payment Methods</span>
-                    </a>
-                    <a href="notifications.html" class="menu-item">
-                        <i class="bi bi-bell me-3"></i>
-                        <span>Notifications</span>
-                    </a>
-                </div>
-
-                <div class="menu-section mb-3">
-                    <h6 class="menu-section-title text-muted mb-2">SUPPORT</h6>
-                    <a href="help.html" class="menu-item">
-                        <i class="bi bi-question-circle me-3"></i>
-                        <span>Help Center</span>
-                    </a>
-                    <a href="contact.html" class="menu-item">
-                        <i class="bi bi-telephone me-3"></i>
-                        <span>Contact Us</span>
-                    </a>
-                    <a href="feedback.html" class="menu-item">
-                        <i class="bi bi-chat-dots me-3"></i>
-                        <span>Feedback</span>
-                    </a>
-                </div>
-
-                <div class="menu-section">
-                    <a href="settings.html" class="menu-item">
-                        <i class="bi bi-gear me-3"></i>
-                        <span>Settings</span>
-                    </a>
-                    <a href="logout.html" class="menu-item text-danger">
-                        <i class="bi bi-box-arrow-right me-3"></i>
-                        <span>Logout</span>
-                    </a>
+            <div class="px-5 pb-5">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Select a type of module for your orders</h3>
+                <!-- Grid options -->
+                <div class="grid grid-cols-3 gap-4">
+                    <!-- Item template repeated -->
+                    <button class="group rounded-xl p-4 bg-white shadow-sm ring-1 ring-gray-100 hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-lg bg-green-100 mx-auto mb-2 flex items-center justify-center">
+                            <span class="text-green-500 font-semibold">?</span>
                         </div>
-                            </div>
+                        <div class="text-center text-sm text-gray-700">Grocery</div>
+                    </button>
+                    <button class="group rounded-xl p-4 bg-white shadow-sm ring-1 ring-gray-100 hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-lg bg-blue-100 mx-auto mb-2 flex items-center justify-center">
+                            <span class="text-blue-500 font-semibold">?</span>
                         </div>
+                        <div class="text-center text-sm text-gray-700">Pharmacy</div>
+                    </button>
+                    <button class="group rounded-xl p-4 bg-white shadow-sm ring-1 ring-gray-100 hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-lg bg-pink-100 mx-auto mb-2 flex items-center justify-center">
+                            <span class="text-pink-500 font-semibold">??</span>
+                        </div>
+                        <div class="text-center text-sm text-gray-700">Shop</div>
+                    </button>
+                    <button class="group rounded-xl p-4 bg-white shadow-[0_0_0_2px_#fecaca] ring-1 ring-red-300">
+                        <div class="w-12 h-12 rounded-lg bg-amber-100 mx-auto mb-2 flex items-center justify-center">
+                            <span class="text-amber-500 font-semibold">?</span>
+                        </div>
+                        <div class="text-center text-sm text-red-500 font-semibold">Food</div>
+                    </button>
+                    <button class="group rounded-xl p-4 bg-white shadow-sm ring-1 ring-gray-100 hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-lg bg-indigo-100 mx-auto mb-2 flex items-center justify-center">
+                            <span class="text-indigo-500 font-semibold">?</span>
+                        </div>
+                        <div class="text-center text-sm text-gray-700">Parcel</div>
+                    </button>
+                    <button class="group rounded-xl p-4 bg-white shadow-sm ring-1 ring-gray-100 hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-lg bg-rose-100 mx-auto mb-2 flex items-center justify-center">
+                            <span class="text-rose-500 font-semibold">?</span>
+                        </div>
+                        <div class="text-center text-sm text-gray-700">Rental</div>
+                    </button>
+                </div>
+                <div class="mt-5">
+                    <div class="flex items-center gap-2 text-xs text-slate-600 bg-slate-100 rounded-xl px-3 py-3">
+                        <i class="fas fa-info-circle text-blue-500"></i>
+                        <span>A module must be selected to continue.</span>
                     </div>
-
-    <!-- Quick Actions Modal -->
-    <div class="modal fade" id="quickActionsModal" tabindex="-1" aria-labelledby="quickActionsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content quick-actions-modal">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="quickActionsModalLabel">Quick Actions</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="quick-actions-grid">
-                        <a href="search.html" class="quick-action-item">
-                            <div class="quick-action-icon">
-                                <i class="bi bi-search"></i>
-                            </div>
-                            <span>Search</span>
-                        </a>
-                        <a href="favorites.html" class="quick-action-item">
-                            <div class="quick-action-icon">
-                                <i class="bi bi-heart"></i>
-                            </div>
-                            <span>Favorites</span>
-                        </a>
-                        <a href="orders.html" class="quick-action-item">
-                            <div class="quick-action-icon">
-                                <i class="bi bi-list-ul"></i>
-                            </div>
-                            <span>My Orders</span>
-                        </a>
-                        <a href="track-order.html" class="quick-action-item">
-                            <div class="quick-action-icon">
-                                <i class="bi bi-truck"></i>
-                            </div>
-                            <span>Track Order</span>
-                        </a>
-                        <a href="notifications.html" class="quick-action-item">
-                            <div class="quick-action-icon">
-                                <i class="bi bi-bell"></i>
-                            </div>
-                            <span>Notifications</span>
-                        </a>
-                        <a href="help.html" class="quick-action-item">
-                            <div class="quick-action-icon">
-                                <i class="bi bi-question-circle"></i>
-                        </div>
-                            <span>Help</span>
-                        </a>
-                        <a href="settings.html" class="quick-action-item">
-                            <div class="quick-action-icon">
-                                <i class="bi bi-gear"></i>
-                            </div>
-                            <span>Settings</span>
-                        </a>
-                        <a href="contact.html" class="quick-action-item">
-                            <div class="quick-action-icon">
-                                <i class="bi bi-telephone"></i>
-                        </div>
-                            <span>Contact</span>
-                        </a>
-                    </div>
+                <div class="mt-4 flex justify-end">
+                    <button id="closeSheetBtn" class="px-4 py-2 text-sm text-gray-600">Close</button>
                 </div>
             </div>
         </div>
     </div>
-    </div> <!-- End Mobile Container -->
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Search Modal Page -->
+    <div id="searchModal" class="fixed inset-0 z-50 hidden">
+        <!-- Backdrop -->
+        <div id="searchBackdrop" class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300"></div>
+        <!-- Card Panel -->
+        <div id="searchPanel" class="fixed inset-0 translate-y-full w-full h-full bg-white rounded-none shadow-none overflow-hidden transition-transform duration-400 flex flex-col">
+            <!-- Header -->
+            <div class="flex items-center px-4 py-3 border-b border-gray-100 sticky top-0 bg-white z-10">
+                <button id="closeSearchBtn" class="text-gray-600 mr-2">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h3 class="flex-1 text-center font-semibold">Search</h3>
+                <div class="w-6"></div>
+            </div>
+            <!-- Content -->
+            <div class="p-4 overflow-y-auto flex-1">
+                <!-- Promo input -->
+                <div class="flex items-center bg-gray-100 rounded-lg px-3 py-2 mb-4">
+                    <input type="text" placeholder="Promo Code" class="flex-1 bg-transparent text-sm text-gray-600 placeholder-gray-400 focus:outline-none">
+                    <button class="text-sm text-red-500 font-semibold">Apply</button>
+                </div>
 
-    <!-- Service Worker Registration -->
+                <div class="text-xs text-gray-500 mb-2">Shipping Offers</div>
+                <div class="space-y-3 mb-4">
+                    <label class="flex items-center justify-between bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded bg-amber-100 text-amber-500 flex items-center justify-center text-xs">%</span>
+                            <span class="text-sm font-semibold text-gray-800">FREE SHIPPING</span>
+                            <i class="fas fa-info-circle text-gray-300 text-xs"></i>
+                        </div>
+                        <input type="checkbox" class="w-5 h-5 rounded border-gray-300">
+                    </label>
+                    <label class="flex items-center justify-between bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded bg-amber-100 text-amber-500 flex items-center justify-center text-xs">%</span>
+                            <span class="text-sm font-semibold text-gray-800">20% OFF</span>
+                            <i class="fas fa-info-circle text-gray-300 text-xs"></i>
+                        </div>
+                        <input type="checkbox" class="w-5 h-5 rounded border-gray-300">
+                    </label>
+                </div>
+
+                <div class="text-xs text-gray-500 mb-2">Order Offers</div>
+                <div class="space-y-3 mb-4">
+                    <label class="flex items-center justify-between bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded bg-amber-100 text-amber-500 flex items-center justify-center text-xs">%</span>
+                            <span class="text-sm font-semibold text-gray-800">20% OFF</span>
+                        </div>
+                        <input type="checkbox" class="w-5 h-5 rounded border-gray-300">
+                    </label>
+                    <label class="flex items-center justify-between bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-6 h-6 rounded bg-amber-100 text-amber-500 flex items-center justify-center text-xs">%</span>
+                            <span class="text-sm font-semibold text-gray-800">10% OFF</span>
+                        </div>
+                        <input type="checkbox" class="w-5 h-5 rounded border-gray-300">
+                    </label>
+                </div>
+
+                <button class="w-full flex items-center justify-between bg-rose-50 text-rose-500 rounded-xl px-3 py-3 mb-5">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-plus"></i>
+                        <span class="text-sm font-semibold">Get More Promotions</span>
+                    </div>
+                </button>
+
+                <button class="w-full bg-gradient-to-r from-red-500 to-orange-400 text-white rounded-full py-3 font-semibold shadow">
+                    Apply
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Locations Modal Page -->
+    <div id="locationModal" class="fixed inset-0 z-50 hidden">
+        <div id="locationBackdrop" class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300"></div>
+        <div id="locationPanel" class="fixed inset-0 translate-y-full w-full h-full bg-white rounded-none overflow-hidden transition-transform duration-400 flex flex-col">
+            <!-- Header -->
+            <div class="flex items-center px-4 py-3 border-b border-gray-100 sticky top-0 bg-white z-10">
+                <button id="closeLocationBtn" class="text-gray-600 mr-2">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h3 class="flex-1 text-center font-semibold">My Locations</h3>
+                <div class="w-6"></div>
+            </div>
+            <!-- Body -->
+            <div class="p-4 overflow-y-auto flex-1">
+                <!-- Location card -->
+                <label class="block bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3 mb-3">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="text-sm font-semibold text-gray-900">Home</div>
+                            <div class="text-xs text-gray-500">221B Baker Street, London, United Kingdom</div>
+                        </div>
+                        <input type="radio" name="locationRadio" value="Home" class="mt-1 w-5 h-5">
+                    </div>
+                </label>
+                <label class="block bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3 mb-3">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="text-sm font-semibold text-gray-900">Company</div>
+                            <div class="text-xs text-gray-500">1A Baker Street, London, United Kingdom</div>
+                        </div>
+                        <input type="radio" name="locationRadio" value="Company" class="mt-1 w-5 h-5">
+                    </div>
+                </label>
+
+                <button id="goAddLocationBtn" class="w-full flex items-center justify-between bg-rose-50 text-rose-500 rounded-xl px-3 py-3">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-plus"></i>
+                        <span class="text-sm font-semibold">Add New Location</span>
+                    </div>
+                </button>
+            </div>
+            <!-- Footer -->
+            <div class="p-4 border-t border-gray-100">
+                <button id="applyLocationBtn" class="w-full rounded-full py-3 font-semibold text-white bg-rose-300 cursor-not-allowed" disabled>
+                    Apply
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // PWA Install Detection (No Banner)
-        let deferredPrompt;
-
-        // Capture install prompt but don't show banner
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            console.log('PWA install prompt available');
-        });
-
-        // Register service worker
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then((registration) => {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch((registrationError) => {
-                        console.log('SW registration failed: ', registrationError);
+        class BannerSlider {
+            constructor() {
+                this.slider = document.getElementById('bannerSlider');
+                this.indicators = document.querySelectorAll('.indicator');
+                this.currentSlide = 0;
+                this.totalSlides = this.indicators.length;
+                this.autoplayInterval = null;
+                this.autoplayDelay = 3000; // 3 seconds
+                
+                this.init();
+            }
+            
+            init() {
+                this.setupEventListeners();
+                this.startAutoplay();
+            }
+            
+            setupEventListeners() {
+                // Indicator click events
+                this.indicators.forEach((indicator, index) => {
+                    indicator.addEventListener('click', () => {
+                        this.goToSlide(index);
+                        this.resetAutoplay();
                     });
+                });
+                
+                // Touch/swipe support
+                let startX = 0;
+                let endX = 0;
+                
+                this.slider.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                });
+                
+                this.slider.addEventListener('touchend', (e) => {
+                    endX = e.changedTouches[0].clientX;
+                    this.handleSwipe(startX, endX);
+                });
+                
+                // Mouse events for desktop
+                this.slider.addEventListener('mousedown', (e) => {
+                    startX = e.clientX;
+                    e.preventDefault();
+                });
+                
+                this.slider.addEventListener('mouseup', (e) => {
+                    endX = e.clientX;
+                    this.handleSwipe(startX, endX);
+                });
+                
+                // Pause autoplay on hover
+                this.slider.addEventListener('mouseenter', () => {
+                    this.pauseAutoplay();
+                });
+                
+                this.slider.addEventListener('mouseleave', () => {
+                    this.startAutoplay();
+                });
+            }
+            
+            handleSwipe(startX, endX) {
+                const threshold = 50;
+                const diff = startX - endX;
+                
+                if (Math.abs(diff) > threshold) {
+                    if (diff > 0) {
+                        this.nextSlide();
+                    } else {
+                        this.prevSlide();
+                    }
+                    this.resetAutoplay();
+                }
+            }
+            
+            goToSlide(slideIndex) {
+                this.currentSlide = slideIndex;
+                this.updateSlider();
+                this.updateIndicators();
+            }
+            
+            nextSlide() {
+                this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+                this.updateSlider();
+                this.updateIndicators();
+            }
+            
+            prevSlide() {
+                this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+                this.updateSlider();
+                this.updateIndicators();
+            }
+            
+            updateSlider() {
+                const translateX = -this.currentSlide * 100;
+                this.slider.style.transform = `translateX(${translateX}%)`;
+            }
+            
+            updateIndicators() {
+                this.indicators.forEach((indicator, index) => {
+                    if (index === this.currentSlide) {
+                        indicator.classList.add('bg-red-500');
+                        indicator.classList.remove('bg-gray-300');
+                    } else {
+                        indicator.classList.remove('bg-red-500');
+                        indicator.classList.add('bg-gray-300');
+                    }
+                });
+            }
+            
+            startAutoplay() {
+                this.autoplayInterval = setInterval(() => {
+                    this.nextSlide();
+                }, this.autoplayDelay);
+            }
+            
+            pauseAutoplay() {
+                if (this.autoplayInterval) {
+                    clearInterval(this.autoplayInterval);
+                    this.autoplayInterval = null;
+                }
+            }
+            
+            resetAutoplay() {
+                this.pauseAutoplay();
+                this.startAutoplay();
+            }
+        }
+        
+        // Initialize slider when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new BannerSlider();
+            // Bottom Sheet interactions
+            const sheet = document.getElementById('moduleSheet');
+            const backdrop = document.getElementById('sheetBackdrop');
+            const panel = document.getElementById('sheetPanel');
+            const openBtn = document.getElementById('openSheetBtn');
+            const closeBtn = document.getElementById('closeSheetBtn');
+
+            function openSheet() {
+                sheet.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    backdrop.classList.add('opacity-100');
+                    backdrop.classList.remove('opacity-0');
+                    panel.classList.remove('translate-y-full');
+                });
+            }
+
+            function closeSheet() {
+                backdrop.classList.add('opacity-0');
+                panel.classList.add('translate-y-full');
+                setTimeout(() => sheet.classList.add('hidden'), 300);
+            }
+
+            openBtn.addEventListener('click', openSheet);
+            closeBtn.addEventListener('click', closeSheet);
+            backdrop.addEventListener('click', closeSheet);
+            // Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !sheet.classList.contains('hidden')) closeSheet();
             });
-        }
 
-        // PWA Install detection
-        window.addEventListener('appinstalled', (evt) => {
-            console.log('PWA was installed');
-        });
+            // Search modal interactions
+            const searchModal = document.getElementById('searchModal');
+            const searchBackdrop = document.getElementById('searchBackdrop');
+            const searchPanel = document.getElementById('searchPanel');
+            const openSearchBtn = document.getElementById('openSearchBtn');
+            const closeSearchBtn = document.getElementById('closeSearchBtn');
 
-        // Online/Offline detection
-        window.addEventListener('online', () => {
-            console.log('App is online');
-            showNotification('You are back online!', 'success');
-        });
-
-        window.addEventListener('offline', () => {
-            console.log('App is offline');
-            showNotification('You are offline. Some features may be limited.', 'warning');
-        });
-
-        // Notification function
-        function showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.className = `notification notification-${type}`;
-            notification.innerHTML = `
-                <div class="notification-content">
-                    <i class="bi bi-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
-                    <span>${message}</span>
-                </div>
-            `;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.classList.add('show');
-            }, 100);
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    document.body.removeChild(notification);
-                }, 300);
-            }, 3000);
-        }
-
-        // Touch gestures for mobile
-        let startY = 0;
-        let startX = 0;
-
-        document.addEventListener('touchstart', (e) => {
-            startY = e.touches[0].clientY;
-            startX = e.touches[0].clientX;
-        });
-
-        document.addEventListener('touchmove', (e) => {
-            if (!startY || !startX) return;
-            
-            const currentY = e.touches[0].clientY;
-            const currentX = e.touches[0].clientX;
-            const diffY = startY - currentY;
-            const diffX = startX - currentX;
-            
-            // Swipe down to refresh
-            if (Math.abs(diffY) > Math.abs(diffX) && diffY < -50) {
-                if (window.scrollY === 0) {
-                    location.reload();
-                }
+            function openSearch() {
+                searchModal.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    searchBackdrop.classList.add('opacity-100');
+                    searchBackdrop.classList.remove('opacity-0');
+                    searchPanel.classList.remove('translate-y-full');
+                });
             }
-        });
 
-        // Prevent zoom on double tap
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', (e) => {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                e.preventDefault();
+            function closeSearch() {
+                searchBackdrop.classList.add('opacity-0');
+                searchPanel.classList.add('translate-y-full');
+                setTimeout(() => searchModal.classList.add('hidden'), 300);
             }
-            lastTouchEnd = now;
-        });
 
-        // Offline detection and banner fallback
-        window.addEventListener('online', () => {
-            console.log('Back online');
-            const carousel = document.getElementById('foodBannerCarousel');
-            if (carousel) {
-                const bsCarousel = bootstrap.Carousel.getInstance(carousel);
-                if (bsCarousel) {
-                    bsCarousel.to(0);
-                }
+            openSearchBtn.addEventListener('click', openSearch);
+            closeSearchBtn.addEventListener('click', closeSearch);
+            searchBackdrop.addEventListener('click', closeSearch);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !searchModal.classList.contains('hidden')) closeSearch();
+            });
+
+            // Location modal interactions
+            const locationModal = document.getElementById('locationModal');
+            const locationBackdrop = document.getElementById('locationBackdrop');
+            const locationPanel = document.getElementById('locationPanel');
+            const openLocationBtn = document.getElementById('openLocationBtn');
+            const closeLocationBtn = document.getElementById('closeLocationBtn');
+            const applyLocationBtn = document.getElementById('applyLocationBtn');
+            const locationRadios = () => document.querySelectorAll('input[name="locationRadio"]');
+
+            function openLocation() {
+                locationModal.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    locationBackdrop.classList.add('opacity-100');
+                    locationBackdrop.classList.remove('opacity-0');
+                    locationPanel.classList.remove('translate-y-full');
+                });
             }
-        });
 
-        window.addEventListener('offline', () => {
-            console.log('Gone offline');
-        });
+            function closeLocation() {
+                locationBackdrop.classList.add('opacity-0');
+                locationPanel.classList.add('translate-y-full');
+                setTimeout(() => locationModal.classList.add('hidden'), 300);
+            }
 
-        // Favorite button functionality
-        document.querySelectorAll('.favorite-btn').forEach(btn => {
-            btn.addEventListener('click', function (e) {
-                e.preventDefault();
-                this.classList.toggle('active');
-                const icon = this.querySelector('i');
-                if (this.classList.contains('active')) {
-                    icon.className = 'bi bi-heart-fill';
-                    this.style.color = '#FF6B35';
+            function enableApplyIfSelected() {
+                const selected = Array.from(locationRadios()).some(r => r.checked);
+                if (selected) {
+                    applyLocationBtn.disabled = false;
+                    applyLocationBtn.classList.remove('bg-rose-300', 'cursor-not-allowed');
+                    applyLocationBtn.classList.add('bg-gradient-to-r', 'from-red-500', 'to-orange-400');
                 } else {
-                    icon.className = 'bi bi-heart';
-                    this.style.color = '#FF6B35';
+                    applyLocationBtn.disabled = true;
+                    applyLocationBtn.classList.add('bg-rose-300', 'cursor-not-allowed');
+                    applyLocationBtn.classList.remove('bg-gradient-to-r', 'from-red-500', 'to-orange-400');
                 }
+            }
+
+            openLocationBtn.addEventListener('click', openLocation);
+            closeLocationBtn.addEventListener('click', closeLocation);
+            locationBackdrop.addEventListener('click', closeLocation);
+            document.addEventListener('change', (e) => {
+                if (e.target && e.target.name === 'locationRadio') enableApplyIfSelected();
             });
-        });
+            applyLocationBtn.addEventListener('click', () => {
+                // In a real app, you would persist the selection
+                closeLocation();
+            });
+            document.getElementById('goAddLocationBtn').addEventListener('click', () => {
+                window.location.href = 'add-location.html';
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !locationModal.classList.contains('hidden')) closeLocation();
+            });
 
-        // Search functionality
-        document.querySelector('.search-input').addEventListener('input', function (e) {
-            const searchTerm = e.target.value.toLowerCase();
-            // Implement search logic here
-            console.log('Searching for:', searchTerm);
-        });
-
-        // Filter button functionality
-        document.querySelector('.filter-btn').addEventListener('click', function () {
-            // Implement filter logic here
-            console.log('Filter clicked');
+            // Cart navigation
+            document.getElementById('openCartBtn').addEventListener('click', () => {
+                window.location.href = 'cart.html';
+            });
         });
     </script>
 </body>
-
 </html>
