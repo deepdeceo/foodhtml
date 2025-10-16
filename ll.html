@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Live Map with Directions (ORS)</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map { height: 500px; width: 100%; }
+        #search-container { margin-bottom: 10px; position: relative; }
+        #destination { width: 300px; padding: 5px; }
+        #suggestions { border: 1px solid #ccc; max-height: 150px; overflow-y: auto; width: 300px; position: absolute; background: white; z-index: 1000; }
+        .suggestion-item { padding: 5px; cursor: pointer; }
+        .suggestion-item:hover { background: #eee; }
+    </style>
+</head>
+
+<body>
+    <h2>Live Map with Directions</h2>
+    <div id="search-container">
+        <input type="text" id="destination" placeholder="Enter destination, e.g., New Market, Rajshahi">
+        <div id="suggestions"></div>
+    </div>
+    <div id="map"></div>
+    <p id="status">Detecting location…</p>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const status = document.getElementById("status");
+        const destInput = document.getElementById("destination");
+        const suggestionsBox = document.getElementById("suggestions");
+
+        let userLat, userLng, userMarker, routeLayer, routeDestination;
+
+        // Base layers
+        const streetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' });
+        const satelliteMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, attribution: 'Tiles © Esri' });
+
+        // Initialize map
+        const map = L.map('map', { layers: [streetMap] }).setView([0, 0], 2);
+        L.control.layers({ "Street": streetMap, "Satellite": satelliteMap }).addTo(map);
+
+        // Continuous location tracking
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(position => {
+                userLat = position.coords.latitude;
+                userLng = position.coords.longitude;
+
+                status.textContent = `You are here: Lat ${userLat}, Lng ${userLng}`;
+
+                // Create or update user marker
+                if (!userMarker) {
+                    userMarker = L.marker([userLat, userLng]).addTo(map).bindPopup("You are here!").openPopup();
+                } else {
+                    userMarker.setLatLng([userLat, userLng]);
+                }
+
+                // Smoothly move map center to user
+                map.panTo([userLat, userLng]);
+
+                // Optionally, redraw route dynamically
+                if (routeDestination) drawRoute(routeDestination.lat, routeDestination.lng, false);
+            }, err => {
+                status.textContent = "Error getting location: " + err.message;
+            }, {
+                enableHighAccuracy: true,
+                maximumAge: 1000,
+                timeout: 5000
+            });
+        } else {
+            status.textContent = "Geolocation not supported.";
+        }
+
+        // Fetch suggestions from Nominatim
+        destInput.addEventListener("input", async () => {
+            const query = destInput.value;
+            if (!query) { suggestionsBox.innerHTML = ""; return; }
+
+            const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=5`);
+            const results = await response.json();
+
+            suggestionsBox.innerHTML = "";
+            results.forEach(r => {
+                const item = document.createElement("div");
+                item.className = "suggestion-item";
+                item.textContent = r.display_name;
+                item.dataset.lat = r.lat;
+                item.dataset.lon = r.lon;
+                suggestionsBox.appendChild(item);
+
+                item.addEventListener("click", () => {
+                    destInput.value = r.display_name;
+                    suggestionsBox.innerHTML = "";
+                    routeDestination = { lat: r.lat, lng: r.lon };
+                    drawRoute(r.lat, r.lon, true);
+                });
+            });
+        });
+
+        // Draw route using OpenRouteService
+        async function drawRoute(destLat, destLng, fitMap = true) {
+            if (!userLat || !userLng) return;
+
+            const apiKey = "YOUR_ORS_API_KEY"; // Replace with your ORS API key
+            const url = `https://api.openrouteservice.org/v2/directions/driving-car/geojson`;
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': apiKey },
+                body: JSON.stringify({ coordinates: [[userLng, userLat], [destLng, destLat]] })
+            });
+
+            const data = await response.json();
+            const coords = data.features[0].geometry.coordinates.map(c => [c[1], c[0]]); // [lat, lng]
+
+            if (routeLayer) map.removeLayer(routeLayer);
+
+            routeLayer = L.polyline(coords, { color: 'blue', weight: 5 }).addTo(map);
+            if (fitMap) map.fitBounds(routeLayer.getBounds());
+        }
+    </script>
+</body>
+
+</html>
