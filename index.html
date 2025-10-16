@@ -59,6 +59,9 @@
     <!-- Header -->
     <header class="header">
         <div class="header-content">
+            <button class="menu-btn" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
+                <i class="bi bi-list"></i>
+            </button>
             <div class="location-section">
                 <img src="assets/images/svg/location.svg" alt="location" class="location-icon">
                 <div class="location-text">
@@ -76,9 +79,9 @@
                 <a href="notification.html" class="header-btn">
                     <i class="bi bi-bell"></i>
                 </a>
-                <a href="cart.html" class="header-btn">
-                    <i class="bi bi-bag"></i>
-                </a>
+                <button class="header-btn" data-bs-toggle="modal" data-bs-target="#quickActionsModal">
+                    <i class="bi bi-three-dots"></i>
+                </button>
             </div>
         </div>
     </header>
@@ -269,6 +272,180 @@
                 </div>
                 <div class="nav-label">Profile</div>
             </a>
+        </div>
+    </div>
+
+    <!-- Offcanvas Sidebar Menu -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="sidebarMenuLabel">
+                <img src="assets/images/logo/logo.png" alt="Food Delivery" style="height: 30px;">
+                Food Delivery
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- User Profile Section -->
+            <div class="user-profile mb-4">
+                <div class="d-flex align-items-center">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face" 
+                         alt="User" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                    <div>
+                        <h6 class="mb-0">John Doe</h6>
+                        <small class="text-muted">john.doe@email.com</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Items -->
+            <div class="menu-items">
+                <div class="menu-section mb-3">
+                    <h6 class="menu-section-title text-muted mb-2">FOOD</h6>
+                    <a href="home.html" class="menu-item">
+                        <i class="bi bi-house me-3"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="categories.html" class="menu-item">
+                        <i class="bi bi-grid me-3"></i>
+                        <span>Categories</span>
+                    </a>
+                    <a href="favorites.html" class="menu-item">
+                        <i class="bi bi-heart me-3"></i>
+                        <span>Favorites</span>
+                    </a>
+                    <a href="search.html" class="menu-item">
+                        <i class="bi bi-search me-3"></i>
+                        <span>Search</span>
+                    </a>
+                </div>
+
+                <div class="menu-section mb-3">
+                    <h6 class="menu-section-title text-muted mb-2">ORDERS</h6>
+                    <a href="orders.html" class="menu-item">
+                        <i class="bi bi-list-ul me-3"></i>
+                        <span>My Orders</span>
+                    </a>
+                    <a href="track-order.html" class="menu-item">
+                        <i class="bi bi-truck me-3"></i>
+                        <span>Track Order</span>
+                    </a>
+                    <a href="order-history.html" class="menu-item">
+                        <i class="bi bi-clock-history me-3"></i>
+                        <span>Order History</span>
+                    </a>
+                </div>
+
+                <div class="menu-section mb-3">
+                    <h6 class="menu-section-title text-muted mb-2">ACCOUNT</h6>
+                    <a href="profile.html" class="menu-item">
+                        <i class="bi bi-person me-3"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="addresses.html" class="menu-item">
+                        <i class="bi bi-geo-alt me-3"></i>
+                        <span>Addresses</span>
+                    </a>
+                    <a href="payment-methods.html" class="menu-item">
+                        <i class="bi bi-credit-card me-3"></i>
+                        <span>Payment Methods</span>
+                    </a>
+                    <a href="notifications.html" class="menu-item">
+                        <i class="bi bi-bell me-3"></i>
+                        <span>Notifications</span>
+                    </a>
+                </div>
+
+                <div class="menu-section mb-3">
+                    <h6 class="menu-section-title text-muted mb-2">SUPPORT</h6>
+                    <a href="help.html" class="menu-item">
+                        <i class="bi bi-question-circle me-3"></i>
+                        <span>Help Center</span>
+                    </a>
+                    <a href="contact.html" class="menu-item">
+                        <i class="bi bi-telephone me-3"></i>
+                        <span>Contact Us</span>
+                    </a>
+                    <a href="feedback.html" class="menu-item">
+                        <i class="bi bi-chat-dots me-3"></i>
+                        <span>Feedback</span>
+                    </a>
+                </div>
+
+                <div class="menu-section">
+                    <a href="settings.html" class="menu-item">
+                        <i class="bi bi-gear me-3"></i>
+                        <span>Settings</span>
+                    </a>
+                    <a href="logout.html" class="menu-item text-danger">
+                        <i class="bi bi-box-arrow-right me-3"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions Modal -->
+    <div class="modal fade" id="quickActionsModal" tabindex="-1" aria-labelledby="quickActionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content quick-actions-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="quickActionsModalLabel">Quick Actions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="quick-actions-grid">
+                        <a href="search.html" class="quick-action-item">
+                            <div class="quick-action-icon">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <span>Search</span>
+                        </a>
+                        <a href="favorites.html" class="quick-action-item">
+                            <div class="quick-action-icon">
+                                <i class="bi bi-heart"></i>
+                            </div>
+                            <span>Favorites</span>
+                        </a>
+                        <a href="orders.html" class="quick-action-item">
+                            <div class="quick-action-icon">
+                                <i class="bi bi-list-ul"></i>
+                            </div>
+                            <span>My Orders</span>
+                        </a>
+                        <a href="track-order.html" class="quick-action-item">
+                            <div class="quick-action-icon">
+                                <i class="bi bi-truck"></i>
+                            </div>
+                            <span>Track Order</span>
+                        </a>
+                        <a href="notifications.html" class="quick-action-item">
+                            <div class="quick-action-icon">
+                                <i class="bi bi-bell"></i>
+                            </div>
+                            <span>Notifications</span>
+                        </a>
+                        <a href="help.html" class="quick-action-item">
+                            <div class="quick-action-icon">
+                                <i class="bi bi-question-circle"></i>
+                            </div>
+                            <span>Help</span>
+                        </a>
+                        <a href="settings.html" class="quick-action-item">
+                            <div class="quick-action-icon">
+                                <i class="bi bi-gear"></i>
+                            </div>
+                            <span>Settings</span>
+                        </a>
+                        <a href="contact.html" class="quick-action-item">
+                            <div class="quick-action-icon">
+                                <i class="bi bi-telephone"></i>
+                            </div>
+                            <span>Contact</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
