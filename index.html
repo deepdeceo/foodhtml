@@ -1,688 +1,188 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Delivery App</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'food-red': '#FF4444',
-                        'food-orange': '#FF8A00',
-                        'food-yellow': '#FFD700',
-                    }
-                }
-            }
-        }
-    </script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Food Delivery UI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-white min-h-screen">
-    <!-- Header Section -->
-    <div class="px-4 py-3 bg-white">
-        <div class="flex justify-between items-center">
-            <button id="openLocationBtn" class="text-left">
-                <p class="text-gray-500 text-sm">Deliver to</p>
-                <div class="flex items-center">
-                    <p class="text-gray-700 text-sm">Select Your Location</p>
-                    <i class="fas fa-chevron-down text-red-500 text-xs ml-1"></i>
+
+<body>
+    <div class="mobile-frame mx-auto shadow-sm">
+        <header class="px-3 py-2 d-flex align-items-center justify-content-between">
+            <div>
+                <small class="text-muted">Deliver to</small>
+                <div class="d-flex align-items-center">
+                    <strong class="me-2">Select Your Location</strong>
+                    <svg width="18" height="18" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M7.247 11.14 2.451 5.658C1.885 4.988 2.345 4 3.204 4h9.592c.86 0 1.319.988.753 1.658L8.753 11.14a1 1 0 0 1-1.506 0z" />
+                    </svg>
                 </div>
-            </button>
-            <div class="flex space-x-3">
-                <button id="openCartBtn" class="text-gray-600 text-lg">
-                    <i class="fas fa-shopping-bag"></i>
-                </button>
-                <button id="openSearchBtn" class="text-gray-600 text-lg">
-                    <i class="fas fa-search"></i>
-                </button>
-                <button id="openSheetBtn" class="text-gray-600 text-lg">
-                    <i class="fas fa-bars"></i>
-                </button>
             </div>
+            <div class="icons d-flex gap-2">
+                <button class="btn btn-sm btn-light rounded-circle"><i class="far fa-clock"></i></button>
+                <button class="btn btn-sm btn-light rounded-circle"><i class="far fa-bell"></i></button>
+            </div>
+        </header>
+
+        <main>
+            <section class="banner px-3">
+                <div class="banner-card rounded-3 text-white p-3 d-flex align-items-center justify-content-between">
+                    <div>
+                        <h5 class="mb-1">Get your sweet ice cream</h5>
+                        <small>40% OFF</small>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1551024709-8f23befc6e49?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.0.3&s=3c0f1a7d0d9a8b5d7cb6d3a6b2f8c6d7"
+                        alt="ice cream" class="banner-img rounded-3">
+                </div>
+            </section>
+
+            <section class="search px-3 mt-3">
+                <div class="input-group">
+                    <span class="input-group-text bg-white"><svg width="18" height="18" viewBox="0 0 16 16"
+                            class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.415 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                            <path fill-rule="evenodd"
+                                d="M6.5 12a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zM6.5 2a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9z" />
+                        </svg></span>
+                    <input id="searchInput" type="text" class="form-control" placeholder="Search">
+                    <button class="btn btn-outline-secondary" id="filterBtn"><svg width="18" height="18"
+                            viewBox="0 0 16 16" class="bi bi-filter" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .354.854L8.354 13.354A.5.5 0 0 1 8 13.5V11a.5.5 0 0 1-.5-.5z" />
+                            <path fill-rule="evenodd"
+                                d="M1.5 1a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.146.354L10 8.207V12.5a.5.5 0 0 1-.276.447l-2 1A.5.5 0 0 1 7 13.5V8.207L1.646 2.354A.5.5 0 0 1 1.5 2v-1z" />
+                        </svg></button>
+                </div>
+            </section>
+
+            <section class="categories px-2 mt-3">
+                <div class="row g-3 px-2 cat-grid">
+                    <div class="col-3 text-center">
+                        <div class="cat-tile shadow-sm mx-auto p-3 rounded-3">
+                            <div class="cat-figure mb-2"><i class="fas fa-hamburger fa-2x"></i></div>
+                            <div class="cat-label">Burger</div>
+                        </div>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="cat-tile shadow-sm mx-auto p-3 rounded-3">
+                            <div class="cat-figure mb-2"><i class="fas fa-taco fa-2x"></i></div>
+                            <div class="cat-label">Taco</div>
+                        </div>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="cat-tile shadow-sm mx-auto p-3 rounded-3">
+                            <div class="cat-figure mb-2"><i class="fas fa-burrito fa-2x"></i></div>
+                            <div class="cat-label">Burrito</div>
+                        </div>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="cat-tile shadow-sm mx-auto p-3 rounded-3">
+                            <div class="cat-figure mb-2"><i class="fas fa-cup-straw fa-2x"></i></div>
+                            <div class="cat-label">Drink</div>
+                        </div>
+                    </div>
+
+                    <div class="col-3 text-center">
+                        <div class="cat-tile shadow-sm mx-auto p-3 rounded-3">
+                            <div class="cat-figure mb-2"><i class="fas fa-sandwich fa-2x"></i></div>
+                            <div class="cat-label">Sandwich</div>
+                        </div>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="cat-tile shadow-sm mx-auto p-3 rounded-3">
+                            <div class="cat-figure mb-2"><i class="fas fa-bowl-food fa-2x"></i></div>
+                            <div class="cat-label">Pasta</div>
+                        </div>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="cat-tile shadow-sm mx-auto p-3 rounded-3">
+                            <div class="cat-figure mb-2"><i class="fas fa-ice-cream fa-2x"></i></div>
+                            <div class="cat-label">Ice</div>
+                        </div>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="cat-tile shadow-sm mx-auto p-3 rounded-3">
+                            <div class="cat-figure mb-2"><i class="fas fa-ellipsis-h fa-2x"></i></div>
+                            <div class="cat-label">More</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="products px-3 mt-2">
+                <div class="row g-2">
+                    <div class="col-12 col-md-6">
+                        <div class="card product-card h-100">
+                            <img src="https://images.unsplash.com/photo-1606756791741-2a7d0f1b4bff?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=9a0e789c8e3e1b4b"
+                                class="card-img-top" alt="chicken burger">
+                            <div class="card-body p-2">
+                                <h6 class="card-title mb-1">Chicken Burger</h6>
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <div class="rating text-warning">★ 4.9</div>
+                                    <div class="price text-muted"><del>£10.00</del> <strong
+                                            class="text-danger">£6.00</strong></div>
+                                </div>
+                                <button class="btn btn-sm btn-outline-danger fav-btn">❤</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <div class="card product-card h-100">
+                            <img src="https://images.unsplash.com/photo-1606756791741-2a7d0f1b4bff?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=9a0e789c8e3e1b4b"
+                                class="card-img-top" alt="beef burger">
+                            <div class="card-body p-2">
+                                <h6 class="card-title mb-1">Beef Burger</h6>
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <div class="rating text-warning">★ 4.9</div>
+                                    <div class="price text-muted"><del>£12.00</del> <strong
+                                            class="text-danger">£10.00</strong></div>
+                                </div>
+                                <button class="btn btn-sm btn-outline-danger fav-btn active">❤</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom pill nav with floating action button -->
+        <div class="bottom-wrap">
+            
+            <nav class="bottom-nav d-flex justify-content-around align-items-center">
+                <div class="nav-item active">
+                    <div class="nav-icon"><i class="fas fa-utensils"></i></div>
+                    <small>Food</small>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon"><i class="far fa-heart"></i></div>
+                    <small>Favorites</small>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon"><i class="fas fa-receipt"></i></div>
+                    <small>Orders</small>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon"><i class="fas fa-user"></i></div>
+                    <small>Profile</small>
+                </div>
+            </nav>
         </div>
+
     </div>
 
-    <!-- Promotional Banner Slider -->
-    <div class="px-4 py-2">
-        <div class="relative overflow-hidden rounded-lg">
-            <!-- Slider Container -->
-            <div id="bannerSlider" class="flex transition-transform duration-500 ease-in-out">
-                <!-- Slide 1: Ice Cream Banner -->
-                <div class="w-full flex-shrink-0 bg-gradient-to-r from-orange-400 to-yellow-400 rounded-lg p-4 relative overflow-hidden">
-                    <div class="relative z-10">
-                        <p class="text-white text-xs font-semibold mb-1">ICE CREAM DAY</p>
-                        <h2 class="text-white text-lg font-bold leading-tight mb-2">GET YOUR SWEET<br>ICE CREAM</h2>
-                        <p class="text-white text-sm font-semibold">40% OFF</p>
-                    </div>
-                    <div class="absolute right-0 top-0 w-20 h-20">
-                        <div class="w-full h-full bg-pink-300 rounded-full transform translate-x-8 -translate-y-4"></div>
-                    </div>
-                </div>
-                
-                <!-- Slide 2: Coupon Banner -->
-                <div class="w-full flex-shrink-0 bg-gray-800 rounded-lg p-4 relative">
-                    <div class="text-white">
-                        <p class="text-xs font-semibold">COUPON</p>
-                        <p class="text-lg font-bold">Don't</p>
-                        <p class="text-lg font-bold">Hesitate</p>
-                        <p class="text-xs">Happy Hour</p>
-                    </div>
-                    <div class="absolute right-4 top-4 w-12 h-12 bg-red-500 rounded-full flex items-center justify-center">
-                        <i class="fas fa-gift text-white text-lg"></i>
-                    </div>
-                </div>
-                
-                <!-- Slide 3: Pizza Banner -->
-                <div class="w-full flex-shrink-0 bg-gradient-to-r from-red-500 to-pink-500 rounded-lg p-4 relative overflow-hidden">
-                    <div class="relative z-10">
-                        <p class="text-white text-xs font-semibold mb-1">PIZZA TIME</p>
-                        <h2 class="text-white text-lg font-bold leading-tight mb-2">HOT & FRESH<br>PIZZA</h2>
-                        <p class="text-white text-sm font-semibold">30% OFF</p>
-                    </div>
-                    <div class="absolute right-0 top-0 w-20 h-20">
-                        <div class="w-full h-full bg-yellow-300 rounded-full transform translate-x-8 -translate-y-4"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Carousel Indicators -->
-            <div class="flex justify-center space-x-2 py-2">
-                <button class="w-2 h-2 bg-red-500 rounded-full transition-colors duration-300 indicator active" data-slide="0"></button>
-                <button class="w-2 h-2 bg-gray-300 rounded-full transition-colors duration-300 indicator" data-slide="1"></button>
-                <button class="w-2 h-2 bg-gray-300 rounded-full transition-colors duration-300 indicator" data-slide="2"></button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Search Bar -->
-    <div class="px-4 py-3">
-        <div class="relative">
-            <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
-                <i class="fas fa-search text-gray-400"></i>
-            </div>
-            <input type="text" placeholder="Search" class="w-full bg-gray-100 rounded-lg py-3 pl-10 pr-10 text-gray-500 focus:outline-none">
-            <div class="absolute right-3 top-1/2 transform -translate-y-1/2">
-                <i class="fas fa-sliders-h text-gray-400"></i>
-            </div>
-        </div>
-    </div>
-
-    <!-- Food Categories -->
-    <div class="px-4 py-2">
-        <div class="grid grid-cols-4 gap-4">
-            <!-- Row 1 -->
-            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
-                <div class="w-8 h-8 mx-auto mb-2 bg-orange-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-hamburger text-orange-500 text-sm"></i>
-                </div>
-                <p class="text-gray-700 text-xs">Burger</p>
-            </div>
-            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
-                <div class="w-8 h-8 mx-auto mb-2 bg-yellow-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-taco text-yellow-500 text-sm"></i>
-                </div>
-                <p class="text-gray-700 text-xs">Taco</p>
-            </div>
-            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
-                <div class="w-8 h-8 mx-auto mb-2 bg-green-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-burrito text-green-500 text-sm"></i>
-                </div>
-                <p class="text-gray-700 text-xs">Burrito</p>
-            </div>
-            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
-                <div class="w-8 h-8 mx-auto mb-2 bg-blue-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-coffee text-blue-500 text-sm"></i>
-                </div>
-                <p class="text-gray-700 text-xs">Drink</p>
-            </div>
-            
-            <!-- Row 2 -->
-            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
-                <div class="w-8 h-8 mx-auto mb-2 bg-purple-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-sandwich text-purple-500 text-sm"></i>
-                </div>
-                <p class="text-gray-700 text-xs">Sandwich</p>
-            </div>
-            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
-                <div class="w-8 h-8 mx-auto mb-2 bg-red-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-utensils text-red-500 text-sm"></i>
-                </div>
-                <p class="text-gray-700 text-xs">Pasta</p>
-            </div>
-            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
-                <div class="w-8 h-8 mx-auto mb-2 bg-pink-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-ice-cream text-pink-500 text-sm"></i>
-                </div>
-                <p class="text-gray-700 text-xs">Ice Cream</p>
-            </div>
-            <div class="bg-white rounded-lg p-3 text-center shadow-sm">
-                <div class="w-8 h-8 mx-auto mb-2 bg-gray-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-ellipsis-h text-gray-500 text-sm"></i>
-                </div>
-                <p class="text-gray-700 text-xs">More</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Food Listings -->
-    <div class="px-4 py-3">
-        <div class="flex space-x-4 overflow-x-auto pb-4">
-            <!-- Chicken Burger Card -->
-            <div class="flex-shrink-0 w-48 bg-white rounded-lg shadow-sm">
-                <div class="relative">
-                    <div class="w-full h-32 bg-gradient-to-br from-yellow-200 to-orange-200 rounded-t-lg flex items-center justify-center">
-                        <div class="w-20 h-20 bg-orange-300 rounded-full"></div>
-                    </div>
-                    <div class="absolute top-2 right-2 w-6 h-6 bg-white rounded-full flex items-center justify-center">
-                        <i class="fas fa-heart text-gray-400 text-xs"></i>
-                    </div>
-                </div>
-                <div class="p-3">
-                    <h3 class="font-bold text-gray-800 text-sm mb-1">Chicken Burger</h3>
-                    <div class="flex items-center mb-2">
-                        <i class="fas fa-star text-yellow-400 text-xs mr-1"></i>
-                        <span class="text-gray-600 text-xs">4.9</span>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="text-gray-400 text-xs line-through mr-2">£ 10.00</span>
-                        <span class="text-red-500 font-bold text-sm">£ 6.00</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Beef Burger Card -->
-            <div class="flex-shrink-0 w-48 bg-white rounded-lg shadow-sm">
-                <div class="relative">
-                    <div class="w-full h-32 bg-gradient-to-br from-gray-300 to-gray-400 rounded-t-lg flex items-center justify-center">
-                        <div class="w-20 h-20 bg-gray-500 rounded-full"></div>
-                    </div>
-                    <div class="absolute top-2 right-2 w-6 h-6 bg-white rounded-full flex items-center justify-center">
-                        <i class="fas fa-heart text-gray-400 text-xs"></i>
-                    </div>
-                </div>
-                <div class="p-3">
-                    <h3 class="font-bold text-gray-800 text-sm mb-1">Beef Burger</h3>
-                    <div class="flex items-center mb-2">
-                        <i class="fas fa-star text-yellow-400 text-xs mr-1"></i>
-                        <span class="text-gray-600 text-xs">4.9</span>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="text-gray-400 text-xs line-through mr-2">£ 12.00</span>
-                        <span class="text-red-500 font-bold text-sm">£ 10.00</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bottom Navigation -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
-        <div class="flex justify-around items-center py-2">
-            <div class="flex flex-col items-center">
-                <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center mb-1">
-                    <i class="fas fa-home text-white text-sm"></i>
-                </div>
-                <span class="text-red-500 text-xs font-medium">Food</span>
-            </div>
-            <div class="flex flex-col items-center">
-                <i class="fas fa-list text-gray-400 text-lg mb-1"></i>
-            </div>
-            <div class="flex flex-col items-center">
-                <i class="fas fa-heart text-gray-400 text-lg mb-1"></i>
-            </div>
-            <div class="flex flex-col items-center">
-                <i class="fas fa-bell text-gray-400 text-lg mb-1"></i>
-            </div>
-            <div class="flex flex-col items-center">
-                <i class="fas fa-user text-gray-400 text-lg mb-1"></i>
-            </div>
-        </div>
-    </div>
-
-    <!-- Add bottom padding to prevent content from being hidden behind navigation -->
-    <div class="h-16"></div>
-
-    <!-- Bottom Sheet Modal -->
-    <div id="moduleSheet" class="fixed inset-0 z-40 hidden">
-        <!-- Backdrop -->
-        <div id="sheetBackdrop" class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300"></div>
-        <!-- Sheet -->
-        <div id="sheetPanel" class="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-full w-[92%] max-w-md bg-white rounded-t-2xl shadow-xl transition-transform duration-400">
-            <div class="pt-3 pb-1 flex justify-center">
-                <div class="w-16 h-1.5 bg-gray-300 rounded-full"></div>
-            </div>
-            <div class="px-5 pb-5">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">Select a type of module for your orders</h3>
-                <!-- Grid options -->
-                <div class="grid grid-cols-3 gap-4">
-                    <!-- Item template repeated -->
-                    <button class="group rounded-xl p-4 bg-white shadow-sm ring-1 ring-gray-100 hover:shadow-md transition">
-                        <div class="w-12 h-12 rounded-lg bg-green-100 mx-auto mb-2 flex items-center justify-center">
-                            <span class="text-green-500 font-semibold">?</span>
-                        </div>
-                        <div class="text-center text-sm text-gray-700">Grocery</div>
-                    </button>
-                    <button class="group rounded-xl p-4 bg-white shadow-sm ring-1 ring-gray-100 hover:shadow-md transition">
-                        <div class="w-12 h-12 rounded-lg bg-blue-100 mx-auto mb-2 flex items-center justify-center">
-                            <span class="text-blue-500 font-semibold">?</span>
-                        </div>
-                        <div class="text-center text-sm text-gray-700">Pharmacy</div>
-                    </button>
-                    <button class="group rounded-xl p-4 bg-white shadow-sm ring-1 ring-gray-100 hover:shadow-md transition">
-                        <div class="w-12 h-12 rounded-lg bg-pink-100 mx-auto mb-2 flex items-center justify-center">
-                            <span class="text-pink-500 font-semibold">??</span>
-                        </div>
-                        <div class="text-center text-sm text-gray-700">Shop</div>
-                    </button>
-                    <button class="group rounded-xl p-4 bg-white shadow-[0_0_0_2px_#fecaca] ring-1 ring-red-300">
-                        <div class="w-12 h-12 rounded-lg bg-amber-100 mx-auto mb-2 flex items-center justify-center">
-                            <span class="text-amber-500 font-semibold">?</span>
-                        </div>
-                        <div class="text-center text-sm text-red-500 font-semibold">Food</div>
-                    </button>
-                    <button class="group rounded-xl p-4 bg-white shadow-sm ring-1 ring-gray-100 hover:shadow-md transition">
-                        <div class="w-12 h-12 rounded-lg bg-indigo-100 mx-auto mb-2 flex items-center justify-center">
-                            <span class="text-indigo-500 font-semibold">?</span>
-                        </div>
-                        <div class="text-center text-sm text-gray-700">Parcel</div>
-                    </button>
-                    <button class="group rounded-xl p-4 bg-white shadow-sm ring-1 ring-gray-100 hover:shadow-md transition">
-                        <div class="w-12 h-12 rounded-lg bg-rose-100 mx-auto mb-2 flex items-center justify-center">
-                            <span class="text-rose-500 font-semibold">?</span>
-                        </div>
-                        <div class="text-center text-sm text-gray-700">Rental</div>
-                    </button>
-                </div>
-                <div class="mt-5">
-                    <div class="flex items-center gap-2 text-xs text-slate-600 bg-slate-100 rounded-xl px-3 py-3">
-                        <i class="fas fa-info-circle text-blue-500"></i>
-                        <span>A module must be selected to continue.</span>
-                    </div>
-                </div>
-                <div class="mt-4 flex justify-end">
-                    <button id="closeSheetBtn" class="px-4 py-2 text-sm text-gray-600">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Search Modal Page -->
-    <div id="searchModal" class="fixed inset-0 z-50 hidden">
-        <!-- Backdrop -->
-        <div id="searchBackdrop" class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300"></div>
-        <!-- Card Panel -->
-        <div id="searchPanel" class="fixed inset-0 translate-y-full w-full h-full bg-white rounded-none shadow-none overflow-hidden transition-transform duration-400 flex flex-col">
-            <!-- Header -->
-            <div class="flex items-center px-4 py-3 border-b border-gray-100 sticky top-0 bg-white z-10">
-                <button id="closeSearchBtn" class="text-gray-600 mr-2">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-                <h3 class="flex-1 text-center font-semibold">Search</h3>
-                <div class="w-6"></div>
-            </div>
-            <!-- Content -->
-            <div class="p-4 overflow-y-auto flex-1">
-                <!-- Promo input -->
-                <div class="flex items-center bg-gray-100 rounded-lg px-3 py-2 mb-4">
-                    <input type="text" placeholder="Promo Code" class="flex-1 bg-transparent text-sm text-gray-600 placeholder-gray-400 focus:outline-none">
-                    <button class="text-sm text-red-500 font-semibold">Apply</button>
-                </div>
-
-                <div class="text-xs text-gray-500 mb-2">Shipping Offers</div>
-                <div class="space-y-3 mb-4">
-                    <label class="flex items-center justify-between bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3">
-                        <div class="flex items-center gap-3">
-                            <span class="w-6 h-6 rounded bg-amber-100 text-amber-500 flex items-center justify-center text-xs">%</span>
-                            <span class="text-sm font-semibold text-gray-800">FREE SHIPPING</span>
-                            <i class="fas fa-info-circle text-gray-300 text-xs"></i>
-                        </div>
-                        <input type="checkbox" class="w-5 h-5 rounded border-gray-300">
-                    </label>
-                    <label class="flex items-center justify-between bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3">
-                        <div class="flex items-center gap-3">
-                            <span class="w-6 h-6 rounded bg-amber-100 text-amber-500 flex items-center justify-center text-xs">%</span>
-                            <span class="text-sm font-semibold text-gray-800">20% OFF</span>
-                            <i class="fas fa-info-circle text-gray-300 text-xs"></i>
-                        </div>
-                        <input type="checkbox" class="w-5 h-5 rounded border-gray-300">
-                    </label>
-                </div>
-
-                <div class="text-xs text-gray-500 mb-2">Order Offers</div>
-                <div class="space-y-3 mb-4">
-                    <label class="flex items-center justify-between bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3">
-                        <div class="flex items-center gap-3">
-                            <span class="w-6 h-6 rounded bg-amber-100 text-amber-500 flex items-center justify-center text-xs">%</span>
-                            <span class="text-sm font-semibold text-gray-800">20% OFF</span>
-                        </div>
-                        <input type="checkbox" class="w-5 h-5 rounded border-gray-300">
-                    </label>
-                    <label class="flex items-center justify-between bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3">
-                        <div class="flex items-center gap-3">
-                            <span class="w-6 h-6 rounded bg-amber-100 text-amber-500 flex items-center justify-center text-xs">%</span>
-                            <span class="text-sm font-semibold text-gray-800">10% OFF</span>
-                        </div>
-                        <input type="checkbox" class="w-5 h-5 rounded border-gray-300">
-                    </label>
-                </div>
-
-                <button class="w-full flex items-center justify-between bg-rose-50 text-rose-500 rounded-xl px-3 py-3 mb-5">
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-plus"></i>
-                        <span class="text-sm font-semibold">Get More Promotions</span>
-                    </div>
-                </button>
-
-                <button class="w-full bg-gradient-to-r from-red-500 to-orange-400 text-white rounded-full py-3 font-semibold shadow">
-                    Apply
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Locations Modal Page -->
-    <div id="locationModal" class="fixed inset-0 z-50 hidden">
-        <div id="locationBackdrop" class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300"></div>
-        <div id="locationPanel" class="fixed inset-0 translate-y-full w-full h-full bg-white rounded-none overflow-hidden transition-transform duration-400 flex flex-col">
-            <!-- Header -->
-            <div class="flex items-center px-4 py-3 border-b border-gray-100 sticky top-0 bg-white z-10">
-                <button id="closeLocationBtn" class="text-gray-600 mr-2">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-                <h3 class="flex-1 text-center font-semibold">My Locations</h3>
-                <div class="w-6"></div>
-            </div>
-            <!-- Body -->
-            <div class="p-4 overflow-y-auto flex-1">
-                <!-- Location card -->
-                <label class="block bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3 mb-3">
-                    <div class="flex items-start justify-between">
-                        <div>
-                            <div class="text-sm font-semibold text-gray-900">Home</div>
-                            <div class="text-xs text-gray-500">221B Baker Street, London, United Kingdom</div>
-                        </div>
-                        <input type="radio" name="locationRadio" value="Home" class="mt-1 w-5 h-5">
-                    </div>
-                </label>
-                <label class="block bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3 mb-3">
-                    <div class="flex items-start justify-between">
-                        <div>
-                            <div class="text-sm font-semibold text-gray-900">Company</div>
-                            <div class="text-xs text-gray-500">1A Baker Street, London, United Kingdom</div>
-                        </div>
-                        <input type="radio" name="locationRadio" value="Company" class="mt-1 w-5 h-5">
-                    </div>
-                </label>
-
-                <button id="goAddLocationBtn" class="w-full flex items-center justify-between bg-rose-50 text-rose-500 rounded-xl px-3 py-3">
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-plus"></i>
-                        <span class="text-sm font-semibold">Add New Location</span>
-                    </div>
-                </button>
-            </div>
-            <!-- Footer -->
-            <div class="p-4 border-t border-gray-100">
-                <button id="applyLocationBtn" class="w-full rounded-full py-3 font-semibold text-white bg-rose-300 cursor-not-allowed" disabled>
-                    Apply
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        class BannerSlider {
-            constructor() {
-                this.slider = document.getElementById('bannerSlider');
-                this.indicators = document.querySelectorAll('.indicator');
-                this.currentSlide = 0;
-                this.totalSlides = this.indicators.length;
-                this.autoplayInterval = null;
-                this.autoplayDelay = 3000; // 3 seconds
-                
-                this.init();
-            }
-            
-            init() {
-                this.setupEventListeners();
-                this.startAutoplay();
-            }
-            
-            setupEventListeners() {
-                // Indicator click events
-                this.indicators.forEach((indicator, index) => {
-                    indicator.addEventListener('click', () => {
-                        this.goToSlide(index);
-                        this.resetAutoplay();
-                    });
-                });
-                
-                // Touch/swipe support
-                let startX = 0;
-                let endX = 0;
-                
-                this.slider.addEventListener('touchstart', (e) => {
-                    startX = e.touches[0].clientX;
-                });
-                
-                this.slider.addEventListener('touchend', (e) => {
-                    endX = e.changedTouches[0].clientX;
-                    this.handleSwipe(startX, endX);
-                });
-                
-                // Mouse events for desktop
-                this.slider.addEventListener('mousedown', (e) => {
-                    startX = e.clientX;
-                    e.preventDefault();
-                });
-                
-                this.slider.addEventListener('mouseup', (e) => {
-                    endX = e.clientX;
-                    this.handleSwipe(startX, endX);
-                });
-                
-                // Pause autoplay on hover
-                this.slider.addEventListener('mouseenter', () => {
-                    this.pauseAutoplay();
-                });
-                
-                this.slider.addEventListener('mouseleave', () => {
-                    this.startAutoplay();
-                });
-            }
-            
-            handleSwipe(startX, endX) {
-                const threshold = 50;
-                const diff = startX - endX;
-                
-                if (Math.abs(diff) > threshold) {
-                    if (diff > 0) {
-                        this.nextSlide();
-                    } else {
-                        this.prevSlide();
-                    }
-                    this.resetAutoplay();
-                }
-            }
-            
-            goToSlide(slideIndex) {
-                this.currentSlide = slideIndex;
-                this.updateSlider();
-                this.updateIndicators();
-            }
-            
-            nextSlide() {
-                this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
-                this.updateSlider();
-                this.updateIndicators();
-            }
-            
-            prevSlide() {
-                this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
-                this.updateSlider();
-                this.updateIndicators();
-            }
-            
-            updateSlider() {
-                const translateX = -this.currentSlide * 100;
-                this.slider.style.transform = `translateX(${translateX}%)`;
-            }
-            
-            updateIndicators() {
-                this.indicators.forEach((indicator, index) => {
-                    if (index === this.currentSlide) {
-                        indicator.classList.add('bg-red-500');
-                        indicator.classList.remove('bg-gray-300');
-                    } else {
-                        indicator.classList.remove('bg-red-500');
-                        indicator.classList.add('bg-gray-300');
-                    }
-                });
-            }
-            
-            startAutoplay() {
-                this.autoplayInterval = setInterval(() => {
-                    this.nextSlide();
-                }, this.autoplayDelay);
-            }
-            
-            pauseAutoplay() {
-                if (this.autoplayInterval) {
-                    clearInterval(this.autoplayInterval);
-                    this.autoplayInterval = null;
-                }
-            }
-            
-            resetAutoplay() {
-                this.pauseAutoplay();
-                this.startAutoplay();
-            }
-        }
-        
-        // Initialize slider when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            new BannerSlider();
-            // Bottom Sheet interactions
-            const sheet = document.getElementById('moduleSheet');
-            const backdrop = document.getElementById('sheetBackdrop');
-            const panel = document.getElementById('sheetPanel');
-            const openBtn = document.getElementById('openSheetBtn');
-            const closeBtn = document.getElementById('closeSheetBtn');
-
-            function openSheet() {
-                sheet.classList.remove('hidden');
-                requestAnimationFrame(() => {
-                    backdrop.classList.add('opacity-100');
-                    backdrop.classList.remove('opacity-0');
-                    panel.classList.remove('translate-y-full');
-                });
-            }
-
-            function closeSheet() {
-                backdrop.classList.add('opacity-0');
-                panel.classList.add('translate-y-full');
-                setTimeout(() => sheet.classList.add('hidden'), 300);
-            }
-
-            openBtn.addEventListener('click', openSheet);
-            closeBtn.addEventListener('click', closeSheet);
-            backdrop.addEventListener('click', closeSheet);
-            // Escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !sheet.classList.contains('hidden')) closeSheet();
-            });
-
-            // Search modal interactions
-            const searchModal = document.getElementById('searchModal');
-            const searchBackdrop = document.getElementById('searchBackdrop');
-            const searchPanel = document.getElementById('searchPanel');
-            const openSearchBtn = document.getElementById('openSearchBtn');
-            const closeSearchBtn = document.getElementById('closeSearchBtn');
-
-            function openSearch() {
-                searchModal.classList.remove('hidden');
-                requestAnimationFrame(() => {
-                    searchBackdrop.classList.add('opacity-100');
-                    searchBackdrop.classList.remove('opacity-0');
-                    searchPanel.classList.remove('translate-y-full');
-                });
-            }
-
-            function closeSearch() {
-                searchBackdrop.classList.add('opacity-0');
-                searchPanel.classList.add('translate-y-full');
-                setTimeout(() => searchModal.classList.add('hidden'), 300);
-            }
-
-            openSearchBtn.addEventListener('click', openSearch);
-            closeSearchBtn.addEventListener('click', closeSearch);
-            searchBackdrop.addEventListener('click', closeSearch);
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !searchModal.classList.contains('hidden')) closeSearch();
-            });
-
-            // Location modal interactions
-            const locationModal = document.getElementById('locationModal');
-            const locationBackdrop = document.getElementById('locationBackdrop');
-            const locationPanel = document.getElementById('locationPanel');
-            const openLocationBtn = document.getElementById('openLocationBtn');
-            const closeLocationBtn = document.getElementById('closeLocationBtn');
-            const applyLocationBtn = document.getElementById('applyLocationBtn');
-            const locationRadios = () => document.querySelectorAll('input[name="locationRadio"]');
-
-            function openLocation() {
-                locationModal.classList.remove('hidden');
-                requestAnimationFrame(() => {
-                    locationBackdrop.classList.add('opacity-100');
-                    locationBackdrop.classList.remove('opacity-0');
-                    locationPanel.classList.remove('translate-y-full');
-                });
-            }
-
-            function closeLocation() {
-                locationBackdrop.classList.add('opacity-0');
-                locationPanel.classList.add('translate-y-full');
-                setTimeout(() => locationModal.classList.add('hidden'), 300);
-            }
-
-            function enableApplyIfSelected() {
-                const selected = Array.from(locationRadios()).some(r => r.checked);
-                if (selected) {
-                    applyLocationBtn.disabled = false;
-                    applyLocationBtn.classList.remove('bg-rose-300', 'cursor-not-allowed');
-                    applyLocationBtn.classList.add('bg-gradient-to-r', 'from-red-500', 'to-orange-400');
-                } else {
-                    applyLocationBtn.disabled = true;
-                    applyLocationBtn.classList.add('bg-rose-300', 'cursor-not-allowed');
-                    applyLocationBtn.classList.remove('bg-gradient-to-r', 'from-red-500', 'to-orange-400');
-                }
-            }
-
-            openLocationBtn.addEventListener('click', openLocation);
-            closeLocationBtn.addEventListener('click', closeLocation);
-            locationBackdrop.addEventListener('click', closeLocation);
-            document.addEventListener('change', (e) => {
-                if (e.target && e.target.name === 'locationRadio') enableApplyIfSelected();
-            });
-            applyLocationBtn.addEventListener('click', () => {
-                // In a real app, you would persist the selection
-                closeLocation();
-            });
-            document.getElementById('goAddLocationBtn').addEventListener('click', () => {
-                window.location.href = 'add-location.html';
-            });
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !locationModal.classList.contains('hidden')) closeLocation();
-            });
-
-            // Cart navigation
-            document.getElementById('openCartBtn').addEventListener('click', () => {
-                window.location.href = 'cart.html';
-            });
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
 </body>
+
 </html>
