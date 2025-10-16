@@ -18,7 +18,7 @@
         <header class="px-3 py-2 d-flex align-items-center justify-content-between">
             <div>
                 <small class="text-muted">Deliver to</small>
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#exampleModallocation">
                     <strong class="me-2">Select Your Location</strong>
                     <svg width="18" height="18" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"
                         xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +29,8 @@
             </div>
             <div class="icons d-flex gap-2">
                 <button class="btn btn-sm btn-light rounded-circle"><i class="far fa-clock"></i></button>
-                <button class="btn btn-sm btn-light rounded-circle"><i class="far fa-bell"></i></button>
+                <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
+                    class="btn btn-sm btn-light rounded-circle"><i class="fa-solid fa-braille"></i></i></button>
             </div>
         </header>
 
@@ -61,13 +62,68 @@
                 </div>
             </section>
 
+            <!-- Coupons carousel (start at requested insertion point) -->
+            <section class="coupons px-3 mt-3">
+                <div class="coupons-header d-flex justify-content-between align-items-center mb-2">
+                    <h6 class="mb-0">Coupons</h6>
+                    <a href="#" class="small text-muted">View all</a>
+                </div>
+                <div class="coupons-row" role="list">
+                    <div class="coupon-card p-3 rounded-3" role="listitem">
+                        <div class="coupon-left d-flex align-items-center gap-2">
+                            <div class="coupon-badge"> <i class="fas fa-sun"></i> </div>
+                            <div>
+                                <div class="coupon-title">Bank of America</div>
+                                <div class="coupon-sub">Use code #A125</div>
+                            </div>
+                        </div>
+                        <div class="coupon-off">30%<small>OFF</small></div>
+                    </div>
+
+                    <div class="coupon-card p-3 rounded-3" role="listitem">
+                        <div class="coupon-left d-flex align-items-center gap-2">
+                            <div class="coupon-badge"> <i class="fas fa-sun"></i> </div>
+                            <div>
+                                <div class="coupon-title">Vidacard</div>
+                                <div class="coupon-sub">Use code #A125</div>
+                            </div>
+                        </div>
+                        <div class="coupon-off">30%<small>OFF</small></div>
+                    </div>
+
+                    <div class="coupon-card p-3 rounded-3" role="listitem">
+                        <div class="coupon-left d-flex align-items-center gap-2">
+                            <div class="coupon-badge"> <i class="fas fa-sun"></i> </div>
+                            <div>
+                                <div class="coupon-title">Visa</div>
+                                <div class="coupon-sub">Use code #V20</div>
+                            </div>
+                        </div>
+                        <div class="coupon-off">20%<small>OFF</small></div>
+                    </div>
+
+                    <div class="coupon-card p-3 rounded-3" role="listitem">
+                        <div class="coupon-left d-flex align-items-center gap-2">
+                            <div class="coupon-badge"> <i class="fas fa-sun"></i> </div>
+                            <div>
+                                <div class="coupon-title">Mastercard</div>
+                                <div class="coupon-sub">Save now</div>
+                            </div>
+                        </div>
+                        <div class="coupon-off">15%<small>OFF</small></div>
+                    </div>
+                </div>
+            </section>
+
             <section class="search px-3 mt-3">
                 <div class="search-wrap">
                     <span class="search-icon"><i class="fas fa-search"></i></span>
                     <input id="searchInput" type="text" class="form-control search-input" placeholder="Search">
-                    <button class="filter-btn" id="filterBtn" aria-label="Filter"><i class="fas fa-sliders-h"></i></button>
+                    <button class="filter-btn" id="filterBtn" aria-label="Filter"><i
+                            class="fas fa-sliders-h"></i></button>
                 </div>
             </section>
+
 
             <section class="categories px-2 mt-3 pb-2">
                 <div class="row g-3 px-2 cat-grid">
@@ -123,42 +179,52 @@
                 </div>
             </section>
 
-            <section class="products px-3 mt-2">
-                <div class="row g-2">
-                    <div class="col-12 col-md-6">
-                        <div class="card product-card h-100">
-                            <img src="https://images.unsplash.com/photo-1606756791741-2a7d0f1b4bff?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=9a0e789c8e3e1b4b"
-                                class="card-img-top" alt="chicken burger">
-                            <div class="card-body p-2">
-                                <h6 class="card-title mb-1">Chicken Burger</h6>
-                                <div class="d-flex justify-content-between align-items-center mb-1">
-                                    <div class="rating text-warning">★ 4.9</div>
-                                    <div class="price text-muted"><del>£10.00</del> <strong
-                                            class="text-danger">£6.00</strong></div>
-                                </div>
-                                <button class="btn btn-sm btn-outline-danger fav-btn">❤</button>
-                            </div>
-                        </div>
-                    </div>
+            <section class="productcards px-3 mt-2">
+                <div class="biz-list d-flex flex-nowrap overflow-auto gap-3 pb-2">
 
-                    <div class="col-12 col-md-6">
-                        <div class="card product-card h-100">
-                            <img src="https://images.unsplash.com/photo-1606756791741-2a7d0f1b4bff?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=9a0e789c8e3e1b4b"
-                                class="card-img-top" alt="beef burger">
-                            <div class="card-body p-2">
-                                <h6 class="card-title mb-1">Beef Burger</h6>
-                                <div class="d-flex justify-content-between align-items-center mb-1">
-                                    <div class="rating text-warning">★ 4.9</div>
-                                    <div class="price text-muted"><del>£12.00</del> <strong
-                                            class="text-danger">£10.00</strong></div>
-                                </div>
-                                <button class="btn btn-sm btn-outline-danger fav-btn active">❤</button>
+                    <div class="biz-card rounded-3 shadow-sm overflow-hidden flex-shrink-0" style="width: 240px;">
+                        <div class="biz-banner"
+                            style="background-image:url('https://placehold.co/600x180/8b5cf6/fff');">
+                            <div class="badge-featured">Featured</div>
+                            <div class="open-pill">Open</div>
+                        </div>
+                        <div class="biz-body p-3 text-center">
+                            <img src="https://placehold.co/72x72/ffffff/10b981?text=LOGO"
+                                class="biz-logo rounded-circle shadow-sm" alt="logo">
+                            <h5 class="biz-name mt-2 mb-1">Kombucha <i class="fas fa-check-circle text-primary"></i>
+                            </h5>
+                            <div
+                                class="biz-meta d-flex justify-content-center gap-3 align-items-center text-muted small">
+                                <div><i class="fas fa-map-marker-alt"></i> Comilla</div>
+                                <div>•</div>
+                                <div><i class="fas fa-star text-warning"></i> 0 (0)</div>
                             </div>
                         </div>
                     </div>
+                    <div class="biz-card rounded-3 shadow-sm overflow-hidden flex-shrink-0" style="width: 240px;">
+                        <div class="biz-banner"
+                            style="background-image:url('https://placehold.co/600x180/8b5cf6/fff');">
+                            <div class="badge-featured">Featured</div>
+                            <div class="open-pill">Open</div>
+                        </div>
+                        <div class="biz-body p-3 text-center">
+                            <img src="https://placehold.co/72x72/ffffff/10b981?text=LOGO"
+                                class="biz-logo rounded-circle shadow-sm" alt="logo">
+                            <h5 class="biz-name mt-2 mb-1">Kombucha <i class="fas fa-check-circle text-primary"></i>
+                            </h5>
+                            <div
+                                class="biz-meta d-flex justify-content-center gap-3 align-items-center text-muted small">
+                                <div><i class="fas fa-map-marker-alt"></i> Comilla</div>
+                                <div>•</div>
+                                <div><i class="fas fa-star text-warning"></i> 0 (0)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Repeat other cards here (same structure) -->
 
                 </div>
             </section>
+
         </main>
 
         <!-- Bottom pill nav with floating action button -->
@@ -185,6 +251,102 @@
         </div>
 
     </div>
+
+    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasBottomLabel">Offcanvas bottom</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body small">
+
+            <!-- Modules selection section (matches design screenshot) -->
+            <section class="modules px-3 mt-3">
+                <h4 class="modules-title text-center">Select a type of module for your orders</h4>
+                <div class="modules-grid mt-3">
+                    <div class="module-tile">
+                        <img src="https://placehold.co/60x60/" alt="Grocery">
+                        <div class="module-label">Grocery</div>
+                    </div>
+                    <div class="module-tile">
+                        <img src="https://placehold.co/60x60/" alt="Pharmacy">
+                        <div class="module-label">Pharmacy</div>
+                    </div>
+                    <div class="module-tile">
+                        <img src="https://placehold.co/60x60" alt="Shop">
+                        <div class="module-label">Shop</div>
+                    </div>
+                    <div class="module-tile">
+                        <img src="https://placehold.co/60x60" alt="Food">
+                        <div class="module-label">Food</div>
+                    </div>
+                    <div class="module-tile">
+                        <img src="https://placehold.co/60x60" alt="Parcel">
+                        <div class="module-label">Parcel</div>
+                    </div>
+                    <div class="module-tile">
+                        <img src="https://placehold.co/60x60" alt="Rental">
+                        <div class="module-label">Rental</div>
+                    </div>
+                </div>
+
+                <div class="modules-info mt-3">
+                    <i class="fas fa-info-circle"></i>
+                    <span>A module must be selected to continue.</span>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModallocation" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header d-flex align-items-center justify-content-between">
+                    <h1 class="modal-title fs-5 mb-0" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fas fa-arrow-left"></i>
+                    </h1>
+
+                    <h2 class="flex-grow-1 text-center mb-0">My Location</h2>
+                </div>
+
+                <div class="modal-body">
+                    <div class="locations-list">
+                        <label class="loc-item">
+                            <div class="loc-info">
+                                <div class="loc-title">Home</div>
+                                <div class="loc-address">221B Baker Street, London, United Kingdom</div>
+                            </div>
+                            <div class="loc-action">
+                                <input type="radio" name="location" aria-label="Select Home">
+                            </div>
+                        </label>
+
+                        <label class="loc-item">
+                            <div class="loc-info">
+                                <div class="loc-title">Company</div>
+                                <div class="loc-address">1A Baker Street, London, United Kingdom</div>
+                            </div>
+                            <div class="loc-action">
+                                <input type="radio" name="location" aria-label="Select Company">
+                            </div>
+                        </label>
+
+                        <a href="new_location.html" class="btn add-location mt-2" type="button"><i
+                                class="fas fa-plus me-2"></i> Add New
+                            Location</a>
+                    </div>
+                </div>
+                <!-- sticky apply bar -->
+                <div class="apply-bar p-3">
+                    <button class="btn apply-btn w-100">Apply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/app.js"></script>
