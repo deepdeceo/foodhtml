@@ -7,7 +7,7 @@
 body {
     font-family: 'DM Sans', sans-serif;
     background-color: #f8f9fa;
-    padding-bottom: 80px;
+    padding-bottom: 100px;
 }
 
 /* Header Styles */
@@ -374,19 +374,21 @@ body {
 /* Bottom Navigation */
 .bottom-nav {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: white;
-    border-top: 1px solid #eee;
-    padding: 10px 0;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
     z-index: 1000;
 }
 
 .nav-items {
+    background: white;
+    border-radius: 25px;
+    padding: 1px 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    backdrop-filter: blur(10px);
 }
 
 .nav-item {
@@ -394,32 +396,58 @@ body {
     text-decoration: none;
     color: #999;
     flex: 1;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 15px;
+    position: relative;
 }
 
 .nav-item.active {
     color: #FF6B35;
+    background: rgba(255, 107, 53, 0.1);
 }
 
 .nav-icon {
     width: 24px;
     height: 24px;
-    margin: 0 auto 5px;
+    margin: 0 auto 4px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
     transition: all 0.3s ease;
+    font-size: 18px;
 }
 
 .nav-item.active .nav-icon {
     background: #FF6B35;
     color: white;
+    transform: scale(1.1);
 }
 
 .nav-label {
     font-size: 10px;
-    font-weight: 500;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+/* Active state enhancement */
+.nav-item.active .nav-label {
+    color: #FF6B35;
+    font-weight: 700;
+}
+
+/* Hover effects for non-active items */
+.nav-item:not(.active):hover {
+    color: #666;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.nav-item:not(.active):hover .nav-icon {
+    transform: scale(1.05);
 }
 
 /* Responsive Design */
@@ -436,6 +464,31 @@ body {
 
     .food-items-grid {
         gap: 10px;
+    }
+    
+    /* Bottom navigation responsive */
+    .bottom-nav {
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
+    }
+    
+    .nav-items {
+        padding: 12px 15px;
+    }
+    
+    .nav-item {
+        padding: 6px 8px;
+    }
+    
+    .nav-icon {
+        width: 20px;
+        height: 20px;
+        font-size: 16px;
+    }
+    
+    .nav-label {
+        font-size: 9px;
     }
 }
 
