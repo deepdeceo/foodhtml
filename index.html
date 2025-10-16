@@ -1,742 +1,774 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="fixit">
-    <meta name="keywords" content="fixit">
-    <meta name="author" content="fixit">
+    <title>Food Delivery - Fast & Fresh</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Fast food delivery with the best restaurants in your area. Order burgers, tacos, pasta, and more with quick delivery.">
+    <meta name="keywords" content="food delivery, restaurant, burger, taco, pasta, ice cream, fast food, online ordering">
+    <meta name="author" content="Food Delivery App">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fooddelivery.app/">
+    <meta property="og:title" content="Food Delivery App - Fast & Fresh">
+    <meta property="og:description" content="Order from the best restaurants in your area with fast delivery.">
+    <meta property="og:image" content="assets/images/logo/512.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://fooddelivery.app/">
+    <meta property="twitter:title" content="Food Delivery App - Fast & Fresh">
+    <meta property="twitter:description" content="Order from the best restaurants in your area with fast delivery.">
+    <meta property="twitter:image" content="assets/images/logo/512.png">
+
+    <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="assets/images/logo/favicon.png" type="image/x-icon">
-    <title>Fixit - User App</title>
     <link rel="apple-touch-icon" href="assets/images/logo/favicon.png">
-    <meta name="title-color" content="#00162E">
+    <meta name="title-color" content="#FF9D5C">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="fixit">
+    <meta name="apple-mobile-web-app-title" content="FoodDelivery">
     <meta name="msapplication-TileImage" content="assets/images/logo/favicon.png">
     <meta name="msapplication-TileColor" content="#FFFFFF">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!--Google font-->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
 
-    <!-- swiper css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/swiper-bundle.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Iconsax CSS -->
+    <link rel="stylesheet" href="assets/css/vendors/iconsax.css">
+    
+    <!-- Custom CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- iconsax css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/vendors/iconsax.css">
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: #f8f9fa;
+            padding-bottom: 80px;
+        }
 
-    <!-- bootstrap css -->
-    <link rel="stylesheet" id="rtl-link" type="text/css" href="assets/css/vendors/bootstrap.css">
+        /* Header Styles */
+        .header {
+            background: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-    <!-- Theme css -->
-    <link rel="stylesheet" id="change-link" type="text/css" href="assets/css/style.css">
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .location-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .location-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .location-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .location-text .deliver-to {
+            font-size: 12px;
+            color: #666;
+            margin: 0;
+        }
+
+        .location-text .location-select {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .location-arrow {
+            color: #FF6B35;
+            font-size: 12px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-btn {
+            background: #f8f9fa;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .header-btn:hover {
+            background: #e9ecef;
+            color: #FF6B35;
+        }
+
+        /* Banner Carousel */
+        .banner-section {
+            margin: 20px 0;
+            padding: 0 20px;
+        }
+
+        .banner-slide {
+            background: linear-gradient(135deg, #FF9D5C 0%, #FF6B35 100%);
+            border-radius: 15px;
+            padding: 30px 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .banner-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .banner-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .banner-offer {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .banner-btn {
+            background: white;
+            color: #FF6B35;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 12px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .banner-btn:hover {
+            background: #f8f9fa;
+            color: #FF6B35;
+        }
+
+        .carousel-indicators {
+            bottom: -30px;
+        }
+
+        .carousel-indicators button {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ddd;
+            border: none;
+            margin: 0 4px;
+        }
+
+        .carousel-indicators button.active {
+            background: #FF6B35;
+        }
+
+        /* Search Bar */
+        .search-section {
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .search-bar {
+            background: #f8f9fa;
+            border-radius: 25px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-input {
+            border: none;
+            background: none;
+            outline: none;
+            flex: 1;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .search-input::placeholder {
+            color: #999;
+        }
+
+        .filter-btn {
+            background: #e9ecef;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: #dee2e6;
+        }
+
+        /* Categories Grid */
+        .categories-section {
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .category-item {
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s ease;
+        }
+
+        .category-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .category-name {
+            font-size: 12px;
+            font-weight: 500;
+            color: #333;
+            margin: 0;
+        }
+
+        /* Food Items */
+        .food-items-section {
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .food-items-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .food-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .food-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .food-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .favorite-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FF6B35;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .favorite-btn:hover {
+            background: white;
+            color: #FF6B35;
+        }
+
+        .food-details {
+            padding: 12px;
+        }
+
+        .food-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .food-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 8px;
+        }
+
+        .star-icon {
+            color: #FFD700;
+            font-size: 12px;
+        }
+
+        .rating-text {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .food-price {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .current-price {
+            color: #FF6B35;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .original-price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 12px;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #eee;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+
+        .nav-items {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-item {
+            text-align: center;
+            text-decoration: none;
+            color: #999;
+            flex: 1;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item.active {
+            color: #FF6B35;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin: 0 auto 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active .nav-icon {
+            background: #FF6B35;
+            color: white;
+        }
+
+        .nav-label {
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 375px) {
+            .categories-grid {
+                gap: 15px;
+            }
+            
+            .category-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .food-items-grid {
+                gap: 10px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .food-items-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .food-items-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(8, 1fr);
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- loader start-->
-    <div class="loader-wrapper" id="loader">
-        <span class="loader"></span>
-    </div>
-    <!-- loader end -->
-
-    <!-- header start -->
+    <!-- Header -->
     <header class="header">
-        <div class="custom-container">
-            <div class="head-content">
-                <a href="#sidebar" class="sidebar-btn" data-bs-toggle="offcanvas">
-                    <i class="iconsax" data-icon="text-align-left"></i>
-                </a>
-                <a href="location.html" class="header-location">
-                    <div class="location-icon">
-                        <img class="img-fluid location" src="assets/images/svg/location.svg" alt="location">
-                    </div>
-                    <div class="location-content">
-                        <div class="d-flex align-items-center gap-1">
-                            <h6>Current Location</h6>
-                            <i class="iconsax d-arrow" data-icon="chevron-down"></i>
-                        </div>
-                        <h5>New Jersey, USA</h5>
-                    </div>
-                </a>
-                <div class="d-flex align-items-center gap-2">
-                    <a href="search.html">
-                        <i class="iconsax icon-btn" data-icon="search-normal-2"></i>
-                    </a>
-                    <a href="notification.html">
-                        <i class="iconsax icon-btn notification-icon" data-icon="bell-2"></i>
-                    </a>
+        <div class="header-content">
+            <div class="location-section">
+                <img src="assets/images/svg/location.svg" alt="location" class="location-icon">
+                <div class="location-text">
+                    <p class="deliver-to">Deliver to</p>
+                    <p class="location-select">
+                        Select Your Location
+                        <i class="iconsax location-arrow" data-icon="chevron-down"></i>
+                    </p>
                 </div>
+            </div>
+            <div class="header-actions">
+                <a href="search.html" class="header-btn">
+                    <i class="iconsax" data-icon="search-normal-2"></i>
+                </a>
+                <a href="notification.html" class="header-btn">
+                    <i class="iconsax" data-icon="bell-2"></i>
+                </a>
+                <a href="cart.html" class="header-btn">
+                    <i class="iconsax" data-icon="shopping-cart"></i>
+                </a>
             </div>
         </div>
     </header>
-    <!-- header end -->
 
-    <!-- banner section starts -->
-    <section class="section-lg-t-space">
-        <div class="container-fluid p-0">
-            <div class="position-relative">
-                <img class="img-fluid home-banner w-100 position-relative" src="assets/images/banner/banner1.png" alt="banner">
-                <div class="banner-content position-absolute">
-                    <h6 class="fw-medium text-white error-bg px-2 py-1 rounded-pill d-inline-flex">New Offer</h6>
-                    <h3 class="fw-bold text-uppercase mt-1">50% off in Cleaning</h3>
-                    <h6 class="content-color fw-normal mt-1">#On first 50 booking</h6>
-                    <a href="category-details.html" class="btn theme-btn p-1 px-2 mt-4">Book Now</a>
+    <!-- Banner Carousel -->
+    <section class="banner-section">
+        <div id="foodBannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#foodBannerCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#foodBannerCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#foodBannerCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <!-- Ice Cream Banner -->
+                <div class="carousel-item active">
+                    <div class="banner-slide">
+                        <div class="banner-badge">ICE CREAM DAY</div>
+                        <div class="banner-title">GET YOUR SWEET ICE CREAM</div>
+                        <div class="banner-offer">40% OFF</div>
+                        <a href="category-details.html" class="banner-btn">Order Now</a>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
-    <!-- banner section end -->
-
-    <!-- offer section start -->
-    <section>
-        <div class="custom-container">
-            <div class="title">
-                <h2>Coupons</h2>
-                <a href="coupon.html">View all</a>
-            </div>
-
-            <div class="swiper coupon">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <a href="coupon.html" class="offer-box">
-                            <div class="offer-icon">
-                                <img class="img-fluid offer" src="assets/images/svg/coupon-logo.svg" alt="offer">
-                            </div>
-                            <div class="offer-content">
-                                <div>
-                                    <h5 class="fw-medium title-color">Bank of America</h5>
-                                    <h6 class="content-color fw-normal">Use code <span class="fw-semibold content-color"> #A125 </span>
-                                    </h6>
-                                </div>
-                                <h3 class="fw-bold theme-color">30% OFF</h3>
-                            </div>
-                        </a>
+                <!-- Burger Banner -->
+                <div class="carousel-item">
+                    <div class="banner-slide" style="background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);">
+                        <div class="banner-badge">BURGER SPECIAL</div>
+                        <div class="banner-title">JUICY BURGERS</div>
+                        <div class="banner-offer">BUY 2 GET 1 FREE</div>
+                        <a href="category-details.html" class="banner-btn">Order Now</a>
                     </div>
-                    <div class="swiper-slide">
-                        <a href="coupon.html" class="offer-box">
-                            <div class="offer-icon">
-                                <img class="img-fluid offer" src="assets/images/svg/coupon-logo.svg" alt="offer">
-                            </div>
-                            <div class="offer-content">
-                                <div>
-                                    <h5 class="fw-medium title-color">Bank of America</h5>
-                                    <h6 class="content-color fw-normal">Use code <span class="fw-semibold content-color"> #A125 </span>
-                                    </h6>
-                                </div>
-                                <h3 class="fw-bold theme-color">30% OFF</h3>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="coupon.html" class="offer-box">
-                            <div class="offer-icon">
-                                <img class="img-fluid offer" src="assets/images/svg/coupon-logo.svg" alt="offer">
-                            </div>
-                            <div class="offer-content">
-                                <div>
-                                    <h5 class="fw-medium title-color">Bank of America</h5>
-                                    <h6 class="content-color fw-normal">Use code <span class="fw-semibold content-color">
-                                            #A125 </span>
-                                    </h6>
-                                </div>
-                                <h3 class="fw-bold theme-color">30% OFF</h3>
-                            </div>
-                        </a>
+                </div>
+                <!-- Free Delivery Banner -->
+                <div class="carousel-item">
+                    <div class="banner-slide" style="background: linear-gradient(135deg, #32CD32 0%, #228B22 100%);">
+                        <div class="banner-badge">FREE DELIVERY</div>
+                        <div class="banner-title">ON ORDERS OVER €25</div>
+                        <div class="banner-offer">FAST & FRESH</div>
+                        <a href="category-details.html" class="banner-btn">Order Now</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- offer section end -->
 
-    <!-- categories section starts -->
-    <section>
-        <div class="custom-container">
-            <div class="title">
-                <h2>Top categories</h2>
-                <a href="category-grid.html">View all</a>
-            </div>
-            <div class="row g-3">
-                <div class="col-3">
-                    <a href="category-details.html">
-                        <div class="categories-box">
-                            <img class="categories-icon" src="assets/images/categories/ac-repair.svg" alt="ac-repair">
-                        </div>
-                        <h5 class="categories-name mt-2 text-center title-color">Ac Repair</h5>
-                    </a>
-                </div>
-
-                <div class="col-3">
-                    <a href="category-details.html">
-                        <div class="categories-box">
-                            <img class="categories-icon" src="assets/images/categories/cleaning.svg" alt="cleaning">
-                        </div>
-                        <h5 class="categories-name mt-2 text-center title-color">Cleaning</h5>
-                    </a>
-                </div>
-                <div class="col-3">
-                    <a href="category-details.html">
-                        <div class="categories-box">
-                            <img class="categories-icon" src="assets/images/categories/carpenter.svg" alt="carpenter">
-                        </div>
-                        <h5 class="categories-name mt-2 text-center title-color">Carpenter</h5>
-                    </a>
-                </div>
-
-                <div class="col-3">
-                    <a href="category-details.html">
-                        <div class="categories-box">
-                            <img class="categories-icon" src="assets/images/categories/cooking.svg" alt="cooking">
-                        </div>
-                        <h5 class="categories-name mt-2 text-center title-color">Cooking</h5>
-                    </a>
-                </div>
-
-                <div class="col-3">
-                    <a href="category-details.html">
-                        <div class="categories-box">
-                            <img class="categories-icon" src="assets/images/categories/electrician.svg" alt="electrician">
-                        </div>
-                        <h5 class="categories-name mt-2 text-center title-color">Electrician</h5>
-                    </a>
-                </div>
-
-                <div class="col-3">
-                    <a href="category-details.html">
-                        <div class="categories-box">
-                            <img class="categories-icon" src="assets/images/categories/painter.svg" alt="painter">
-                        </div>
-                        <h5 class="categories-name mt-2 text-center title-color">Painter</h5>
-                    </a>
-                </div>
-
-                <div class="col-3">
-                    <a href="category-details.html">
-                        <div class="categories-box">
-                            <img class="categories-icon" src="assets/images/categories/salon.svg" alt="salon">
-                        </div>
-                        <h5 class="categories-name mt-2 text-center title-color">Salon</h5>
-                    </a>
-                </div>
-
-                <div class="col-3">
-                    <a href="category-details.html">
-                        <div class="categories-box">
-                            <img class="categories-icon" src="assets/images/categories/plumber.svg" alt="plumber">
-                        </div>
-                        <h5 class="categories-name mt-2 text-center title-color">Plumber</h5>
-                    </a>
-                </div>
-            </div>
+    <!-- Search Bar -->
+    <section class="search-section">
+        <div class="search-bar">
+            <i class="iconsax" data-icon="search-normal-2" style="color: #999;"></i>
+            <input type="text" class="search-input" placeholder="Search" />
+            <button class="filter-btn">
+                <i class="iconsax" data-icon="setting-2"></i>
+            </button>
         </div>
     </section>
-    <!-- categories section end -->
 
-    <!-- service packages section starts -->
-    <section>
-        <div class="custom-container">
-            <div class="title">
-                <h2>Service packages</h2>
-                <a href="packages.html">View all</a>
-            </div>
+    <!-- Categories Grid -->
+    <section class="categories-section">
+        <div class="categories-grid">
+            <a href="category-details.html" class="category-item">
+                <div class="category-icon" style="background: #FF9D5C;">
+                    <i class="iconsax" data-icon="burger"></i>
+                </div>
+                <h5 class="category-name">Burger</h5>
+            </a>
+            <a href="category-details.html" class="category-item">
+                <div class="category-icon" style="background: #FF6B35;">
+                    <i class="iconsax" data-icon="food"></i>
+                </div>
+                <h5 class="category-name">Taco</h5>
+            </a>
+            <a href="category-details.html" class="category-item">
+                <div class="category-icon" style="background: #8B4513;">
+                    <i class="iconsax" data-icon="food"></i>
+                </div>
+                <h5 class="category-name">Burrito</h5>
+            </a>
+            <a href="category-details.html" class="category-item">
+                <div class="category-icon" style="background: #32CD32;">
+                    <i class="iconsax" data-icon="drink"></i>
+                </div>
+                <h5 class="category-name">Drink</h5>
+            </a>
+            <a href="category-details.html" class="category-item">
+                <div class="category-icon" style="background: #FFD700;">
+                    <i class="iconsax" data-icon="food"></i>
+                </div>
+                <h5 class="category-name">Sandwich</h5>
+            </a>
+            <a href="category-details.html" class="category-item">
+                <div class="category-icon" style="background: #FF1493;">
+                    <i class="iconsax" data-icon="food"></i>
+                </div>
+                <h5 class="category-name">Pasta</h5>
+            </a>
+            <a href="category-details.html" class="category-item">
+                <div class="category-icon" style="background: #FF69B4;">
+                    <i class="iconsax" data-icon="drink"></i>
+                </div>
+                <h5 class="category-name">Ice Cream</h5>
+            </a>
+            <a href="category-details.html" class="category-item">
+                <div class="category-icon" style="background: #808080;">
+                    <i class="iconsax" data-icon="more"></i>
+                </div>
+                <h5 class="category-name">More</h5>
+            </a>
+        </div>
+    </section>
 
-            <div class="swiper packages">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="packages-box box2">
-                            <a href="packages-details.html">
-                                <div class="packages-icon-box icon-box-2">
-                                    <svg class="packages-icon icon2">
-                                        <use href="assets/images/categories/sprite.svg#cleaning"></use>
-                                    </svg>
-                                </div>
-                                <h6 class="packages-name">Cleaning Package</h6>
-                                <h5 class="packages-price">$20.15</h5>
-
-                                <div class="d-flex align-items-center justify-content-between mt-3">
-                                    <h6 class="more">View More</h6>
-                                    <i class="iconsax arrow" data-icon="arrow-right"></i>
-                                </div>
-                            </a>
-                        </div>
+    <!-- Food Items -->
+    <section class="food-items-section">
+        <div class="food-items-grid">
+            <!-- Chicken Burger -->
+            <div class="food-item">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=200&fit=crop" alt="Chicken Burger" class="food-image" loading="lazy">
+                <button class="favorite-btn">
+                    <i class="iconsax" data-icon="heart"></i>
+                </button>
+                <div class="food-details">
+                    <h5 class="food-name">Chicken Burger</h5>
+                    <div class="food-rating">
+                        <i class="iconsax star-icon" data-icon="star"></i>
+                        <span class="rating-text">4.9</span>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="packages-box  box4">
-                            <a href="packages-details.html">
-                                <div class="packages-icon-box icon-box-4">
-                                    <svg class="packages-icon icon4">
-                                        <use href="assets/images/categories/sprite.svg#carpenter"></use>
-                                    </svg>
-                                </div>
-                                <h6 class="packages-name">Carpenter Package</h6>
-                                <h5 class="packages-price">$20.15</h5>
-
-                                <div class="d-flex align-items-center justify-content-between mt-3">
-                                    <h6 class="more">View More</h6>
-                                    <i class="iconsax arrow" data-icon="arrow-right"></i>
-                                </div>
-                            </a>
-                        </div>
+                    <div class="food-price">
+                        <span class="current-price">€6.00</span>
+                        <span class="original-price">€10.00</span>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="packages-box box3">
-                            <a href="packages-details.html">
-                                <div class="packages-icon-box icon-box-3">
-                                    <svg class="packages-icon icon3">
-                                        <use href="assets/images/categories/sprite.svg#cooking"></use>
-                                    </svg>
-                                </div>
-                                <h6 class="packages-name">Cooking Package</h6>
-                                <h5 class="packages-price">$10.32</h5>
-
-                                <div class="d-flex align-items-center justify-content-between mt-3">
-                                    <h6 class="more">View More</h6>
-                                    <i class="iconsax arrow" data-icon="arrow-right"></i>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- service packages section end -->
 
-    <!-- service section starts -->
-    <section class="section-b-space">
-        <div class="custom-container">
-            <div class="title">
-                <h2>Featured service</h2>
-                <a href="service.html">View all</a>
-            </div>
-
-            <ul class="service-list">
-                <li class="service-box">
-                    <div class="service-head">
-                        <div class="service-profile">
-                            <img class="img-fluid profile-img" src="assets/images/profile/p4.png" alt="p4">
-                            <h5>Arlene McCoy</h5>
-                        </div>
-                        <h6 class="rating"> <img class="img-fluid star" src="assets/images/svg/star-fill.svg" alt="star"> 3.0
-                        </h6>
+            <!-- Beef Burger -->
+            <div class="food-item">
+                <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433a?w=400&h=200&fit=crop" alt="Beef Burger" class="food-image" loading="lazy">
+                <button class="favorite-btn">
+                    <i class="iconsax" data-icon="heart"></i>
+                </button>
+                <div class="food-details">
+                    <h5 class="food-name">Beef Burger</h5>
+                    <div class="food-rating">
+                        <i class="iconsax star-icon" data-icon="star"></i>
+                        <span class="rating-text">4.9</span>
                     </div>
-                    <img class="img-fluid w-100" src="assets/images/service/1.jpg" alt="">
-                    <div class="service-details">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <a href="service-details.html">
-                                <h5 class="fw-medium title-color service-name">Cleaning of bathroom</h5>
-                            </a>
-                            <h4 class="fw-semibold title-color d-flex align-items-center gap-1"> $30<span class="content-color fw-normal"> <del> $40.50
-                                    </del> </span></h4>
-                        </div>
-
-                        <div class="service-content">
-                            <div class="d-flex align-items-center mt-2">
-                                <h5 class="timing">
-                                    <i class="iconsax" data-icon="clock"></i> 30mins
-                                </h5>
-                                <h6 class="fw-normal title-color ps-2">Min 2 servicemen required</h6>
-                            </div>
-                        </div>
-                        <div class=" d-flex align-items-center justify-content-between gap-1 mt-2">
-                            <p>Foamjet tachnology removes dust 2x deeper.</p>
-                            <a href="cart.html" class="btn-sm theme-btn">+ Add</a>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="service-box">
-                    <div class="service-head">
-                        <div class="service-profile">
-                            <img class="img-fluid profile-img" src="assets/images/profile/p5.png" alt="p4">
-                            <h5>Arlene McCoy</h5>
-                        </div>
-                        <h6 class="rating"> <img class="img-fluid star" src="assets/images/svg/star-fill.svg" alt="star"> 3.2
-                        </h6>
-                    </div>
-                    <img class="img-fluid w-100" src="assets/images/service/2.jpg" alt="">
-                    <div class="service-details">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <a href="service-details.html">
-                                <h5 class="fw-medium title-color">Furnishing & carpentry</h5>
-                            </a>
-                            <h4 class="fw-semibold title-color d-flex align-items-center gap-1"><span class="content-color fw-normal"></span> $30</h4>
-                        </div>
-
-                        <div class="service-content">
-                            <div class="d-flex align-items-center mt-2">
-                                <h5 class="timing">
-                                    <i class="iconsax" data-icon="clock"></i> 30mins
-                                </h5>
-                                <h6 class="fw-normal title-color ps-2">Min 2 servicemen required</h6>
-                            </div>
-                        </div>
-                        <div class=" d-flex align-items-center justify-content-between gap-1 mt-2">
-                            <p>Foamjet tachnology removes dust 2x deeper.</p>
-                            <a href="cart.html" class="btn-sm theme-btn">+ Add</a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </section>
-    <!-- service section starts -->
-
-    <!-- expert servicer section starts -->
-    <section class="section-b-space box-background">
-        <div class="custom-container">
-            <div class="title">
-                <h2>Expert Servicer</h2>
-                <a href="expert-servicer.html">View all</a>
-            </div>
-
-            <ul class="servicer-list">
-                <li class="servicer-box">
-                    <div class="servicer-profile">
-                        <img class="profile-img" src="assets/images/profile/p11.png" alt="p11">
-                    </div>
-                    <div class="servicer-details">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <a href="servicemen-details.html">
-                                <h4 class="fw-medium title-color">Leslie Alexander</h4>
-                            </a>
-                            <h6 class="rating"> <img class="img-fluid star" src="assets/images/svg/star-fill.svg" alt="star"> 4.2
-                            </h6>
-                        </div>
-                        <h6 class="fw-normal title-color">Painting Service</h6>
-
-                        <div class="location">
-                            <i class="iconsax icon" data-icon="location"></i>
-                            <h6> Santa Ana, New York</h6>
-                        </div>
-                    </div>
-                </li>
-                <li class="servicer-box">
-                    <div class="servicer-profile">
-                        <img class="profile-img" src="assets/images/profile/p10.png" alt="p11">
-                    </div>
-                    <div class="servicer-details">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <a href="servicemen-details.html">
-                                <h4 class="fw-medium title-color">Esther Howard</h4>
-                            </a>
-                            <h6 class="rating"> <img class="img-fluid star" src="assets/images/svg/star-fill.svg" alt="star"> 4.0
-                            </h6>
-                        </div>
-                        <h6 class="fw-normal title-color">Cleaning, Plumber, Electronics Service</h6>
-
-                        <div class="location">
-                            <i class="iconsax icon" data-icon="location"></i>
-                            <h6> Allentown, New Mexico </h6>
-                        </div>
-                    </div>
-                </li>
-                <li class="servicer-box">
-                    <div class="servicer-profile">
-                        <img class="profile-img" src="assets/images/profile/p9.png" alt="p11">
-                    </div>
-                    <div class="servicer-details">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <a href="servicemen-details.html">
-                                <h4 class="fw-medium title-color">Guy Hawkins</h4>
-                            </a>
-                            <h6 class="rating"> <img class="img-fluid star" src="assets/images/svg/star-fill.svg" alt="star"> 3.8
-                            </h6>
-                        </div>
-                        <h6 class="fw-normal title-color">Salon Service</h6>
-
-                        <div class="location">
-                            <i class="iconsax icon" data-icon="location"></i>
-                            <h6> Mesa, New Jersey</h6>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </section>
-    <!-- expert servicer section end -->
-
-    <!-- blog section starts -->
-    <section class="section-b-space">
-        <div class="custom-container">
-            <div class="title">
-                <h2>Latest Blog</h2>
-                <a href="blog.html">View all</a>
-            </div>
-
-            <div class="swiper blog-slider">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="blog-box ratio2_3">
-                            <a href="blog-details.html" class="blog-box-img">
-                                <img class="bg-img blog-img" src="assets/images/blog/1.jpg" alt="1">
-                            </a>
-                            <div class="blog-details">
-                                <a href="blog-details.html">
-                                    <h4>Switchboard and wiring electrical issue</h4>
-                                </a>
-                                <h6>Electrician | 5 June, 2024</h6>
-
-                                <div class="d-flex align-items-center justify-content-between mt-3">
-                                    <div class="message">
-                                        <i class="iconsax icon" data-icon="message-dots"></i>
-                                        <h6>23</h6>
-                                    </div>
-
-                                    <h6 class="mt-0 theme-color">- By admin</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="blog-box ratio2_3">
-                            <a href="blog-details.html" class="blog-box-img">
-                                <img class="bg-img blog-img" src="assets/images/blog/2.jpg" alt="1">
-                            </a>
-                            <div class="blog-details">
-                                <a href="blog-details.html">
-                                    <h4>Man trimming his beard and hair cutting</h4>
-                                </a>
-                                <h6>Hair cutting | 12 June, 2024</h6>
-
-                                <div class="d-flex align-items-center justify-content-between mt-3">
-                                    <div class="message">
-                                        <i class="iconsax icon" data-icon="message-dots"></i>
-                                        <h6>15</h6>
-                                    </div>
-
-                                    <h6 class="mt-0 theme-color">- By admin</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="blog-box ratio2_3">
-                            <a href="blog-details.html" class="blog-box-img">
-                                <img class="bg-img blog-img" src="assets/images/blog/3.jpg" alt="1">
-                            </a>
-                            <div class="blog-details">
-                                <a href="blog-details.html">
-                                    <h4>Bring Joy and Unity on this paint</h4>
-                                </a>
-                                <h6>Painting | 15 June, 2024</h6>
-
-                                <div class="d-flex align-items-center justify-content-between mt-3">
-                                    <div class="message">
-                                        <i class="iconsax icon" data-icon="message-dots"></i>
-                                        <h6>10</h6>
-                                    </div>
-
-                                    <h6 class="mt-0 theme-color">- By admin</h6>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="food-price">
+                        <span class="current-price">€10.00</span>
+                        <span class="original-price">€12.00</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- blog section starts -->
 
-    <!-- panel-space start -->
-    <div class="panel-space"></div>
-    <!-- panel-space end -->
-
-    <!-- bottom navbar start -->
-    <div class="navbar-menu">
-        <ul>
-            <li class="active">
-                <a href="home.html">
-                    <div class="icon">
-                        <img class="unactive" src="assets/images/svg/home.svg" alt="home">
-                        <img class="active" src="assets/images/svg/home-fill.svg" alt="home">
-                    </div>
-                    <h5 class="active">Home</h5>
-                </a>
-            </li>
-
-            <li>
-                <a href="booking.html">
-                    <div class="icon">
-                        <img class="unactive" src="assets/images/svg/booking.svg" alt="booking">
-                        <img class="active" src="assets/images/svg/booking-fill.svg" alt="booking">
-                    </div>
-                    <h5>Booking</h5>
-                </a>
-            </li>
-
-            <li>
-                <a href="cart.html" class="scanner-btn">
-                    <div class="icon">
-                        <i class="iconsax icon-btn" data-icon="shopping-cart"></i>
-                    </div>
-                </a>
-            </li>
-
-            <li>
-                <a href="offer.html">
-                    <div class="icon">
-                        <img class="unactive" src="assets/images/svg/offer.svg" alt="offer">
-                        <img class="active" src="assets/images/svg/offer-fill.svg" alt="offer">
-                    </div>
-                    <h5>Offer</h5>
-                </a>
-            </li>
-
-            <li>
-                <a href="profile.html">
-                    <div class="icon">
-                        <img class="unactive" src="assets/images/svg/profile.svg" alt="profile">
-                        <img class="active" src="assets/images/svg/profile-fill.svg" alt="profile">
-                    </div>
-                    <h5>Profile</h5>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- bottom navbar end -->
-
-    <!-- sidebar starts -->
-    <div class="offcanvas sidebar-offcanvas offcanvas-start" tabindex="-1" id="sidebar">
-        <div class="offcanvas-header sidebar-header">
-            <div class="sidebar-logo">
-                <img class="img-fluid logo" src="assets/images/logo/logo.png" alt="logo">
-                <img class="img-fluid logo-dark" src="assets/images/logo/logo-white.png" alt="logo">
-            </div>
-        </div>
-        <div class="offcanvas-body">
-            <div class="profile-background">
-                <div class="profile-part p-0">
-                    <div class="profile-image">
-                        <img id="output" class="img-fluid profile-pic" src="assets/images/profile/p11.png" alt="11">
-                    </div>
-
-                    <h3>Smitha Williams</h3>
-                    <h4>smithwilliams452@gmail.com</h4>
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-items">
+            <a href="home.html" class="nav-item active">
+                <div class="nav-icon">
+                    <i class="iconsax" data-icon="home"></i>
                 </div>
-            </div>
-
-
-            <ul class="profile-list">
-                <li>
-                    <a href="../user-app/index.html" class="setting-box">
-                        <div class="setting-icon">
-                            <i class="iconsax main-icon" data-icon="user-2"> </i>
-                        </div>
-                        <div class="setting-content">
-                            <h5>User App</h5>
-                            <i class="iconsax arrow" data-icon="chevron-right"></i>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="../provider-app/index.html" class="setting-box">
-                        <div class="setting-icon">
-                            <img class="img-fluid main-icon main-img" src="assets/images/svg/provider-app.svg" alt="provider-app">
-                        </div>
-                        <div class="setting-content">
-                            <h5>Provider App</h5>
-                            <i class="iconsax arrow" data-icon="chevron-right"></i>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="../servicemen-app/index.html" class="setting-box">
-                        <div class="setting-icon">
-                            <img class="img-fluid main-icon main-img" src="assets/images/svg/servicemen-app.svg" alt="servicemen-app">
-                        </div>
-                        <div class="setting-content">
-                            <h5>Servicemen App</h5>
-                            <i class="iconsax arrow" data-icon="chevron-right"></i>
-                        </div>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="page-listing.html" class="setting-box">
-                        <div class="setting-icon">
-                            <i class="iconsax main-icon" data-icon="book-closed"> </i>
-                        </div>
-                        <div class="setting-content">
-                            <h5>Template Pages</h5>
-                            <i class="iconsax arrow" data-icon="chevron-right"></i>
-                        </div>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="../elements/elements-page.html" class="setting-box">
-                        <div class="setting-icon">
-                            <i class="iconsax main-icon" data-icon="document-text-1"> </i>
-                        </div>
-                        <div class="setting-content">
-                            <h5> Template Elements</h5>
-                            <i class="iconsax arrow" data-icon="chevron-right"></i>
-                        </div>
-                    </a>
-                </li>
-
-                <li>
-                    <div class="setting-box">
-                        <div class="setting-icon">
-                            <i class="iconsax main-icon" data-icon="repeat"> </i>
-                        </div>
-                        <div class="setting-content">
-                            <h5>RTL</h5>
-                            <div class="switch-btn">
-                                <input id="dir-switch" type="checkbox">
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                <li>
-                    <div class="setting-box">
-                        <div class="setting-icon">
-                            <i class="iconsax main-icon" data-icon="brush-3"> </i>
-                        </div>
-                        <div class="setting-content">
-                            <h5>Dark</h5>
-                            <div class="switch-btn">
-                                <input id="dark-switch" type="checkbox">
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-
-            <div class="bottom-sidebar">
-                <a href="login.html" class="pages">
-                    <i class="iconsax sidebar-icon" data-icon="logout-2"> </i>
-                    <h3>Logout</h3>
-                </a>
-            </div>
+                <div class="nav-label">Food</div>
+            </a>
+            <a href="orders.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="iconsax" data-icon="document-text"></i>
+                </div>
+                <div class="nav-label">Orders</div>
+            </a>
+            <a href="cart.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="iconsax" data-icon="shopping-cart"></i>
+                </div>
+                <div class="nav-label">Cart</div>
+            </a>
+            <a href="favorites.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="iconsax" data-icon="heart"></i>
+                </div>
+                <div class="nav-label">Favorites</div>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="iconsax" data-icon="profile"></i>
+                </div>
+                <div class="nav-label">Profile</div>
+            </a>
         </div>
     </div>
-    <!-- sidebar end -->
 
-    <!-- swiperjs -->
-    <script src="assets/js/swiper-bundle.min.js"></script>
-    <script src="assets/js/custom-swiper.js"></script>
-
-    <!-- iconsax js -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Iconsax JS -->
     <script src="assets/js/iconsax.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+        
+        // Offline detection and banner fallback
+        window.addEventListener('online', () => {
+            console.log('Back online');
+            const carousel = document.getElementById('foodBannerCarousel');
+            if (carousel) {
+                const bsCarousel = bootstrap.Carousel.getInstance(carousel);
+                if (bsCarousel) {
+                    bsCarousel.to(0);
+                }
+            }
+        });
+        
+        window.addEventListener('offline', () => {
+            console.log('Gone offline');
+        });
+        
+        // Favorite button functionality
+        document.querySelectorAll('.favorite-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.classList.toggle('active');
+                const icon = this.querySelector('i');
+                if (this.classList.contains('active')) {
+                    icon.setAttribute('data-icon', 'heart');
+                    this.style.color = '#FF6B35';
+                } else {
+                    icon.setAttribute('data-icon', 'heart');
+                    this.style.color = '#FF6B35';
+                }
+            });
+        });
 
-    <!-- bootstrap js -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+        // Search functionality
+        document.querySelector('.search-input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            // Implement search logic here
+            console.log('Searching for:', searchTerm);
+        });
 
-    <!-- template-setting js -->
-    <script src="assets/js/template-setting.js"></script>
-
-    <!-- script js -->
-    <script src="assets/js/script.js"></script>
+        // Filter button functionality
+        document.querySelector('.filter-btn').addEventListener('click', function() {
+            // Implement filter logic here
+            console.log('Filter clicked');
+        });
+    </script>
 </body>
-
 </html>
