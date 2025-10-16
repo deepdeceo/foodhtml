@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Free Directions Map</title>
+    <title>Directions with Current Location</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<h2>Directions Example</h2>
+<h2>Directions Map</h2>
 <input type="text" id="destination" placeholder="Enter destination e.g. Rajshahi New Market"/>
 <button onclick="showRoute()">Get Directions</button>
 <p id="status">Enter destination and click button.</p>
@@ -33,8 +33,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 let routingControl;
+let currentMarker;
 
-// Function to geocode address to lat/lng
+// Function to geocode destination
 async function geocode(address) {
     try {
         const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
@@ -47,7 +48,7 @@ async function geocode(address) {
     }
 }
 
-// Main function
+// Function to get current location and plot route
 function showRoute() {
     const destinationInput = document.getElementById("destination").value;
     if (!destinationInput) {
@@ -60,7 +61,7 @@ function showRoute() {
         return;
     }
 
-    status.textContent = "Calculating route…";
+    status.textContent = "Locating…";
 
     navigator.geolocation.getCurrentPosition(async (position) => {
         const origin = [position.coords.latitude, position.coords.longitude];
@@ -73,10 +74,16 @@ function showRoute() {
 
         status.textContent = `Routing from your location to ${destinationInput}`;
 
+        // Add current location marker
+        if (currentMarker) map.removeLayer(currentMarker);
+        currentMarker = L.marker(origin).addTo(map)
+            .bindPopup("You are here")
+            .openPopup();
+
         // Remove previous route
         if (routingControl) map.removeControl(routingControl);
 
-        // Add new route
+        // Add route
         routingControl = L.Routing.control({
             waypoints: [
                 L.latLng(origin[0], origin[1]),
@@ -86,7 +93,12 @@ function showRoute() {
             geocoder: L.Control.Geocoder.nominatim()
         }).addTo(map);
 
-        map.setView(origin, 13);
+        // Fit map to route bounds after routing is ready
+        routingControl.on('routesfound', function(e) {
+            const bounds = e.routes[0].bounds;
+            map.fitBounds(bounds);
+        });
+
     }, (err) => {
         status.textContent = "Error getting location: " + err.message;
     });
