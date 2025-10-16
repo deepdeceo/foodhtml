@@ -1,58 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Free Map with Current Location</title>
+    <title>Free Directions Map</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"/>
     <style>
         #map { height: 500px; width: 100%; }
     </style>
 </head>
 <body>
 
-<h2>My Location Map</h2>
+<h2>Directions Example</h2>
+<input type="text" id="destination" placeholder="Enter destination e.g. Rajshahi New Market"/>
+<button onclick="showRoute()">Get Directions</button>
+<p id="status">Enter destination and click button.</p>
 <div id="map"></div>
-<p id="status">Detecting location…</p>
 
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
 <script>
 const status = document.getElementById("status");
+const map = L.map('map').setView([23.8103, 90.4125], 7); // default Bangladesh
 
-// Initialize map with default center
-const map = L.map('map').setView([0, 0], 2);
-
-// OpenStreetMap tiles
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
 }).addTo(map);
 
-// Check if Geolocation is available
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-        (position) => {
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
-            status.textContent = `You are here: Lat ${lat}, Lng ${lng}`;
+let routingControl;
 
-            // Set map view to current location
-            map.setView([lat, lng], 13);
+// Function to geocode address to lat/lng
+async function geocode(address) {
+    try {
+        const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
+        const data = await res.json();
+        if (data.length === 0) throw "Address not found";
+        return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
+    } catch(err) {
+        console.error(err);
+        return null;
+    }
+}
 
-            // Add marker
-            L.marker([lat, lng]).addTo(map)
-                .bindPopup("You are here!")
-                .openPopup();
-        },
-        (error) => {
-            status.textContent = "Error getting location: " + error.message;
+// Main function
+function showRoute() {
+    const destinationInput = document.getElementById("destination").value;
+    if (!destinationInput) {
+        alert("Please enter a destination");
+        return;
+    }
+
+    if (!navigator.geolocation) {
+        status.textContent = "Geolocation not supported";
+        return;
+    }
+
+    status.textContent = "Calculating route…";
+
+    navigator.geolocation.getCurrentPosition(async (position) => {
+        const origin = [position.coords.latitude, position.coords.longitude];
+        const destination = await geocode(destinationInput);
+
+        if (!destination) {
+            status.textContent = "Destination not found";
+            return;
         }
-    );
-} else {
-    status.textContent = "Geolocation is not supported by your browser.";
+
+        status.textContent = `Routing from your location to ${destinationInput}`;
+
+        // Remove previous route
+        if (routingControl) map.removeControl(routingControl);
+
+        // Add new route
+        routingControl = L.Routing.control({
+            waypoints: [
+                L.latLng(origin[0], origin[1]),
+                L.latLng(destination[0], destination[1])
+            ],
+            routeWhileDragging: false,
+            geocoder: L.Control.Geocoder.nominatim()
+        }).addTo(map);
+
+        map.setView(origin, 13);
+    }, (err) => {
+        status.textContent = "Error getting location: " + err.message;
+    });
 }
 </script>
+
 </body>
 </html>
