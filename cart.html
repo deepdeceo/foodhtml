@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body class="bg-white min-h-screen">
     <!-- Header -->
     <div class="flex items-center px-4 py-3 border-b border-gray-100 sticky top-0 bg-white z-10">
@@ -17,76 +19,84 @@
         <div class="w-6"></div>
     </div>
 
-<!-- Payment Methods Modal -->
-<div id="paymentModal" class="fixed inset-0 z-50 hidden">
-    <div id="paymentBackdrop" class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300"></div>
-    <div id="paymentPanel" class="fixed inset-0 translate-y-full w-full h-full bg-white overflow-hidden transition-transform duration-400 flex flex-col">
-        <div class="flex items-center px-4 py-3 border-b border-gray-100 sticky top-0 bg-white z-10">
-            <button id="closePaymentBtn" class="text-gray-600 mr-2">
-                <i class="fas fa-arrow-left"></i>
-            </button>
-            <h3 class="flex-1 text-center font-semibold">Payment Methods</h3>
-            <div class="w-6"></div>
-        </div>
-        <div class="p-4 overflow-y-auto flex-1 space-y-3">
-            <!-- Methods list -->
-            <label class="flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
-                <div class="flex items-center gap-3">
-                    <span class="text-green-500 text-lg"><i class="fas fa-money-bill-wave"></i></span>
-                    <span class="text-sm font-semibold">Cash</span>
-                </div>
-                <input type="radio" name="paymentRadio" value="Cash" class="w-5 h-5" />
-            </label>
-            <label class="flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
-                <div class="flex items-center gap-3">
-                    <span class="text-sky-600 text-lg"><i class="fab fa-paypal"></i></span>
-                    <span class="text-sm font-semibold">PayPal</span>
-                </div>
-                <input type="radio" name="paymentRadio" value="PayPal" class="w-5 h-5" />
-            </label>
-            <label class="flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
-                <div class="flex items-center gap-3">
-                    <span class="text-amber-500 text-lg"><i class="fab fa-google-pay"></i></span>
-                    <span class="text-sm font-semibold">Google Pay</span>
-                </div>
-                <input type="radio" name="paymentRadio" value="Google Pay" class="w-5 h-5" />
-            </label>
-            <label class="flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
-                <div class="flex items-center gap-3">
-                    <span class="text-black text-lg"><i class="fab fa-apple-pay"></i></span>
-                    <span class="text-sm font-semibold">Apple Pay</span>
-                </div>
-                <input type="radio" name="paymentRadio" value="Apple Pay" class="w-5 h-5" />
-            </label>
-            <label class="flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
-                <div class="flex items-center gap-3">
-                    <span class="text-indigo-600 text-lg"><i class="fas fa-credit-card"></i></span>
-                    <span class="text-sm font-semibold">**** **** **** 0895</span>
-                </div>
-                <input type="radio" name="paymentRadio" value="Card 0895" class="w-5 h-5" />
-            </label>
-            <label class="flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
-                <div class="flex items-center gap-3">
-                    <span class="text-red-500 text-lg"><i class="fas fa-credit-card"></i></span>
-                    <span class="text-sm font-semibold">**** **** **** 2259</span>
-                </div>
-                <input type="radio" name="paymentRadio" value="Card 2259" class="w-5 h-5" />
-            </label>
+    <!-- Payment Methods Modal -->
+    <div id="paymentModal" class="fixed inset-0 z-50 hidden">
+        <div id="paymentBackdrop" class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300"></div>
+        <div id="paymentPanel"
+            class="fixed inset-0 translate-y-full w-full h-full bg-white overflow-hidden transition-transform duration-400 flex flex-col">
+            <div class="flex items-center px-4 py-3 border-b border-gray-100 sticky top-0 bg-white z-10">
+                <button id="closePaymentBtn" class="text-gray-600 mr-2">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h3 class="flex-1 text-center font-semibold">Payment Methods</h3>
+                <div class="w-6"></div>
+            </div>
+            <div class="p-4 overflow-y-auto flex-1 space-y-3">
+                <!-- Methods list -->
+                <label
+                    class="flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
+                    <div class="flex items-center gap-3">
+                        <span class="text-green-500 text-lg"><i class="fas fa-money-bill-wave"></i></span>
+                        <span class="text-sm font-semibold">Cash</span>
+                    </div>
+                    <input type="radio" name="paymentRadio" value="Cash" class="w-5 h-5" />
+                </label>
+                <label
+                    class="flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
+                    <div class="flex items-center gap-3">
+                        <span class="text-sky-600 text-lg"><i class="fab fa-paypal"></i></span>
+                        <span class="text-sm font-semibold">PayPal</span>
+                    </div>
+                    <input type="radio" name="paymentRadio" value="PayPal" class="w-5 h-5" />
+                </label>
+                <label
+                    class="flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
+                    <div class="flex items-center gap-3">
+                        <span class="text-amber-500 text-lg"><i class="fab fa-google-pay"></i></span>
+                        <span class="text-sm font-semibold">Google Pay</span>
+                    </div>
+                    <input type="radio" name="paymentRadio" value="Google Pay" class="w-5 h-5" />
+                </label>
+                <label
+                    class="flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
+                    <div class="flex items-center gap-3">
+                        <span class="text-black text-lg"><i class="fab fa-apple-pay"></i></span>
+                        <span class="text-sm font-semibold">Apple Pay</span>
+                    </div>
+                    <input type="radio" name="paymentRadio" value="Apple Pay" class="w-5 h-5" />
+                </label>
+                <label
+                    class="flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
+                    <div class="flex items-center gap-3">
+                        <span class="text-indigo-600 text-lg"><i class="fas fa-credit-card"></i></span>
+                        <span class="text-sm font-semibold">**** **** **** 0895</span>
+                    </div>
+                    <input type="radio" name="paymentRadio" value="Card 0895" class="w-5 h-5" />
+                </label>
+                <label
+                    class="flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
+                    <div class="flex items-center gap-3">
+                        <span class="text-red-500 text-lg"><i class="fas fa-credit-card"></i></span>
+                        <span class="text-sm font-semibold">**** **** **** 2259</span>
+                    </div>
+                    <input type="radio" name="paymentRadio" value="Card 2259" class="w-5 h-5" />
+                </label>
 
-            <button class="w-full flex items-center justify-between bg-rose-50 text-rose-500 rounded-xl px-3 py-3">
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-plus"></i>
-                    <span class="text-sm font-semibold">Add New Card</span>
-                </div>
-            </button>
-        </div>
-        <div class="p-4 border-t border-gray-100">
-            <button id="applyPaymentBtn" class="w-full rounded-full py-3 font-semibold text-white bg-rose-300 cursor-not-allowed" disabled>
-                Apply
-            </button>
+                <button class="w-full flex items-center justify-between bg-rose-50 text-rose-500 rounded-xl px-3 py-3">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-plus"></i>
+                        <span class="text-sm font-semibold">Add New Card</span>
+                    </div>
+                </button>
+            </div>
+            <div class="p-4 border-t border-gray-100">
+                <button id="applyPaymentBtn"
+                    class="w-full rounded-full py-3 font-semibold text-white bg-rose-300 cursor-not-allowed" disabled>
+                    Apply
+                </button>
+            </div>
         </div>
     </div>
-</div>
 
     <div class="px-4 pt-3 text-[10px] text-gray-500">Order Summary</div>
 
@@ -94,7 +104,8 @@
         <!-- Item card -->
         <div class="bg-white rounded-xl ring-1 ring-gray-100 shadow-sm p-3">
             <div class="flex items-start gap-3">
-                <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=300&auto=format&fit=crop" alt="burger" class="w-12 h-12 rounded-lg object-cover" />
+                <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=300&auto=format&fit=crop"
+                    alt="burger" class="w-12 h-12 rounded-lg object-cover" />
                 <div class="flex-1 min-w-0">
                     <div class="flex items-center justify-between">
                         <div class="text-sm font-semibold text-gray-900 truncate">Chicken Burger</div>
@@ -108,9 +119,11 @@
             </div>
             <div class="mt-3 flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <button class="w-7 h-7 rounded-full ring-1 ring-gray-300 grid place-items-center text-gray-600">-</button>
+                    <button
+                        class="w-7 h-7 rounded-full ring-1 ring-gray-300 grid place-items-center text-gray-600">-</button>
                     <span class="text-sm font-semibold">1</span>
-                    <button class="w-7 h-7 rounded-full ring-1 ring-gray-300 grid place-items-center text-gray-600">+</button>
+                    <button
+                        class="w-7 h-7 rounded-full ring-1 ring-gray-300 grid place-items-center text-gray-600">+</button>
                 </div>
                 <button class="text-gray-400"><i class="fas fa-times"></i></button>
             </div>
@@ -118,7 +131,8 @@
 
         <div class="bg-white rounded-xl ring-1 ring-gray-100 shadow-sm p-3">
             <div class="flex items-start gap-3">
-                <img src="https://images.unsplash.com/photo-1594751543129-6701ad444259?q=80&w=300&auto=format&fit=crop" alt="ramen" class="w-12 h-12 rounded-lg object-cover" />
+                <img src="https://images.unsplash.com/photo-1594751543129-6701ad444259?q=80&w=300&auto=format&fit=crop"
+                    alt="ramen" class="w-12 h-12 rounded-lg object-cover" />
                 <div class="flex-1 min-w-0">
                     <div class="flex items-center justify-between">
                         <div class="text-sm font-semibold text-gray-900 truncate">Ramen Noodles</div>
@@ -130,9 +144,11 @@
             </div>
             <div class="mt-3 flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <button class="w-7 h-7 rounded-full ring-1 ring-gray-300 grid place-items-center text-gray-600">-</button>
+                    <button
+                        class="w-7 h-7 rounded-full ring-1 ring-gray-300 grid place-items-center text-gray-600">-</button>
                     <span class="text-sm font-semibold">1</span>
-                    <button class="w-7 h-7 rounded-full ring-1 ring-gray-300 grid place-items-center text-gray-600">+</button>
+                    <button
+                        class="w-7 h-7 rounded-full ring-1 ring-gray-300 grid place-items-center text-gray-600">+</button>
                 </div>
                 <button class="text-gray-400"><i class="fas fa-times"></i></button>
             </div>
@@ -140,7 +156,8 @@
 
         <div class="bg-white rounded-xl ring-1 ring-gray-100 shadow-sm p-3">
             <div class="flex items-start gap-3">
-                <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=300&auto=format&fit=crop" alt="salad" class="w-12 h-12 rounded-lg object-cover" />
+                <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=300&auto=format&fit=crop"
+                    alt="salad" class="w-12 h-12 rounded-lg object-cover" />
                 <div class="flex-1 min-w-0">
                     <div class="flex items-center justify-between">
                         <div class="text-sm font-semibold text-gray-900 truncate">Cherry Tomato Salad</div>
@@ -151,9 +168,11 @@
             </div>
             <div class="mt-3 flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <button class="w-7 h-7 rounded-full ring-1 ring-gray-300 grid place-items-center text-gray-600">-</button>
+                    <button
+                        class="w-7 h-7 rounded-full ring-1 ring-gray-300 grid place-items-center text-gray-600">-</button>
                     <span class="text-sm font-semibold">1</span>
-                    <button class="w-7 h-7 rounded-full ring-1 ring-gray-300 grid place-items-center text-gray-600">+</button>
+                    <button
+                        class="w-7 h-7 rounded-full ring-1 ring-gray-300 grid place-items-center text-gray-600">+</button>
                 </div>
                 <button class="text-gray-400"><i class="fas fa-times"></i></button>
             </div>
@@ -161,7 +180,8 @@
 
         <!-- Actions list -->
         <div class="space-y-3">
-            <button id="openCartLocationBtn" class="w-full flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
+            <button id="openCartLocationBtn"
+                class="w-full flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
                 <div class="flex items-center gap-2 text-gray-700">
                     <i class="fas fa-location-dot text-rose-500"></i>
                     <div class="text-left">
@@ -171,7 +191,8 @@
                 </div>
                 <i class="fas fa-chevron-right text-gray-300"></i>
             </button>
-            <button id="openPaymentBtn" class="w-full flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
+            <button id="openPaymentBtn"
+                class="w-full flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
                 <div class="flex items-center gap-2 text-gray-700">
                     <i class="fas fa-credit-card text-blue-500"></i>
                     <div class="text-left">
@@ -181,7 +202,8 @@
                 </div>
                 <i class="fas fa-chevron-right text-gray-300"></i>
             </button>
-            <button id="openPromotionsBtn" class="w-full flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
+            <button id="openPromotionsBtn"
+                class="w-full flex items-center justify-between bg-white rounded-xl ring-1 ring-gray-100 shadow-sm px-3 py-3">
                 <div class="flex items-center gap-2 text-gray-700">
                     <i class="fas fa-badge-percent text-amber-500"></i>
                     <div class="text-left">
@@ -221,7 +243,9 @@
                 <button class="w-full rounded-xl bg-gray-100 py-3 font-semibold text-gray-800">£ 31.50</button>
             </div>
             <div class="flex-1">
-                <button class="w-full rounded-xl bg-gradient-to-r from-red-500 to-orange-400 py-3 text-white font-semibold shadow">Place Order</button>
+                <button
+                    class="w-full rounded-xl bg-gradient-to-r from-red-500 to-orange-400 py-3 text-white font-semibold shadow">Place
+                    Order</button>
             </div>
         </div>
     </div>
@@ -229,8 +253,10 @@
 
     <!-- Promotions Modal -->
     <div id="promotionsModal" class="fixed inset-0 z-50 hidden">
-        <div id="promotionsBackdrop" class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300"></div>
-        <div id="promotionsPanel" class="fixed inset-0 translate-y-full w-full h-full bg-white overflow-hidden transition-transform duration-400 flex flex-col">
+        <div id="promotionsBackdrop" class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300">
+        </div>
+        <div id="promotionsPanel"
+            class="fixed inset-0 translate-y-full w-full h-full bg-white overflow-hidden transition-transform duration-400 flex flex-col">
             <div class="flex items-center px-4 py-3 border-b border-gray-100 sticky top-0 bg-white z-10">
                 <button id="closePromotionsBtn" class="text-gray-600 mr-2"><i class="fas fa-arrow-left"></i></button>
                 <h3 class="flex-1 text-center font-semibold">Promotions</h3>
@@ -239,23 +265,28 @@
             <div class="p-4 overflow-y-auto flex-1">
                 <!-- Promo input -->
                 <div class="flex items-center bg-gray-100 rounded-lg px-3 py-2 mb-4">
-                    <input type="text" placeholder="Promo Code" class="flex-1 bg-transparent text-sm text-gray-600 placeholder-gray-400 focus:outline-none">
+                    <input type="text" placeholder="Promo Code"
+                        class="flex-1 bg-transparent text-sm text-gray-600 placeholder-gray-400 focus:outline-none">
                     <button class="text-sm text-red-500 font-semibold">Apply</button>
                 </div>
 
                 <div class="text-xs text-gray-500 mb-2">Shipping Offers</div>
                 <div class="space-y-3 mb-4">
-                    <label class="flex items-center justify-between bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3">
+                    <label
+                        class="flex items-center justify-between bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3">
                         <div class="flex items-center gap-3">
-                            <span class="w-6 h-6 rounded bg-amber-100 text-amber-500 flex items-center justify-center text-xs">%</span>
+                            <span
+                                class="w-6 h-6 rounded bg-amber-100 text-amber-500 flex items-center justify-center text-xs">%</span>
                             <span class="text-sm font-semibold text-gray-800">FREE SHIPPING</span>
                             <i class="fas fa-circle-info text-gray-300 text-xs"></i>
                         </div>
                         <input type="checkbox" class="w-5 h-5 text-red-500 accent-red-500" checked>
                     </label>
-                    <label class="flex items-center justify-between bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3 opacity-50">
+                    <label
+                        class="flex items-center justify-between bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3 opacity-50">
                         <div class="flex items-center gap-3">
-                            <span class="w-6 h-6 rounded bg-amber-100 text-amber-500 flex items-center justify-center text-xs">%</span>
+                            <span
+                                class="w-6 h-6 rounded bg-amber-100 text-amber-500 flex items-center justify-center text-xs">%</span>
                             <span class="text-sm font-semibold text-gray-800">20% OFF</span>
                             <i class="fas fa-circle-info text-gray-300 text-xs"></i>
                         </div>
@@ -265,24 +296,29 @@
 
                 <div class="text-xs text-gray-500 mb-2">Order Offers</div>
                 <div class="space-y-3 mb-4">
-                    <label class="flex items-center justify-between bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3">
+                    <label
+                        class="flex items-center justify-between bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3">
                         <div class="flex items-center gap-3">
-                            <span class="w-6 h-6 rounded bg-amber-100 text-amber-500 flex items-center justify-center text-xs">%</span>
+                            <span
+                                class="w-6 h-6 rounded bg-amber-100 text-amber-500 flex items-center justify-center text-xs">%</span>
                             <span class="text-sm font-semibold text-gray-800">20% OFF</span>
                             <i class="fas fa-circle-info text-gray-300 text-xs"></i>
                         </div>
                         <input type="checkbox" class="w-5 h-5 text-red-500 accent-red-500" checked>
                     </label>
-                    <label class="flex items-center justify-between bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3 opacity-50">
+                    <label
+                        class="flex items-center justify-between bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3 opacity-50">
                         <div class="flex items-center gap-3">
-                            <span class="w-6 h-6 rounded bg-amber-100 text-amber-500 flex items-center justify-center text-xs">%</span>
+                            <span
+                                class="w-6 h-6 rounded bg-amber-100 text-amber-500 flex items-center justify-center text-xs">%</span>
                             <span class="text-sm font-semibold text-gray-800">10% OFF</span>
                         </div>
                         <input type="checkbox" class="w-5 h-5" disabled>
                     </label>
                 </div>
 
-                <button class="w-full flex items-center justify-between bg-rose-50 text-rose-500 rounded-xl px-3 py-3 mb-5">
+                <button
+                    class="w-full flex items-center justify-between bg-rose-50 text-rose-500 rounded-xl px-3 py-3 mb-5">
                     <div class="flex items-center gap-2">
                         <i class="fas fa-plus"></i>
                         <span class="text-sm font-semibold">Get More Promotions</span>
@@ -290,7 +326,8 @@
                 </button>
             </div>
             <div class="p-4 border-t border-gray-100">
-                <button id="applyPromotionsBtn" class="w-full rounded-full py-3 font-semibold text-white bg-gradient-to-r from-red-500 to-orange-400">
+                <button id="applyPromotionsBtn"
+                    class="w-full rounded-full py-3 font-semibold text-white bg-gradient-to-r from-red-500 to-orange-400">
                     Apply
                 </button>
             </div>
@@ -298,8 +335,10 @@
     </div>
     <!-- Locations Modal -->
     <div id="cartLocationModal" class="fixed inset-0 z-50 hidden">
-        <div id="cartLocationBackdrop" class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300"></div>
-        <div id="cartLocationPanel" class="fixed inset-0 translate-y-full w-full h-full bg-white overflow-hidden transition-transform duration-400 flex flex-col">
+        <div id="cartLocationBackdrop" class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300">
+        </div>
+        <div id="cartLocationPanel"
+            class="fixed inset-0 translate-y-full w-full h-full bg-white overflow-hidden transition-transform duration-400 flex flex-col">
             <div class="flex items-center px-4 py-3 border-b border-gray-100 sticky top-0 bg-white z-10">
                 <button id="closeCartLocationBtn" class="text-gray-600 mr-2">
                     <i class="fas fa-arrow-left"></i>
@@ -314,7 +353,8 @@
                             <div class="text-sm font-semibold text-gray-900">Home</div>
                             <div class="text-xs text-gray-500">221B Baker Street, London, United Kingdom</div>
                         </div>
-                        <input type="radio" name="cartLocationRadio" value="Home|221B Baker Street, London, United Kingdom" class="mt-1 w-5 h-5">
+                        <input type="radio" name="cartLocationRadio"
+                            value="Home|221B Baker Street, London, United Kingdom" class="mt-1 w-5 h-5">
                     </div>
                 </label>
                 <label class="block bg-white rounded-xl shadow-sm ring-1 ring-gray-100 px-3 py-3 mb-3">
@@ -323,11 +363,13 @@
                             <div class="text-sm font-semibold text-gray-900">Company</div>
                             <div class="text-xs text-gray-500">1A Baker Street, London, United Kingdom</div>
                         </div>
-                        <input type="radio" name="cartLocationRadio" value="Company|1A Baker Street, London, United Kingdom" class="mt-1 w-5 h-5">
+                        <input type="radio" name="cartLocationRadio"
+                            value="Company|1A Baker Street, London, United Kingdom" class="mt-1 w-5 h-5">
                     </div>
                 </label>
 
-                <button id="goAddLocationFromCartBtn" class="w-full flex items-center justify-between bg-rose-50 text-rose-500 rounded-xl px-3 py-3">
+                <button id="goAddLocationFromCartBtn"
+                    class="w-full flex items-center justify-between bg-rose-50 text-rose-500 rounded-xl px-3 py-3">
                     <div class="flex items-center gap-2">
                         <i class="fas fa-plus"></i>
                         <span class="text-sm font-semibold">Add New Location</span>
@@ -335,7 +377,8 @@
                 </button>
             </div>
             <div class="p-4 border-t border-gray-100">
-                <button id="applyCartLocationBtn" class="w-full rounded-full py-3 font-semibold text-white bg-rose-300 cursor-not-allowed" disabled>
+                <button id="applyCartLocationBtn"
+                    class="w-full rounded-full py-3 font-semibold text-white bg-rose-300 cursor-not-allowed" disabled>
                     Apply
                 </button>
             </div>
@@ -368,12 +411,12 @@
         const selected = document.querySelector('input[name="paymentRadio"]:checked');
         if (selected) {
             applyPaymentBtn.disabled = false;
-            applyPaymentBtn.classList.remove('bg-rose-300','cursor-not-allowed');
-            applyPaymentBtn.classList.add('bg-gradient-to-r','from-red-500','to-orange-400');
+            applyPaymentBtn.classList.remove('bg-rose-300', 'cursor-not-allowed');
+            applyPaymentBtn.classList.add('bg-gradient-to-r', 'from-red-500', 'to-orange-400');
         } else {
             applyPaymentBtn.disabled = true;
-            applyPaymentBtn.classList.add('bg-rose-300','cursor-not-allowed');
-            applyPaymentBtn.classList.remove('bg-gradient-to-r','from-red-500','to-orange-400');
+            applyPaymentBtn.classList.add('bg-rose-300', 'cursor-not-allowed');
+            applyPaymentBtn.classList.remove('bg-gradient-to-r', 'from-red-500', 'to-orange-400');
         }
     }
 
@@ -414,12 +457,12 @@
         const selected = document.querySelector('input[name="cartLocationRadio"]:checked');
         if (selected) {
             applyCartLocationBtn.disabled = false;
-            applyCartLocationBtn.classList.remove('bg-rose-300','cursor-not-allowed');
-            applyCartLocationBtn.classList.add('bg-gradient-to-r','from-red-500','to-orange-400');
+            applyCartLocationBtn.classList.remove('bg-rose-300', 'cursor-not-allowed');
+            applyCartLocationBtn.classList.add('bg-gradient-to-r', 'from-red-500', 'to-orange-400');
         } else {
             applyCartLocationBtn.disabled = true;
-            applyCartLocationBtn.classList.add('bg-rose-300','cursor-not-allowed');
-            applyCartLocationBtn.classList.remove('bg-gradient-to-r','from-red-500','to-orange-400');
+            applyCartLocationBtn.classList.add('bg-rose-300', 'cursor-not-allowed');
+            applyCartLocationBtn.classList.remove('bg-gradient-to-r', 'from-red-500', 'to-orange-400');
         }
     }
     openCartLocationBtn.addEventListener('click', openCartLocation);
@@ -431,7 +474,7 @@
     applyCartLocationBtn.addEventListener('click', () => {
         const selected = document.querySelector('input[name="cartLocationRadio"]:checked');
         if (selected) {
-            const [label,address] = selected.value.split('|');
+            const [label, address] = selected.value.split('|');
             cartLocationSubtitle.textContent = `${label} · ${address}`;
         }
         closeCartLocation();
@@ -473,6 +516,5 @@
         if (e.key === 'Escape' && !promotionsModal.classList.contains('hidden')) closePromotions();
     });
 </script>
+
 </html>
-
-
