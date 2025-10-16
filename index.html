@@ -56,22 +56,6 @@
 </head>
 
 <body>
-    <!-- PWA Install Banner -->
-    <div id="pwaInstallBanner" class="pwa-install-banner" style="display: none;">
-        <div class="install-content">
-            <div class="install-icon">
-                <i class="bi bi-download"></i>
-            </div>
-            <div class="install-text">
-                <h6>Install Food Delivery App</h6>
-                <p>Get quick access to your favorite food</p>
-            </div>
-            <button class="install-btn" id="installBtn">Install</button>
-            <button class="close-btn" id="closeInstallBanner">
-                <i class="bi bi-x"></i>
-            </button>
-        </div>
-    </div>
 
     <!-- Mobile Container -->
     <div class="mobile-container">
@@ -212,6 +196,189 @@
             </a>
         </div>
     </section>
+
+    <!-- Featured Restaurants Carousel -->
+    <section class="featured-restaurants-section">
+        <div class="custom-container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Restaurants</h2>
+                <p class="section-subtitle">Discover amazing food from top restaurants</p>
+            </div>
+            
+            <div id="restaurantsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#restaurantsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#restaurantsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#restaurantsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                
+                <div class="carousel-inner">
+                    <!-- Restaurant Card 1 -->
+                    <div class="carousel-item active">
+                        <div class="featured-restaurant-card">
+                            <!-- Promotional Banner -->
+                            <div class="restaurant-banner">
+                                <div class="banner-tags">
+                                    <span class="featured-tag">Featured</span>
+                                    <button class="open-btn">
+                                        <i class="bi bi-arrow-up"></i>
+                                        Open
+                                    </button>
+                                </div>
+                                <div class="banner-content">
+                                    <h2 class="banner-title">SPECIAL FOOD MENU</h2>
+                                    <p class="banner-subtitle">This weekend only</p>
+                                    <div class="banner-time">24/7</div>
+                                </div>
+                                <div class="banner-image">
+                                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=200&h=150&fit=crop" alt="Special Food" loading="lazy">
+                                </div>
+                            </div>
+                            
+                            <!-- Restaurant Logo -->
+                            <div class="restaurant-logo">
+                                <div class="logo-circle">
+                                    <i class="bi bi-burger"></i>
+                                </div>
+                                <span class="logo-text">Burgers</span>
+                            </div>
+                            
+                            <!-- Restaurant Info -->
+                            <div class="restaurant-info">
+                                <div class="restaurant-header">
+                                    <h3 class="restaurant-name">Kombucha</h3>
+                                    <i class="bi bi-patch-check-fill verified-icon"></i>
+                                </div>
+                                <div class="restaurant-details">
+                                    <div class="detail-item">
+                                        <i class="bi bi-geo-alt location-icon"></i>
+                                        <span>Comilla</span>
+                                    </div>
+                                    <div class="detail-separator"></div>
+                                    <div class="detail-item">
+                                        <i class="bi bi-star-fill star-icon"></i>
+                                        <span>0 (0)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Restaurant Card 2 -->
+                    <div class="carousel-item">
+                        <div class="featured-restaurant-card">
+                            <!-- Promotional Banner -->
+                            <div class="restaurant-banner" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">
+                                <div class="banner-tags">
+                                    <span class="featured-tag" style="background: #28a745;">Hot</span>
+                                    <button class="open-btn">
+                                        <i class="bi bi-arrow-up"></i>
+                                        Open
+                                    </button>
+                                </div>
+                                <div class="banner-content">
+                                    <h2 class="banner-title">ITALIAN SPECIAL</h2>
+                                    <p class="banner-subtitle">Fresh pasta daily</p>
+                                    <div class="banner-time">11AM-10PM</div>
+                                </div>
+                                <div class="banner-image">
+                                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=200&h=150&fit=crop" alt="Italian Food" loading="lazy">
+                                </div>
+                            </div>
+                            
+                            <!-- Restaurant Logo -->
+                            <div class="restaurant-logo">
+                                <div class="logo-circle">
+                                    <i class="bi bi-cup-hot"></i>
+                                </div>
+                                <span class="logo-text">Pasta</span>
+                            </div>
+                            
+                            <!-- Restaurant Info -->
+                            <div class="restaurant-info">
+                                <div class="restaurant-header">
+                                    <h3 class="restaurant-name">Mario's Italian</h3>
+                                    <i class="bi bi-patch-check-fill verified-icon"></i>
+                                </div>
+                                <div class="restaurant-details">
+                                    <div class="detail-item">
+                                        <i class="bi bi-geo-alt location-icon"></i>
+                                        <span>Dhaka</span>
+                                    </div>
+                                    <div class="detail-separator"></div>
+                                    <div class="detail-item">
+                                        <i class="bi bi-star-fill star-icon"></i>
+                                        <span>4.8 (127)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Restaurant Card 3 -->
+                    <div class="carousel-item">
+                        <div class="featured-restaurant-card">
+                            <!-- Promotional Banner -->
+                            <div class="restaurant-banner" style="background: linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%);">
+                                <div class="banner-tags">
+                                    <span class="featured-tag" style="background: #6f42c1;">New</span>
+                                    <button class="open-btn">
+                                        <i class="bi bi-arrow-up"></i>
+                                        Open
+                                    </button>
+                                </div>
+                                <div class="banner-content">
+                                    <h2 class="banner-title">ASIAN FUSION</h2>
+                                    <p class="banner-subtitle">Exotic flavors</p>
+                                    <div class="banner-time">12PM-11PM</div>
+                                </div>
+                                <div class="banner-image">
+                                    <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=200&h=150&fit=crop" alt="Asian Food" loading="lazy">
+                                </div>
+                            </div>
+                            
+                            <!-- Restaurant Logo -->
+                            <div class="restaurant-logo">
+                                <div class="logo-circle">
+                                    <i class="bi bi-egg-fried"></i>
+                                </div>
+                                <span class="logo-text">Asian</span>
+                            </div>
+                            
+                            <!-- Restaurant Info -->
+                            <div class="restaurant-info">
+                                <div class="restaurant-header">
+                                    <h3 class="restaurant-name">Tokyo Sushi</h3>
+                                    <i class="bi bi-patch-check-fill verified-icon"></i>
+                                </div>
+                                <div class="restaurant-details">
+                                    <div class="detail-item">
+                                        <i class="bi bi-geo-alt location-icon"></i>
+                                        <span>Chittagong</span>
+                                    </div>
+                                    <div class="detail-separator"></div>
+                                    <div class="detail-item">
+                                        <i class="bi bi-star-fill star-icon"></i>
+                                        <span>4.9 (89)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="carousel-control-prev" type="button" data-bs-target="#restaurantsCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#restaurantsCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- Featured Restaurants Carousel end -->
 
     <!-- Food Items -->
     <section class="food-items-section">
@@ -474,33 +641,14 @@
 
     <!-- Service Worker Registration -->
     <script>
-        // PWA Install Banner
+        // PWA Install Detection (No Banner)
         let deferredPrompt;
-        const installBanner = document.getElementById('pwaInstallBanner');
-        const installBtn = document.getElementById('installBtn');
-        const closeBtn = document.getElementById('closeInstallBanner');
 
-        // Show install banner
+        // Capture install prompt but don't show banner
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            installBanner.style.display = 'block';
-        });
-
-        // Install button click
-        installBtn.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                console.log(`User response to the install prompt: ${outcome}`);
-                deferredPrompt = null;
-                installBanner.style.display = 'none';
-            }
-        });
-
-        // Close banner
-        closeBtn.addEventListener('click', () => {
-            installBanner.style.display = 'none';
+            console.log('PWA install prompt available');
         });
 
         // Register service worker
@@ -519,7 +667,6 @@
         // PWA Install detection
         window.addEventListener('appinstalled', (evt) => {
             console.log('PWA was installed');
-            installBanner.style.display = 'none';
         });
 
         // Online/Offline detection
